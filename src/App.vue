@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid">
     <Header />
-    <ApplyPersonalLoan />
+    <router-view>
+    </router-view>
     <OtherPages />
     <Footer />
   </div>
@@ -11,15 +12,13 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import OtherPages from './components/OtherPages'
-import ApplyPersonalLoan from './components/ApplyPersonalLoan'
 
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
-    OtherPages,
-    ApplyPersonalLoan
+    OtherPages
   }
 }
 </script>

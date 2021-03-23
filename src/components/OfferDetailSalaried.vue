@@ -3,7 +3,7 @@
     <ApplyProgress />
     <div class="col-md-8">
       <h3 class="color-white roboto-bold mgb-30">
-        Compare and Apply For Personal Loans in 2 minutes
+        Offer Detail Salaried
       </h3>
       <div class="row mgb-60">
         <form>
@@ -15,7 +15,8 @@
                 class="form-control"
                 id="loan-amount"
                 placeholder="Loan Amount"
-                name="loan-amount"
+                name="loanAmount"
+                v-model="loanAmount"
               />
             </div>
             <div class="col-5 form-group">
@@ -24,8 +25,9 @@
                 type="text"
                 class="form-control"
                 placeholder="Net Montly Salary"
-                name="pswd"
+                name="monthlySalary"
                 id="monthly-salary"
+                v-model="montlySalary"
               />
             </div>
             <div class="col-2 form-group"></div>
@@ -37,6 +39,7 @@
                 id="city"
                 placeholder="Your City"
                 name="city"
+                v-model="city"
               />
             </div>
             <div class="col-5 form-group">
@@ -45,11 +48,12 @@
                 type="text"
                 class="form-control"
                 placeholder="Mobile Number"
-                name="mobile-number"
+                name="mobileNumber"
+                v-model="mobileNumber"
               />
             </div>
             <div class="col-12 form-group mgt-15">
-              <router-link to="/">
+              <router-link to="/salaried/transaction-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
                 <button type="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
@@ -70,7 +74,16 @@ import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
 export default {
-  name: "ApplyPersonalLoan",
+  name: "OfferDetailSalaried",
+  data:function()
+  {
+      return{
+          city:null,
+          mobileNumber:null,
+          montlySalary:null,
+          loanAmount:null,
+      }
+  },
   components: {
     ApplyProgress,
     ApplyFeature,
