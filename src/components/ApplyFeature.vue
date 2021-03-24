@@ -47,7 +47,7 @@ ul li::before{
    display: inline-block;
    height:20px;
    width: 20px;
-   background-image: url('../assets/img/check-mark.png');
+   background-image: url('../assets/img/checked.svg');
    background-size: contain;
    background-repeat: no-repeat;
    margin-right: 10px;

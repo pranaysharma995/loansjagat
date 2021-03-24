@@ -39,7 +39,7 @@ export default {
   data: function()
   {
       return{
-      page:'salaried'
+      page:'self-employed'
       }
   },
   components: {

@@ -120,10 +120,11 @@ export default {
   {
       return{
           fullName:null,
-          workExperinece:0,
+          workExperience:0,
           companyName:null,
           pan:null,
           email:null,
+          dateOfBirth:null
       }
   },
   components: {
@@ -133,8 +134,8 @@ export default {
   },
           validations: {
         fullName: {required},
-        workExperinece: {required},
         companyName: {required},
+        dateOfBirth:{required},
         pan: {required, minLength: minLength(10)},
         email:{required}
     },

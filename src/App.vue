@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
-    <Header />
+    <Header v-if=" ! $route.path == '/salaried/offer-detail' || ! $route.path == '/self-employed/offer-detail'" />
     <router-view>
     </router-view>
-    <OtherPages />
-    <Footer />
+    <OtherPages v-if=" ! $route.path == '/salaried/offer-detail' || ! $route.path == '/self-employed/offer-detail'" />
+    <Footer v-if=" ! $route.path == '/salaried/offer-detail' || ! $route.path == '/self-employed/offer-detail'" />
   </div>
 </template>
 
