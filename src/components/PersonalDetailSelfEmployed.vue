@@ -1,14 +1,14 @@
 <template>
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-12 col-xs-12">
       <h3 class="color-white roboto-bold mgb-30">
         Personal Detail Self Employed
       </h3>
       <div class="row mgb-60">
         <form v-on:submit.prevent="submit">
           <div class="row">
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="full-name" class="color-white">Full Name*</label>
               <input
                 type="text"
@@ -21,7 +21,7 @@
               />
               <div v-if="!$v.fullName.required" class="invalid-feedback">Full name is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="email" class="color-white">Email*</label>
               <input
                 type="text"
@@ -34,8 +34,8 @@
               />
               <div v-if="!$v.email.required" class="invalid-feedback">Email is required.</div>
             </div>
-            <div class="col-2 form-group"></div>
-            <div class="col-5 form-group">
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                 <label for="date-of-birth" class="color-white">Date of Birth*</label>
               <input
                 type="date"
@@ -48,7 +48,7 @@
               />
               <div v-if="!$v.dateOfBirth.required" class="invalid-feedback">Date of birth is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="pan" class="color-white">PAN Number*</label>
               <input
                 type="text"
@@ -60,9 +60,9 @@
               />
               <div v-if="!$v.pan.required" class="invalid-feedback">PAN is required.</div>
             </div>
-            <div class="col-2"></div>
+            <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="ownership" class="color-white">Ownership Status*</label>
               <input
                 type="text"
@@ -75,7 +75,7 @@
               <div v-if="!$v.ownership.required" class="invalid-feedback">Ownership status is required.</div>
             </div>
 
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="business-life" class="color-white">How Old is Business*</label>
                 <select name="businessLife" v-model="businessLife" id="business-life" class="form-control">
               <option value="0">0</option>
@@ -97,7 +97,7 @@
       </div>
        <ApplyReview />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
      <ApplyFeature />
     </div>
   </div>

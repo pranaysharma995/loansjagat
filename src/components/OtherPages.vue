@@ -1,14 +1,14 @@
 <template>
   <div class="row content-padding pd-50-0 bg-white">
-      <div class="col-md-2 d-flex flex-column align-items-center">
+      <div class="col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center">
           <img src="../assets/img/benefits@2x.png" alt="Benifits" />
           <p class="mgt-15">Benifits for you</p>
       </div>
-      <div class="col-md-8 d-flex flex-column align-items-center">
+      <div class="col-md-8 col-sm-4 col-xl-4 d-flex flex-column align-items-center">
           <img src="../assets/img/eligibility.png" alt="Eligibility" />
           <p class="mgt-15">Eligibility</p>
       </div>
-      <div class="col-md-2 d-flex flex-column align-items-center">
+      <div class="col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center">
           <img src="../assets/img/document-required.png" alt="Document Required" />
           <p class="mgt-15">Document Required</p>
       </div>

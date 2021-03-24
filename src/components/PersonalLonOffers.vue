@@ -1,24 +1,24 @@
 <template>
 
 <div class='row contai' >
-<div class='container  '>
+<div class='container containz  '>
   <div class='text_container color_white'>
-  <p class='heading_one p-0'>Congratulations! You Are Eligible for Personal Loan Offers </p>
-  <p class='heading_two'>
-    Adjust the loan amount and choose tenure to suit the EMI paying capacity.
-  </p>
+    <p class='heading_one p-0'>Congratulations! You Are Eligible for Personal Loan Offers </p>
+    <p class='heading_two'>
+      Adjust the loan amount and choose tenure to suit the EMI paying capacity.
+    </p>
   </div>
   <div class='container_two shadow mr-auto ml-auto'>
     <div class='first_container'>
-      <div class='slider_container'>
-        <div class='d-flex flex-row justify-content-between align-items-center'>
-          <span class='d-flex flex-row'>
+      <div class='slider_container row'>
+        <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
+          <span class='col-md-6 pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
             <input type='range' min='0' max='100' value='50' class=' button-blue'>
             <p class='padd_text padd_left'>₹10000   </p>
 
           </span>
-          <span class='d-flex flex-row align-items-center'>
+          <span class='col-md-4 pad_top d-flex flex-row align-items-center'>
                 <p class='padd_text'>Tenure:    </p>
               <div>
               <select class="form-select dropdown" aria-label="Default select example">
@@ -30,11 +30,11 @@
               </div>
 
             </span>
-        <span >
+        <span class='pad_top'>
           <button type="submit" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply Filter</button>
         </span>
 
-        </div>
+        <!-- </div> -->
       </div>
       <p class='result_size'>Result</p>
     </div>
@@ -61,7 +61,7 @@
           <tbody class= 'tbody'>
             <tr >
               <td class='col_' >
-                <img alt="img" src="../assets/logo.png">
+                <img class='bank_img' alt="img" src="../assets/logo.png">
               </td>
               <td  class='col_'>₹10000</td>
               <td  class='col_'>14.28%</td>
@@ -77,7 +77,7 @@
             </tr>
             <tr >
               <td class='col_' >
-                <img alt="img" src="../assets/logo.png">
+                <img class='bank_img' alt="img" src="../assets/logo.png">
               </td>
               <td  class='col_'>₹10000</td>
               <td  class='col_'>14.28%</td>
@@ -128,10 +128,12 @@ export default{
   min-height:calc(100vh - 59px);
   background-color:#0255AB;
 
+
   /* position: fixed; */
 }
 .color_white{
   color:white;
+
 }
 
 .heading_one{
@@ -146,8 +148,8 @@ font-size: 1.5rem;
 font-weight: 100;
 text-align: center;
 }
-.text_container{
-
+.containz{
+  margin-bottom:2rem;
 }
 .container_two{
   margin-top:2rem;
@@ -188,6 +190,11 @@ text-align: center;
 }
 .table_container{
 
+overflow:auto;
+/* border : 1px solid #000; */
+}
+.tbl{
+  min-width:690px;
 }
 .result_size{
   margin-top:1.5rem;
@@ -207,6 +214,7 @@ text-align: center;
   margin-top:1rem!important;
   margin-bottom:1rem;
   padding-bottom:1rem;
+  font-size: 1rem;
 }
 .border_col{
 
@@ -219,6 +227,7 @@ text-align: center;
 .tbody{
   padding:2rem!important;
   border-top:1px solid #000;
+  font-size:1rem;
 }
 
 .col_{
@@ -228,5 +237,40 @@ text-align: center;
 .end_col{
   border-top:0px solid #000;
 }
-
+.bank_img{
+  width:10rem;
+  height:auto;
+}
+@media screen and (max-width: 767px) {
+  .heading_one{
+  margin-top:5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  }
+  .heading_two{
+  margin-top:2rem;
+  font-size: 1rem;
+  font-weight: 100;
+  text-align: center;
+  }
+.pad_top{
+  padding-top:.5rem;
+}
+.bank_img{
+  width:5rem;
+  height:auto;
+}
+.tbody{
+  padding:2rem!important;
+  border-top:1px solid #000;
+  font-size:0.8rem;
+}
+.head{
+  margin-top:1rem!important;
+  margin-bottom:1rem;
+  padding-bottom:1rem;
+  font-size: 0.8rem;
+}
+}
 </style>

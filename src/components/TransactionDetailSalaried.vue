@@ -1,14 +1,14 @@
 <template>
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-12 col-xs-12">
       <h3 class="color-white roboto-bold mgb-30">
         Transaction Detail Salaried
       </h3>
       <div class="row mgb-60">
         <form v-on:submit.prevent="submit">
           <div class="row">
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="residential-ownership" class="color-white">Residential Ownership*</label>
               <input
                 type="text"
@@ -22,7 +22,7 @@
               />
               <div v-if="!$v.residentialOwnership.required" class="invalid-feedback">Residential ownership is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary-type" class="color-white">Salary Type*</label>
               <input
                 type="text"
@@ -36,8 +36,8 @@
               />
               <div v-if="!$v.salaryType.required" class="invalid-feedback">Salary type is required.</div>
             </div>
-            <div class="col-2 form-group"></div>
-            <div class="col-5 form-group">
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                 <label for="emi" class="color-white">Current EMI*</label>
               <input
                 type="text"
@@ -51,7 +51,7 @@
               />
               <div v-if="!$v.emi.required" class="invalid-feedback">EMI is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
               <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control">
               <option value="below-650">Below 650</option>
@@ -70,7 +70,7 @@
       </div>
        <ApplyReview />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
      <ApplyFeature />
     </div>
   </div>

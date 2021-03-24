@@ -1,14 +1,14 @@
 <template>
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-12 col-xs-12">
       <h3 class="color-white roboto-bold mgb-30">
         Transaction Detail Self Employed
       </h3>
       <div class="row mgb-60">
         <form v-on:submit.prevent="submit">
           <div class="row">
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gross-annual-income" class="color-white">Gross Annual Income*</label>
               <input
                 type="text"
@@ -23,7 +23,7 @@
 
               <div v-if="!$v.grossAnnualIncome.required" class="invalid-feedback">Gross annual income is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gst" class="color-white">GST Registration*</label>
               <input
                 type="text"
@@ -37,8 +37,8 @@
               />
               <div v-if="!$v.gst.required" class="invalid-feedback">GST is required.</div>
             </div>
-            <div class="col-2 form-group"></div>
-            <div class="col-5 form-group">
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                 <label for="current-emi" class="color-white">Current EMI*</label>
               <input
                 type="text"
@@ -52,7 +52,7 @@
               />
               <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
                 <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control">
               <option value="below-650">Below 650</option>
@@ -71,7 +71,7 @@
       </div>
        <ApplyReview />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
      <ApplyFeature />
     </div>
   </div>
