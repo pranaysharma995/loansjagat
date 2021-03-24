@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <Header v-if=" ! $route.path == '/salaried/offer-detail' || ! $route.path == '/self-employed/offer-detail'" />
+    <Header v-if="  $route.path == '/salaried/offer-detail' ||  $route.path == '/self-employed/offer-detail' ||  $route.path == '/personal-loan-offers'" />
     <router-view>
     </router-view>
     <OtherPages v-if=" ! $route.path == '/salaried/offer-detail' || ! $route.path == '/self-employed/offer-detail'" />
