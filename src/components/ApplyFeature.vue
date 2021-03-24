@@ -56,4 +56,10 @@ sup{
     color: red;
     margin-left: 5px;
 }
+@media only screen and (max-width:1200px)
+{
+    ul li{
+        font-size: 12px;
+    }
+}
 </style>

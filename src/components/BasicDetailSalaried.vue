@@ -1,14 +1,14 @@
 <template>
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-12 col-xs-12">
       <h3 class="color-white roboto-bold mgb-30">
         Basic Detail Salaried
       </h3>
       <div class="row mgb-60">
         <form v-on:submit.prevent="submit">
           <div class="row">
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="loan-amount" class="color-white">Loan Amount Required*</label>
               <input
                 type="text"
@@ -21,7 +21,7 @@
               />
               <div v-if="!$v.loanAmount.required" class="invalid-feedback">Loan amount is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="monthly-salary" class="color-white">Net Monthly Salary*</label>
               <input
                 type="text"
@@ -34,8 +34,8 @@
               />
               <div v-if="!$v.monthlySalary.required" class="invalid-feedback">Monthly salary is required.</div>
             </div>
-            <div class="col-2 form-group"></div>
-            <div class="col-5 form-group">
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                 <label for="city" class="color-white">City*</label>
               <input
                 type="text"
@@ -48,7 +48,7 @@
               />
               <div v-if="!$v.city.required" class="invalid-feedback">City is required.</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                  <label for="mobile-number" class="color-white">Mobile Number*</label>
               <input
                 type="text"
@@ -71,7 +71,7 @@
       </div>
        <ApplyReview />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
      <ApplyFeature />
     </div>
   </div>
