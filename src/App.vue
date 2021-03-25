@@ -22,7 +22,10 @@ export default {
     Header,
     Footer,
     OtherPages
-  }
+  },
+  provide:{
+    self_employed_form:{}
+  },
 }
 </script>
 

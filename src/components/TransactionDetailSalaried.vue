@@ -112,7 +112,7 @@ export default {
         submit: function() {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/salaried/offer-detail'); 
+            this.$router.push('/salaried/offer-detail');
             localStorage.setItem("ownership",this.ownership);
             localStorage.setItem("any_emai",this.any_emi)
             localStorage.setItem("salary_pay_type",this.salary_pay_type);
