@@ -77,29 +77,6 @@
         </div>
         <table v-else class="table ">
           <tbody class= 'tbody'>
-              <!-- <tr >
-                <td class='col_' >
-                  <img class='bank_img' alt="img" src="../assets/logo.png">
-                </td>
-                <td  class='col_'>₹10000</td>
-                <td  class='col_'>14.28%</td>
-                <td  class='col_'>₹6</td>
-                <td  class='col_'>₹8</td>
-                <td  class='col_'>Upto 4% of outstanding Loan</td>
-                <td  class='col_'>4</td>
-                <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
-                  <div class="spinner-border text-primary" role="status">
-                  <span class="sr-only">Loading...</span>
-                  </div>
-                </td>
-                <td v-else class='end_col d-flex justify-content-center align-items-center'>
-
-                  <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
-                   v-on:click='apply_loan'>Apply</button>
-                </td>
-
-
-              </tr> -->
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" src="../assets/logo.png">
@@ -171,23 +148,24 @@ export default{
     })
 
     axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan",{
-      loan_amount:localStorage.getItem("loan_amount"),
+      loan_amount_required:localStorage.getItem("loan_amount"),
       name:localStorage.getItem("name"),
       email:localStorage.getItem("email"),
-      mobile:localStorage.getItem("mobile"),
-      city:localStorage.getItem("city"),
-      net_salary:localStorage.getItem("net_salary"),
+      mobile_number:localStorage.getItem("mobile"),
+      current_city_of_residence:localStorage.getItem("city"),
+      net_salary_all_deductions:localStorage.getItem("net_salary"),
       date_of_birth:localStorage.getItem("date_of_birth"),
-      pan_number:localStorage.getItem("pan_number"),
-      company_id:localStorage.getItem("company_id"),
-      total_exp:localStorage.getItem("total_exp"),
-      salary_pay_type:localStorage.getItem("salary_pay_type"),
+      panno:localStorage.getItem("pan_number"),
+      current_company_name:localStorage.getItem("company_id"),
+      totaltotal_work_experience_exp:localStorage.getItem("total_exp"),
       ownership:localStorage.getItem("ownership"),
-      credit_score:localStorage.getItem("credit_score")
+      civil_score:localStorage.getItem("credit_score"),
+      any_loans_running_emi_monthly:localStorage.getItem("any_emi"),
+      mode_of_salary:localStorage.getItem("salary_pay_type")
+
     })
     .then((res) =>
     {
-      console.log(res);
       this.request_id=res.data.id
       this.loader.page=false;
     })
@@ -200,7 +178,6 @@ export default{
   },
   methods:{
     apply_loan(){
-      console.log('called')
       this.loader.btn=true;
 
       axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{

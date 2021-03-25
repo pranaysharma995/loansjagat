@@ -92,7 +92,7 @@ export default {
     this.credit_score=localStorage.getItem("credit_score") ? localStorage.getItem("credit_score") : 'Below 650';
     this.any_emi=localStorage.getItem("any_emi") ? localStorage.getItem("any_emi") : null;
     this.salary_pay_type=localStorage.getItem("salary_pay_type") ? localStorage.getItem("salary_pay_type") : 'Cash';
-    this.ownership=localStorage.getItem("salariedObj.ownership") ? localStorage.getItem("salariedObj.ownership") : null;
+    this.ownership=localStorage.getItem("ownership") ? localStorage.getItem("ownership") : null;
   },
   components: {
     ApplyProgress,
@@ -114,7 +114,7 @@ export default {
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail');
             localStorage.setItem("ownership",this.ownership);
-            localStorage.setItem("any_emai",this.any_emi)
+            localStorage.setItem("any_emi",this.any_emi)
             localStorage.setItem("salary_pay_type",this.salary_pay_type);
             localStorage.setItem("credit_score",this.credit_score)
         }},
