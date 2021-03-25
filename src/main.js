@@ -15,7 +15,7 @@ import LandingPage from './components/LandingPage.vue';
 import BasicDetailSalaried from './components/BasicDetailSalaried.vue';
 import PersonalDetailSalaried from './components/PersonalDetailSalaried.vue';
 import TransactionDetailSalaried from './components/TransactionDetailSalaried.vue';
-import OfferDetailSalaried from './components/OfferDetailSalaried.vue'
+import OfferDetailSalaried from './components/OfferDetailSalaried.vue';
 
 import BasicDetailSelfEmployed from './components/BasicDetailSelfEmployed.vue';
 import PersonalDetailSelfEmployed from './components/PersonalDetailSelfEmployed.vue';
@@ -30,7 +30,7 @@ const routes = [
   { path: '/salaried/basic-detail', component:BasicDetailSalaried },
   { path: '/salaried/personal-detail', component:PersonalDetailSalaried},
   { path: '/salaried/transaction-detail', component:TransactionDetailSalaried },
-  { path: '/salaried/offer-detail', component:OfferDetailSalaried },
+  { path: '/salaried/offer-detail', component: OfferDetailSalaried},
   { path: '/self-employed/basic-detail', component:BasicDetailSelfEmployed },
   { path: '/self-employed/personal-detail', component:PersonalDetailSelfEmployed },
   { path: '/self-employed/transaction-detail', component:TransactionDetailSelfEmployed },
