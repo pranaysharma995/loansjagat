@@ -113,6 +113,30 @@ export default{
   },
   mounted ()
   {
+    this.loan_amount=salariedObj.loan_amount;
+    this.any_emi=salariedObj.any_emi;
+    this.net_salary=salariedObj.net_salary;
+    this.mode_of_salary=salariedObj.mode_of_salary;
+    this.total_exp=salariedObj.total_exp;
+    this.company_id=salariedObj.company_id;
+
+    axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan-result",{
+      loan_amount:this.loan_amount,
+      any_emi:this.any_emi,
+      net_salary:this.net_salary,
+      mode_of_salary:this.mode_of_salary,
+      total_exp:this.total_exp,
+      company_id:this.company_id
+    })
+    .then((res) =>
+    {
+      console.log(res);
+    })
+    .catch((err) =>
+    {
+      console.log(err)
+    })
+
     axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan",{
       loan_amount:salariedObj.loan_amount,
       name:salariedObj.name,
@@ -131,6 +155,7 @@ export default{
     .then((res) =>
     {
       console.log(res);
+      this.request_id=res.data.id
     })
     .catch((err) =>
     {
@@ -143,7 +168,15 @@ export default{
   },
   data(){
     return {
-
+       request_id:null,
+       loan_amount:null,
+       net_salary:null,
+       mode_of_salary:null,
+       total_exp:null,
+       civil_score:null,
+       any_emi:null,
+       tensure:null,
+       company_id:null
     }
   },
 
