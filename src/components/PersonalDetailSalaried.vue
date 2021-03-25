@@ -82,9 +82,9 @@
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="work-experience" class="color-white">Total Work Experience*</label>
               <select name="workExperince" v-model="total_exp" id="work-experience" class="form-control">
-              <option value="0 - 1">0 - 1</option>
-              <option value="1 - 3">1 - 3</option>
-              <option value="3 year above">Above 3</option>
+              <option value="0 - 1">0 - 1 Year</option>
+              <option value="1 - 3">1 - 3 Years</option>
+              <option value="3 year above">Above 3 Years</option>
               </select>
             </div>
             <div class="col-12 form-group mgt-15">
@@ -109,14 +109,13 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
-import salariedObj from '../globalVariableSalaried';
 export default {
   name: "PersonalDetailSalaried",
   data:function()
   {
       return{
           name:null,
-          total_exp:'0-1',
+          total_exp:'0 - 1',
           company_id:null,
           pan_number:null,
           email:null,
@@ -125,12 +124,12 @@ export default {
   },
   mounted ()
   {
-    this.name=salariedObj.name;
-    this.total_exp=salariedObj.total_exp;
-    this.pan_number=salariedObj.pan_number;
-    this.email=salariedObj.email;
-    this.date_of_birth=salariedObj.date_of_birth;
-    this.company_id=salariedObj.company_id;
+    this.name=localStorage.getItem("name") ? localStorage.getItem("name") : null ;
+    this.total_exp=localStorage.getItem("total_exp") ? localStorage.getItem("total_exp") : '0 - 1';
+    this.pan_number=localStorage.getItem("pan_number") ? localStorage.getItem("pan_number") : null;
+    this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
+    this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
+    this.company_id=localStorage.getItem("company_id") ? localStorage.getItem("company_id") : null;
   },
   components: {
     ApplyProgress,
@@ -152,12 +151,12 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/transaction-detail'); 
-            salariedObj.pan_number=this.pan_number;
-            salariedObj.date_of_birth=this.date_of_birth;
-            salariedObj.company_id=this.company_id;
-            salariedObj.email=this.email;
-            salariedObj.name=this.name;
-            salariedObj.total_exp=this.total_exp
+            localStorage.setItem("pan_number",this.pan_number);
+            localStorage.setItem("date_of_birth",this.date_of_birth);
+            localStorage.setItem("company_id",this.company_id);
+            localStorage.setItem("email",this.email);
+            localStorage.setItem("name",this.name);
+            localStorage.setItem("total_exp",this.total_exp)
         }},
 };
 </script>

@@ -24,17 +24,11 @@
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary-type" class="color-white">Salary Type*</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Salary Type"
-                name="salary-type"
-                id="salary_pay_type"
-                v-model="salary_pay_type"
-                v-model.trim="$v.salary_pay_type.$model"
-                :class="{'is-invalid': validationStatus($v.salary_pay_type)}"
-              />
-              <div v-if="!$v.salary_pay_type.required" class="invalid-feedback">Salary type is required.</div>
+              <select name="salary-type" v-model="salary_pay_type" class="form-control" id="salary-type">
+              <option value="Cash">Cash</option>
+              <option value="Check">Check</option>
+              <option value="Direct Bank">Direct Bank</option>
+              </select>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -54,9 +48,9 @@
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
               <select name="credit_score" v-model="credit_score" id="credit-score" class="form-control">
-              <option value="below-650">Below 650</option>
-              <option value="above-650">Above 650</option>
-              <option value="don't know">Don't Know</option>
+              <option value="Below 650">Below 650</option>
+              <option value="Above 650">Above 650</option>
+              <option value="Don't know">Don't Know</option>
               </select>
             </div>
             <div class="col-12 form-group mgt-15">
@@ -81,25 +75,24 @@ import { required } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
-import salariedObj from '../globalVariableSalaried';
 export default {
   name: "TransactionDetailSalaried",
   data:function()
   {
       return{
-          credit_score:'below-650',
+          credit_score:'Below 650',
           any_emi:null,
-          salary_pay_type:null,
+          salary_pay_type:"Cash",
           ownership:null
       }
 
   },
   mounted ()
   {
-    this.credit_score=salariedObj.credit_score;
-    this.any_emi=salariedObj.any_emi;
-    this.salary_pay_type=salariedObj.salary_pay_type;
-    this.ownership=salariedObj.ownership;
+    this.credit_score=localStorage.getItem("credit_score") ? localStorage.getItem("credit_score") : 'Below 650';
+    this.any_emi=localStorage.getItem("any_emi") ? localStorage.getItem("any_emi") : null;
+    this.salary_pay_type=localStorage.getItem("salary_pay_type") ? localStorage.getItem("salary_pay_type") : 'Cash';
+    this.ownership=localStorage.getItem("salariedObj.ownership") ? localStorage.getItem("salariedObj.ownership") : null;
   },
   components: {
     ApplyProgress,
@@ -120,10 +113,10 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail'); 
-            salariedObj.ownership=this.ownership;
-            salariedObj.any_emi=this.any_emi
-            salariedObj.salary_pay_type=this.salary_pay_type;
-            salariedObj.credit_score=this.credit_score
+            localStorage.setItem("ownership",this.ownership);
+            localStorage.setItem("any_emai",this.any_emi)
+            localStorage.setItem("salary_pay_type",this.salary_pay_type);
+            localStorage.setItem("credit_score",this.credit_score)
         }},
 };
 </script>
