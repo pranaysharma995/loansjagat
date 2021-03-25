@@ -15,12 +15,12 @@
                 class="form-control"
                 id="residential-ownership"
                 placeholder="Residential Ownership"
-                name="residentialOwnership"
-                v-model="residentialOwnership"
-                v-model.trim="$v.residentialOwnership.$model"
-                :class="{'is-invalid': validationStatus($v.residentialOwnership)}"
+                name="ownership"
+                v-model="ownership"
+                v-model.trim="$v.ownership.$model"
+                :class="{'is-invalid': validationStatus($v.ownership)}"
               />
-              <div v-if="!$v.residentialOwnership.required" class="invalid-feedback">Residential ownership is required.</div>
+              <div v-if="!$v.ownership.required" class="invalid-feedback">Residential ownership is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary-type" class="color-white">Salary Type*</label>
@@ -29,31 +29,31 @@
                 class="form-control"
                 placeholder="Salary Type"
                 name="salary-type"
-                id="salaryType"
-                v-model="salaryType"
-                v-model.trim="$v.salaryType.$model"
-                :class="{'is-invalid': validationStatus($v.salaryType)}"
+                id="salary_pay_type"
+                v-model="salary_pay_type"
+                v-model.trim="$v.salary_pay_type.$model"
+                :class="{'is-invalid': validationStatus($v.salary_pay_type)}"
               />
-              <div v-if="!$v.salaryType.required" class="invalid-feedback">Salary type is required.</div>
+              <div v-if="!$v.salary_pay_type.required" class="invalid-feedback">Salary type is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                <label for="emi" class="color-white">Current EMI*</label>
+                <label for="any_emi" class="color-white">Current any_emi*</label>
               <input
                 type="text"
                 class="form-control"
-                id="emi"
+                id="any_emi"
                 placeholder="EMI"
-                name="emi"
-                v-model="emi"
-                v-model.trim="$v.emi.$model"
-                :class="{'is-invalid': validationStatus($v.emi)}"
+                name="any_emi"
+                v-model="any_emi"
+                v-model.trim="$v.any_emi.$model"
+                :class="{'is-invalid': validationStatus($v.any_emi)}"
               />
-              <div v-if="!$v.emi.required" class="invalid-feedback">EMI is required.</div>
+              <div v-if="!$v.any_emi.required" class="invalid-feedback">any_emi is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
-              <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control">
+              <select name="credit_score" v-model="credit_score" id="credit-score" class="form-control">
               <option value="below-650">Below 650</option>
               <option value="above-650">Above 650</option>
               <option value="don't know">Don't Know</option>
@@ -81,17 +81,25 @@ import { required } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
+import salariedObj from '../globalVariableSalaried';
 export default {
   name: "TransactionDetailSalaried",
   data:function()
   {
       return{
-          creditScore:'below-650',
-          emi:null,
-          salaryType:null,
-          residentialOwnership:null
+          credit_score:'below-650',
+          any_emi:null,
+          salary_pay_type:null,
+          ownership:null
       }
 
+  },
+  mounted ()
+  {
+    this.credit_score=salariedObj.credit_score;
+    this.any_emi=salariedObj.any_emi;
+    this.salary_pay_type=salariedObj.salary_pay_type;
+    this.ownership=salariedObj.ownership;
   },
   components: {
     ApplyProgress,
@@ -99,21 +107,23 @@ export default {
     ApplyReview
   },
               validations: {
-        creditScore: {required},
-        emi: {required},
-        salaryType: {required},
-        residentialOwnership:{required}
+        credit_score: {required},
+        any_emi: {required},
+        salary_pay_type: {required},
+        ownership:{required}
     },
         methods: {
              validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
-            console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail'); 
-            alert('Data Submit');
+            salariedObj.ownership=this.ownership;
+            salariedObj.any_emi=this.any_emi
+            salariedObj.salary_pay_type=this.salary_pay_type;
+            salariedObj.credit_score=this.credit_score
         }},
 };
 </script>

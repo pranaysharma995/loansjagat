@@ -15,11 +15,11 @@
                 class="form-control"
                 id="full-name"
                 placeholder="Full Name"
-                name="fullName"
-                v-model.trim="$v.fullName.$model"
-                :class="{'is-invalid': validationStatus($v.fullName)}"
+                name="name"
+                v-model.trim="$v.name.$model"
+                :class="{'is-invalid': validationStatus($v.name)}"
               />
-              <div v-if="!$v.fullName.required" class="invalid-feedback">Full name is required.</div>
+              <div v-if="!$v.name.required" class="invalid-feedback">Full name is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="email" class="color-white">Email*</label>
@@ -42,13 +42,13 @@
                 class="form-control"
                 id="date-of-birth"
                 placeholder="Date of Birth"
-                name="dateOfBirth"
-                v-model="dateOfBirth"
-                v-model.trim="$v.dateOfBirth.$model"
-                :class="{'is-invalid': validationStatus($v.dateOfBirth)}"
+                name="date_of_birth"
+                v-model="date_of_birth"
+                v-model.trim="$v.date_of_birth.$model"
+                :class="{'is-invalid': validationStatus($v.date_of_birth)}"
               />
 
-              <div v-if="!$v.dateOfBirth.required" class="invalid-feedback">Date of birth is required.</div>
+              <div v-if="!$v.date_of_birth.required" class="invalid-feedback">Date of birth is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="pan" maxlength="10" class="color-white">PAN Number*</label>
@@ -57,11 +57,11 @@
                 class="form-control"
                 placeholder="PAN Number"
                 name="pan"
-                v-model="pan"
-                v-model.trim="$v.pan.$model"
-                :class="{'is-invalid': validationStatus($v.pan)}"
+                v-model="pan_number"
+                v-model.trim="$v.pan_number.$model"
+                :class="{'is-invalid': validationStatus($v.pan_number)}"
               />
-              <div v-if="!$v.pan.required" class="invalid-feedback">PAN is required.</div>
+              <div v-if="!$v.pan_number.required" class="invalid-feedback">PAN is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
@@ -71,17 +71,17 @@
                 type="text"
                 class="form-control"
                 placeholder="Company Name"
-                name="companyName"
-                v-model="companyName"
-                v-model.trim="$v.companyName.$model"
-                :class="{'is-invalid': validationStatus($v.companyName)}"
+                name="company_id"
+                v-model="company_id"
+                v-model.trim="$v.company_id.$model"
+                :class="{'is-invalid': validationStatus($v.company_id)}"
               />
-              <div v-if="!$v.companyName.required" class="invalid-feedback">Company name is required.</div>
+              <div v-if="!$v.company_id.required" class="invalid-feedback">Company name is required.</div>
             </div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="work-experience" class="color-white">Total Work Experience*</label>
-              <select name="workExperince" v-model="workExperience" id="work-experience" class="form-control">
+              <select name="workExperince" v-model="total_exp" id="work-experience" class="form-control">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -93,7 +93,7 @@
               </select>
             </div>
             <div class="col-12 form-group mgt-15">
-              <router-link to="/self-employed/basic-detail">
+              <router-link to="/salaried/basic-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
                 <button type="submit" v-on:click="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
@@ -114,18 +114,28 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
+import salariedObj from '../globalVariableSalaried';
 export default {
   name: "PersonalDetailSalaried",
   data:function()
   {
       return{
-          fullName:null,
-          workExperience:0,
-          companyName:null,
-          pan:null,
+          name:null,
+          total_exp:0,
+          company_id:null,
+          pan_number:null,
           email:null,
-          dateOfBirth:null
+          date_of_birth:null
       }
+  },
+  mounted ()
+  {
+    this.name=salariedObj.name;
+    this.total_exp=salariedObj.total_exp;
+    this.pan_number=salariedObj.pan_number;
+    this.email=salariedObj.email;
+    this.date_of_birth=salariedObj.date_of_birth;
+    this.company_id=salariedObj.company_id;
   },
   components: {
     ApplyProgress,
@@ -133,10 +143,10 @@ export default {
     ApplyReview
   },
           validations: {
-        fullName: {required},
-        companyName: {required},
-        dateOfBirth:{required},
-        pan: {required, minLength: minLength(10)},
+        name: {required},
+        company_id: {required},
+        date_of_birth:{required},
+        pan_number: {required, minLength: minLength(10)},
         email:{required}
     },
         methods: {
@@ -144,11 +154,15 @@ export default {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
-            console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/transaction-detail'); 
-            alert('Data Submit');
+            salariedObj.pan_number=this.pan_number;
+            salariedObj.date_of_birth=this.date_of_birth;
+            salariedObj.company_id=this.company_id;
+            salariedObj.email=this.email;
+            salariedObj.name=this.name;
+            salariedObj.total_exp=this.total_exp
         }},
 };
 </script>
