@@ -15,11 +15,11 @@
                 class="form-control"
                 id="loan-amount"
                 placeholder="Loan Amount"
-                name="loanAmount"
-                v-model.trim="$v.loanAmount.$model"
-                :class="{'is-invalid': validationStatus($v.loanAmount)}"
+                name="loan_amount"
+                v-model.trim="$v.loan_amount.$model"
+                :class="{'is-invalid': validationStatus($v.loan_amount)}"
               />
-              <div v-if="!$v.loanAmount.required" class="invalid-feedback">Loan amount is required.</div>
+              <div v-if="!$v.loan_amount.required" class="invalid-feedback">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="monthly-salary" class="color-white">Net Monthly Salary*</label>
@@ -27,12 +27,12 @@
                 type="text"
                 class="form-control"
                 placeholder="Net Monthly Salary"
-                name="monthlySalary"
+                name="net_salary"
                 id="monthly-alary"
-                v-model.trim="$v.monthlySalary.$model"
-                :class="{'is-invalid': validationStatus($v.monthlySalary)}"
+                v-model.trim="$v.net_salary.$model"
+                :class="{'is-invalid': validationStatus($v.net_salary)}"
               />
-              <div v-if="!$v.monthlySalary.required" class="invalid-feedback">Monthly salary is required.</div>
+              <div v-if="!$v.net_salary.required" class="invalid-feedback">Monthly salary is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -54,11 +54,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Mobile Number"
-                name="mobileNumber"
-                v-model.trim="$v.mobileNumber.$model"
-                :class="{'is-invalid': validationStatus($v.mobileNumber)}"
+                name="mobile"
+                v-model.trim="$v.mobile.$model"
+                :class="{'is-invalid': validationStatus($v.mobile)}"
               />
-              <div v-if="!$v.mobileNumber.required" class="invalid-feedback">Mpbile number is required.</div>
+              <div v-if="!$v.mobile.required" class="invalid-feedback">Mpbile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/">
@@ -82,33 +82,43 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
+import salariedObj from '../globalVariableSalaried';
 export default {
   name: "BasicDetailSalaried",
   data:function()
   {
       return{
-        loanAmount:null,
-        mobileNumber:null,
+        loan_amount:null,
+        mobile:null,
         city:null,
-        monthlySalary:null
+        net_salary:null
       }
   },
+  mounted ()
+  {
+    this.loan_amount=salariedObj.loan_amount;
+    this.mobile=salariedObj.mobile;
+    this.city=salariedObj.city;
+    this.net_salary=salariedObj.net_salary;
+  },
       validations: {
-        loanAmount: {required},
-        monthlySalary: {required},
+        loan_amount: {required},
+        net_salary: {required},
         city: {required},
-        mobileNumber: {required, minLength: minLength(10)}
+        mobile: {required, minLength: minLength(10)}
     },
         methods: {
              validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
-            console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/personal-detail'); 
-            alert('Data Submit');
+            salariedObj.loan_amount=this.loan_amount;
+            salariedObj.net_salary=this.net_salary;
+            salariedObj.city=this.city;
+            salariedObj.mobile=this.mobile;
         }},
   components: {
     ApplyProgress,
