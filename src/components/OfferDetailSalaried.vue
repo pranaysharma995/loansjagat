@@ -4,9 +4,7 @@
   <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div v-else-if='list.length==0' class='text-center'>
-  <p >Sorry no result found</p>
-</div>
+
 <div v-else class='row contai' >
 
 <div class='container containz  '>
@@ -74,31 +72,34 @@
           <span class="sr-only">Loading...</span>
           </div>
         </div>
+        <div v-else-if='list.length==0' class='text-center'>
+          <p >Sorry no result found</p>
+        </div>
         <table v-else class="table ">
           <tbody class= 'tbody'>
-            <tr >
-              <td class='col_' >
-                <img class='bank_img' alt="img" src="../assets/logo.png">
-              </td>
-              <td  class='col_'>₹10000</td>
-              <td  class='col_'>14.28%</td>
-              <td  class='col_'>₹6</td>
-              <td  class='col_'>₹8</td>
-              <td  class='col_'>Upto 4% of outstanding Loan</td>
-              <td  class='col_'>4</td>
-              <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
-                <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-                </div>
-              </td>
-              <td v-else class='end_col d-flex justify-content-center align-items-center'>
+              <!-- <tr >
+                <td class='col_' >
+                  <img class='bank_img' alt="img" src="../assets/logo.png">
+                </td>
+                <td  class='col_'>₹10000</td>
+                <td  class='col_'>14.28%</td>
+                <td  class='col_'>₹6</td>
+                <td  class='col_'>₹8</td>
+                <td  class='col_'>Upto 4% of outstanding Loan</td>
+                <td  class='col_'>4</td>
+                <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
+                  <div class="spinner-border text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                  </div>
+                </td>
+                <td v-else class='end_col d-flex justify-content-center align-items-center'>
 
-                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
-                 v-on:click='apply_loan'>Apply</button>
-              </td>
+                  <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
+                   v-on:click='apply_loan'>Apply</button>
+                </td>
 
 
-            </tr>
+              </tr> -->
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" src="../assets/logo.png">
@@ -114,8 +115,10 @@
                 <span class="sr-only">Loading...</span>
                 </div>
               </td>
-              <td  v-else class='end_col d-flex justify-content-center align-items-center'>
-                <button type="button" class="btn button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply</button>
+              <td v-else class='end_col d-flex justify-content-center align-items-center'>
+
+                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
+                 v-on:click='apply_loan'>Apply</button>
               </td>
 
 
@@ -231,6 +234,9 @@ export default{
          btn:false,
            table:true,
        },
+       filter:5000,
+       list:[],
+       tenure:'1',
     }
   },
 

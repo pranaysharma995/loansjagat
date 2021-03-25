@@ -77,7 +77,7 @@
         </div>
         <table v-else class="table ">
           <tbody class= 'tbody'>
-            <tr >
+            <!-- <tr >
               <td class='col_' >
                 <img class='bank_img' alt="img" src="../assets/logo.png">
               </td>
@@ -99,7 +99,7 @@
               </td>
 
 
-            </tr>
+            </tr> -->
 
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
@@ -117,7 +117,9 @@
                 </div>
               </td>
               <td  v-else class='end_col d-flex justify-content-center align-items-center'>
-                <button type="submit" class="btn button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply</button>
+
+                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
+                 v-on:click='apply_loan'>Apply</button>
               </td>
 
 
