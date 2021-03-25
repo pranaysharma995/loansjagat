@@ -21,14 +21,15 @@
     <div class='first_container'>
       <div class='slider_container row'>
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
-          <span class='col-md-6 pad_top d-flex flex-row align-items-center'>
+          <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
             <input type='range' min='0' max='10000' value='0' class=' button-blue' v-model='filter'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
-          <span class='col-md-4 pad_top d-flex flex-row align-items-center'>
+          <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
                 <p class='padd_text'>Tenure:    </p>
+                
               <div>
               <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
                 <option selected>---</option>
@@ -39,7 +40,7 @@
               </div>
 
             </span>
-        <span class='pad_top btm_top'>
+        <span class='pad_top btm_top '>
           <button type="submit" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply Filter</button>
         </span>
 
@@ -363,6 +364,10 @@ this.loader.page=false;
   }
   .btm_top{
     margin-left:1rem;
+  }
+  .mbl_tenure{
+    display:flex;
+    justify-content:flex-end;
   }
 }
 </style>
