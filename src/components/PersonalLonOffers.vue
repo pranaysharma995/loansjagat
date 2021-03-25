@@ -29,7 +29,7 @@
           </span>
           <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
                 <p class='padd_text'>Tenure:    </p>
-                
+
               <div>
               <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
                 <option selected>---</option>
@@ -197,8 +197,10 @@ axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
   this.request_id=response.data.id;
 this.loader.page=false;
 
-    axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{
-      self_employed_form
+    axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-business-loan',{
+
+    "request_id":this.request_id
+
     })
     .then((response)=>{console.log(response);
       this.request_id=response.data.id;

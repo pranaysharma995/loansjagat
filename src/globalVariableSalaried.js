@@ -21,7 +21,6 @@ var self_employed_form={
 	"ownership":null,
 	"creditScore":'',
 	"gst":null,
-	"id": 1,
 	"mini_introduction": "Self Employed",
 	"profession": null,
 	"current_city_of_residence": "",
