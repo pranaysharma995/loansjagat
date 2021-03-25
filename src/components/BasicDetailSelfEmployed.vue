@@ -114,10 +114,10 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            self_employed_form.mobile=this.mobileNumber
-            self_employed_form.loan_amount=this.loanAmount
-            self_employed_form.city=this.city
-            self_employed_form.annualSales=this.annualSales
+            self_employed_form.mobile_number=this.mobileNumber
+            self_employed_form.loan_amount_required=this.loanAmount
+            self_employed_form.current_city_of_residence=this.city
+            self_employed_form.gross_annual_income=this.annualSales
 
             this.$router.push('/self-employed/personal-detail');
             alert('Data Submit');

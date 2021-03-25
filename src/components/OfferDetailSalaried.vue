@@ -4,7 +4,9 @@
   <span class="sr-only">Loading...</span>
   </div>
 </div>
-
+<div v-else-if='list.length==0' class='text-center'>
+  <p >Sorry no result found</p>
+</div>
 <div v-else class='row contai' >
 
 <div class='container containz  '>
@@ -89,9 +91,10 @@
                 <span class="sr-only">Loading...</span>
                 </div>
               </td>
-              <td  v-else class='end_col d-flex justify-content-center align-items-center'>
+              <td v-else class='end_col d-flex justify-content-center align-items-center'>
 
-                <button type="submit" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue">Apply</button>
+                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
+                 v-on:click='apply_loan'>Apply</button>
               </td>
 
 
@@ -112,7 +115,7 @@
                 </div>
               </td>
               <td  v-else class='end_col d-flex justify-content-center align-items-center'>
-                <button type="submit" class="btn button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply</button>
+                <button type="button" class="btn button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply</button>
               </td>
 
 
@@ -145,10 +148,10 @@ export default{
     this.total_exp=localStorage.getItem("total_exp");
     this.company_id=localStorage.getItem("company_id");
 
-    axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan-result",{
+    axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan-result",{
       loan_amount:this.loan_amount,
       any_emi:this.any_emi,
-      net_salary:this.net_salary,
+      net_salary_all_deductions:this.net_salary,
       mode_of_salary:this.mode_of_salary,
       total_exp:this.total_exp,
       company_id:this.company_id
@@ -164,7 +167,7 @@ export default{
           this.loader.table=false;
     })
 
-    axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan",{
+    axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan",{
       loan_amount:localStorage.getItem("loan_amount"),
       name:localStorage.getItem("name"),
       email:localStorage.getItem("email"),
@@ -193,7 +196,24 @@ export default{
 
   },
   methods:{
+    apply_loan(){
+      console.log('called')
+      this.loader.btn=true;
 
+      axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{
+        'request_id':this.request_id
+      })
+      .then((response)=>{console.log(response);
+        this.request_id=response.data.id;
+      this.loader.btn=false;
+
+
+
+      })
+      .catch((err)=>{console.log(err);
+      this.loader.btn=false;
+      })
+    }
   },
   data(){
     return {

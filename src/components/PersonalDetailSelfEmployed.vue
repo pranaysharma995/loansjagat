@@ -142,9 +142,9 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            self_employed_form.businessLife=this.businessLife
-            self_employed_form.ownership=this.ownership
-            self_employed_form.pan_number=this.pan
+            self_employed_form.business_type=this.businessLife
+            self_employed_form.office_ownership=this.ownership
+            self_employed_form.panno=this.pan
             self_employed_form.date_of_birth=this.dateOfBirth
             self_employed_form.email=this.email
             self_employed_form.name=this.fullName

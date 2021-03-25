@@ -115,9 +115,9 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/self-employed/offer-detail');
-            self_employed_form.net_salary=this.grossAnnualIncome
-            self_employed_form.ownership=this.creditScore
-            self_employed_form.any_emi=this.emi
+            self_employed_form.gross_annual_income=this.grossAnnualIncome
+            self_employed_form.civil_score=this.creditScore
+            self_employed_form.any_loans_running_emi_monthly=this.emi
             self_employed_form.dateOfBirth=this.gst
             console.log(self_employed_form);
             alert('Data Submit');

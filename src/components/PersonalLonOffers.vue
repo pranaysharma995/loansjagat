@@ -72,6 +72,9 @@
           <span class="sr-only">Loading...</span>
           </div>
         </div>
+        <div v-else-if='list.length==0' class='text-center'>
+          <p >Sorry no result found</p>
+        </div>
         <table v-else class="table ">
           <tbody class= 'tbody'>
             <tr >
@@ -91,11 +94,13 @@
               </td>
               <td  v-else class='end_col d-flex justify-content-center align-items-center'>
 
-                <button type="submit" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue">Apply</button>
+                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
+                 v-on:click='apply_loan'>Apply</button>
               </td>
 
 
             </tr>
+
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" src="../assets/logo.png">
@@ -141,7 +146,26 @@ export default{
   },
 
   methods:{
+    apply_loan(){
+      console.log('called')
+      this.loader.btn=true;
 
+      axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',
+      {
+        'request_id':this.request_id
+      }
+      )
+      .then((response)=>{console.log(response);
+        this.request_id=response.data.id;
+      this.loader.btn=false;
+
+
+
+      })
+      .catch((err)=>{console.log(err);
+      this.loader.btn=false;
+      })
+    }
   },
   data(){
     return {
@@ -153,7 +177,7 @@ export default{
         btn:false,
         table:true,
       },
-      request_id:null,
+      request_id:0,
 
     }
   },
@@ -176,12 +200,14 @@ this.loader.page=false;
     .then((response)=>{console.log(response);
       this.request_id=response.data.id;
     this.loader.table=false;
+    this.list=[]
 
 
 
     })
     .catch((err)=>{console.log(err);
     this.loader.table=false;
+    this.list=[]
     })
 
 
@@ -195,155 +221,143 @@ this.loader.page=false;
 
 </script>
 <style scoped>
-  .contai{
-    min-height:calc(100vh - 59px);
-    background-color:#0255AB;
-
-
-    /* position: fixed; */
-  }
-  .color_white{
-    color:white;
-
-  }
-
-  .heading_one{
-  margin-top:5rem;
+.contai {
+  min-height: calc(100vh - 59px);
+  background-color: #0255ab;
+  /* position: fixed; */
+}
+.color_white {
+  color: white;
+}
+.heading_one {
+  margin-top: 5rem;
   font-size: 2.5rem;
   font-weight: 600;
   text-align: center;
-  }
-  .heading_two{
-  margin-top:2rem;
+}
+.heading_two {
+  margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: 100;
   text-align: center;
-  }
-  .containz{
-    margin-bottom:2rem;
-  }
-  .container_two{
-    margin-top:2rem;
-    background-color:#fff;
-    min-height:22rem;
-    border-radius: 5px;
-    max-width:100%;
-    /* padding-left:1rem;
+}
+.containz {
+  margin-bottom: 2rem;
+}
+.container_two {
+  margin-top: 2rem;
+  background-color: #fff;
+  min-height: 22rem;
+  border-radius: 5px;
+  max-width: 100%;
+  /* padding-left:1rem;
     padding-right:1rem; */
-    padding-top:0.01rem;
-  }
-  .first_container{
-    padding-left:1rem;
-    padding-right:1rem;
-  }
-  .slider_container{
-    /* height:7rem; */
-    /* border-bottom:1px solid #B3B3B3; */
-   margin-top:2.5rem;
-  }
-  .dropdown{
-    border-radius: 5px;
-    /* height:2.1rem; */
-    /* width:4rem; */
-    padding:0.7rem;
-  }
-  .padd_text{
-    padding-right:1rem;
-    font-size: .9rem;
-    font-weight: normal;
-  }
-  .btn_big{
-    height:3rem;
-    width:7rem;
-  }
-  .padd_left{
-    padding-left:0.7rem;
-  }
-  .table_container{
-
-  overflow:auto;
+  padding-top: 0.01rem;
+}
+.first_container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.slider_container {
+  /* height:7rem; */
+  /* border-bottom:1px solid #B3B3B3; */
+  margin-top: 2.5rem;
+}
+.dropdown {
+  border-radius: 5px;
+  /* height:2.1rem; */
+  /* width:4rem; */
+  padding: 0.7rem;
+}
+.padd_text {
+  padding-right: 1rem;
+  font-size: .9rem;
+  font-weight: normal;
+}
+.btn_big {
+  height: 3rem;
+  width: 7rem;
+}
+.padd_left {
+  padding-left: 0.7rem;
+}
+.table_container {
+  overflow: auto;
   /* border : 1px solid #000; */
-  }
-  .tbl{
-    min-width:690px;
-  }
-  .result_size{
-    margin-top:1.5rem;
-    border-top:1px solid  #B3B3B3;
-    padding-top:1rem;
-    padding-bottom:1rem;
-    font-size: 1rem;
-  }
-
-  .border{
-    border-style: groove;
-      border-width: 0px!important;
-      border-color: coral;
-
-  }
-  .head{
-    margin-top:1rem!important;
-    margin-bottom:1rem;
-    padding-bottom:1rem;
-    font-size: 1rem;
-  }
-  .border_col{
-
-    background-color:#034E9A;
-    color:#fff;
-    font-size: 0.9rem;
-    font-weight: normal;
-
-  }
-  .tbody{
-    padding:2rem!important;
-    border-top:1px solid #000;
-    font-size:1rem;
-  }
-
-  .col_{
-      border-top:0px solid #000;
-      border-right:1px solid #000;
-  }
-  .end_col{
-    border-top:0px solid #000;
-  }
-  .bank_img{
-    width:10rem;
-    height:auto;
-  }
-  @media screen and (max-width: 767px) {
-    .heading_one{
-    margin-top:5rem;
+}
+.tbl {
+  min-width: 690px;
+}
+.result_size {
+  margin-top: 1.5rem;
+  border-top: 1px solid #b3b3b3;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+}
+.border {
+  border-style: groove;
+  border-width: 0px !important;
+  border-color: coral;
+}
+.head {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+}
+.border_col {
+  background-color: #034e9a;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+.tbody {
+  padding: 2rem !important;
+  border-top: 1px solid #000;
+  font-size: 1rem;
+}
+.col_ {
+  border-top: 0px solid #000;
+  border-right: 1px solid #000;
+}
+.end_col {
+  border-top: 0px solid #000;
+}
+.bank_img {
+  width: 10rem;
+  height: auto;
+}
+@media screen and (max-width: 767px) {
+  .heading_one {
+    margin-top: 5rem;
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    }
-    .heading_two{
-    margin-top:2rem;
+  }
+  .heading_two {
+    margin-top: 2rem;
     font-size: 1rem;
     font-weight: 100;
     text-align: center;
-    }
-  .pad_top{
-    padding-top:.5rem;
   }
-  .bank_img{
-    width:5rem;
-    height:auto;
+  .pad_top {
+    padding-top: .5rem;
   }
-  .tbody{
-    padding:2rem!important;
-    border-top:1px solid #000;
-    font-size:0.8rem;
+  .bank_img {
+    width: 5rem;
+    height: auto;
   }
-  .border_col{
-
-    background-color:#034E9A;
-    color:#fff;
+  .tbody {
+    padding: 2rem !important;
+    border-top: 1px solid #000;
+    font-size: 0.8rem;
+  }
+  .border_col {
+    background-color: #034e9a;
+    color: #fff;
     font-size: 0.8rem;
     font-weight: normal;
-
   }
-  }
+}
 </style>
