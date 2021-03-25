@@ -41,7 +41,13 @@
 
             </span>
         <span class='pad_top btm_top '>
-          <button type="submit" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply Filter</button>
+          <div v-if='loader.apply_filter' class="  d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <button v-else type="button" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue"
+          v-on:click='filter_post'>Apply Filter</button>
         </span>
 
         <!-- </div> -->
@@ -168,7 +174,24 @@ export default{
       .catch((err)=>{console.log(err);
       this.loader.btn=false;
       })
-    }
+    },
+    filter_post(){
+      this.loader.apply_filter=true;
+
+      axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan-filte/<id>/<price>/tenure',
+      {
+        'request_id':this.request_id
+      }
+      )
+      .then((response)=>{console.log(response);
+        this.request_id=response.data.id;
+      this.loader.apply_filter=false
+      })
+      .catch((err)=>{console.log(err);
+      this.loader.apply_filter=false;
+      })
+    },
+
   },
   data(){
     return {
@@ -179,6 +202,7 @@ export default{
         page:true,
         btn:false,
         table:true,
+        apply_filter:false,
       },
       request_id:0,
 
