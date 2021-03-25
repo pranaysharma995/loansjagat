@@ -39,7 +39,7 @@
               </div>
 
             </span>
-        <span class='pad_top'>
+        <span class='pad_top btm_top'>
           <button type="submit" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply Filter</button>
         </span>
 
@@ -360,6 +360,9 @@ this.loader.page=false;
     color: #fff;
     font-size: 0.8rem;
     font-weight: normal;
+  }
+  .btm_top{
+    margin-left:1rem;
   }
 }
 </style>

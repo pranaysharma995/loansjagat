@@ -393,5 +393,8 @@ overflow:auto;
   padding-bottom:1rem;
   font-size: 0.8rem;
 }
+.btm_top{
+  margin-left:1rem;
+}
 }
 </style>
