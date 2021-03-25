@@ -82,14 +82,9 @@
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="work-experience" class="color-white">Total Work Experience*</label>
               <select name="workExperince" v-model="total_exp" id="work-experience" class="form-control">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="8">8</option>
+              <option value="0 - 1">0 - 1</option>
+              <option value="1 - 3">1 - 3</option>
+              <option value="3 year above">Above 3</option>
               </select>
             </div>
             <div class="col-12 form-group mgt-15">
@@ -121,7 +116,7 @@ export default {
   {
       return{
           name:null,
-          total_exp:0,
+          total_exp:'0-1',
           company_id:null,
           pan_number:null,
           email:null,
