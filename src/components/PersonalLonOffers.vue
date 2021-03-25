@@ -1,27 +1,36 @@
 <template>
+<div v-if='loader.page' class=" load d-flex justify-content-center align-items-center">
+  <div class="spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+  </div>
+</div>
 
-<div class='row contai' >
+<div v-else class='row contai' >
+
 <div class='container containz  '>
+
+
   <div class='text_container color_white'>
     <p class='heading_one p-0'>Congratulations! You Are Eligible for Personal Loan Offers </p>
     <p class='heading_two'>
       Adjust the loan amount and choose tenure to suit the EMI paying capacity.
     </p>
   </div>
+
   <div class='container_two shadow mr-auto ml-auto'>
     <div class='first_container'>
       <div class='slider_container row'>
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-6 pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' max='100' value='50' class=' button-blue'>
-            <p class='padd_text padd_left'>₹10000   </p>
+            <input type='range' min='0' max='10000' value='0' class=' button-blue' v-model='filter'>
+            <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
           <span class='col-md-4 pad_top d-flex flex-row align-items-center'>
                 <p class='padd_text'>Tenure:    </p>
               <div>
-              <select class="form-select dropdown" aria-label="Default select example">
+              <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
                 <option selected>---</option>
                 <option value="1">3 Year</option>
                 <option value="2">6 Year</option>
@@ -41,7 +50,8 @@
 
     <div class='table_container'>
 
-      <div class='tbl'>
+
+      <div  class='tbl'>
         <table class="table">
           <thead>
             <tr class='head'>
@@ -57,7 +67,12 @@
             </tr>
           </thead>
         </table>
-        <table class="table ">
+        <div v-if='loader.table' class="  d-flex justify-content-center align-items-center">
+          <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <table v-else class="table ">
           <tbody class= 'tbody'>
             <tr >
               <td class='col_' >
@@ -69,23 +84,34 @@
               <td  class='col_'>₹8</td>
               <td  class='col_'>Upto 4% of outstanding Loan</td>
               <td  class='col_'>4</td>
-              <td  class='end_col d-flex justify-content-center align-items-center'>
+              <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+              </td>
+              <td  v-else class='end_col d-flex justify-content-center align-items-center'>
+
                 <button type="submit" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue">Apply</button>
               </td>
 
 
             </tr>
-            <tr >
+            <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" src="../assets/logo.png">
               </td>
-              <td  class='col_'>₹10000</td>
+              <td  class='col_'>₹10000{{i}}</td>
               <td  class='col_'>14.28%</td>
               <td  class='col_'>₹6</td>
               <td  class='col_'>₹8</td>
               <td  class='col_'>Upto 4% of outstanding Loan</td>
               <td  class='col_'>4</td>
-              <td  class='end_col d-flex justify-content-center align-items-center'>
+              <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+              </td>
+              <td  v-else class='end_col d-flex justify-content-center align-items-center'>
                 <button type="submit" class="btn button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Apply</button>
               </td>
 
@@ -103,7 +129,11 @@
 </div>
 
 </template>
+
 <script>
+import axios from 'axios';
+import {self_employed_form} from '../globalVariableSalaried.js'
+
 export default{
   name:'home',
   props:{
@@ -115,162 +145,205 @@ export default{
   },
   data(){
     return {
+      filter:5000,
+      list:[],
+      tenure:'1',
+      loader:{
+        page:true,
+        btn:false,
+        table:true,
+      },
+      request_id:null,
 
     }
   },
 
   components: {
     },
+
+mounted(){
+
+axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
+  self_employed_form
+})
+.then((response)=>{console.log(response);
+  this.request_id=response.data.id;
+this.loader.page=false;
+
+    axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{
+      self_employed_form
+    })
+    .then((response)=>{console.log(response);
+      this.request_id=response.data.id;
+    this.loader.table=false;
+
+
+
+    })
+    .catch((err)=>{console.log(err);
+    this.loader.table=false;
+    })
+
+
+})
+.catch((err)=>{console.log(err);
+this.loader.page=false;
+})
+
+},
 }
+
 </script>
 <style scoped>
-.contai{
-  min-height:calc(100vh - 59px);
-  background-color:#0255AB;
+  .contai{
+    min-height:calc(100vh - 59px);
+    background-color:#0255AB;
 
 
-  /* position: fixed; */
-}
-.color_white{
-  color:white;
+    /* position: fixed; */
+  }
+  .color_white{
+    color:white;
 
-}
+  }
 
-.heading_one{
-margin-top:5rem;
-font-size: 2.5rem;
-font-weight: 600;
-text-align: center;
-}
-.heading_two{
-margin-top:2rem;
-font-size: 1.5rem;
-font-weight: 100;
-text-align: center;
-}
-.containz{
-  margin-bottom:2rem;
-}
-.container_two{
-  margin-top:2rem;
-  background-color:#fff;
-  min-height:22rem;
-  border-radius: 5px;
-  max-width:100%;
-  /* padding-left:1rem;
-  padding-right:1rem; */
-  padding-top:0.01rem;
-}
-.first_container{
-  padding-left:1rem;
-  padding-right:1rem;
-}
-.slider_container{
-  /* height:7rem; */
-  /* border-bottom:1px solid #B3B3B3; */
- margin-top:2.5rem;
-}
-.dropdown{
-  border-radius: 5px;
-  /* height:2.1rem; */
-  /* width:4rem; */
-  padding:0.7rem;
-}
-.padd_text{
-  padding-right:1rem;
-  font-size: .9rem;
-  font-weight: normal;
-}
-.btn_big{
-  height:3rem;
-  width:7rem;
-}
-.padd_left{
-  padding-left:0.7rem;
-}
-.table_container{
-
-overflow:auto;
-/* border : 1px solid #000; */
-}
-.tbl{
-  min-width:690px;
-}
-.result_size{
-  margin-top:1.5rem;
-  border-top:1px solid  #B3B3B3;
-  padding-top:1rem;
-  padding-bottom:1rem;
-  font-size: 1rem;
-}
-
-.border{
-  border-style: groove;
-    border-width: 0px!important;
-    border-color: coral;
-
-}
-.head{
-  margin-top:1rem!important;
-  margin-bottom:1rem;
-  padding-bottom:1rem;
-  font-size: 1rem;
-}
-.border_col{
-
-  background-color:#034E9A;
-  color:#fff;
-  font-size: 0.9rem;
-  font-weight: normal;
-
-}
-.tbody{
-  padding:2rem!important;
-  border-top:1px solid #000;
-  font-size:1rem;
-}
-
-.col_{
-    border-top:0px solid #000;
-    border-right:1px solid #000;
-}
-.end_col{
-  border-top:0px solid #000;
-}
-.bank_img{
-  width:10rem;
-  height:auto;
-}
-@media screen and (max-width: 767px) {
   .heading_one{
   margin-top:5rem;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
   text-align: center;
   }
   .heading_two{
   margin-top:2rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 100;
   text-align: center;
   }
-.pad_top{
-  padding-top:.5rem;
-}
-.bank_img{
-  width:5rem;
-  height:auto;
-}
-.tbody{
-  padding:2rem!important;
-  border-top:1px solid #000;
-  font-size:0.8rem;
-}
-.head{
-  margin-top:1rem!important;
-  margin-bottom:1rem;
-  padding-bottom:1rem;
-  font-size: 0.8rem;
-}
-}
+  .containz{
+    margin-bottom:2rem;
+  }
+  .container_two{
+    margin-top:2rem;
+    background-color:#fff;
+    min-height:22rem;
+    border-radius: 5px;
+    max-width:100%;
+    /* padding-left:1rem;
+    padding-right:1rem; */
+    padding-top:0.01rem;
+  }
+  .first_container{
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+  .slider_container{
+    /* height:7rem; */
+    /* border-bottom:1px solid #B3B3B3; */
+   margin-top:2.5rem;
+  }
+  .dropdown{
+    border-radius: 5px;
+    /* height:2.1rem; */
+    /* width:4rem; */
+    padding:0.7rem;
+  }
+  .padd_text{
+    padding-right:1rem;
+    font-size: .9rem;
+    font-weight: normal;
+  }
+  .btn_big{
+    height:3rem;
+    width:7rem;
+  }
+  .padd_left{
+    padding-left:0.7rem;
+  }
+  .table_container{
+
+  overflow:auto;
+  /* border : 1px solid #000; */
+  }
+  .tbl{
+    min-width:690px;
+  }
+  .result_size{
+    margin-top:1.5rem;
+    border-top:1px solid  #B3B3B3;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    font-size: 1rem;
+  }
+
+  .border{
+    border-style: groove;
+      border-width: 0px!important;
+      border-color: coral;
+
+  }
+  .head{
+    margin-top:1rem!important;
+    margin-bottom:1rem;
+    padding-bottom:1rem;
+    font-size: 1rem;
+  }
+  .border_col{
+
+    background-color:#034E9A;
+    color:#fff;
+    font-size: 0.9rem;
+    font-weight: normal;
+
+  }
+  .tbody{
+    padding:2rem!important;
+    border-top:1px solid #000;
+    font-size:1rem;
+  }
+
+  .col_{
+      border-top:0px solid #000;
+      border-right:1px solid #000;
+  }
+  .end_col{
+    border-top:0px solid #000;
+  }
+  .bank_img{
+    width:10rem;
+    height:auto;
+  }
+  @media screen and (max-width: 767px) {
+    .heading_one{
+    margin-top:5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    }
+    .heading_two{
+    margin-top:2rem;
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: center;
+    }
+  .pad_top{
+    padding-top:.5rem;
+  }
+  .bank_img{
+    width:5rem;
+    height:auto;
+  }
+  .tbody{
+    padding:2rem!important;
+    border-top:1px solid #000;
+    font-size:0.8rem;
+  }
+  .border_col{
+
+    background-color:#034E9A;
+    color:#fff;
+    font-size: 0.8rem;
+    font-weight: normal;
+
+  }
+  }
 </style>

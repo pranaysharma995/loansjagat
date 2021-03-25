@@ -108,12 +108,13 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
+import {self_employed_form} from '../globalVariableSalaried.js'
 export default {
   name: "PersonalDetailSelfEmployed",
   data:function()
   {
    return{
-       businessLife:0,
+         businessLife:0,
        ownership:null,
        pan:null,
        dateOfBirth:null,
@@ -126,7 +127,7 @@ export default {
     ApplyFeature,
     ApplyReview
   },
-            validations: {
+        validations: {
         ownership: {required},
         dateOfBirth: {required},
         pan: {required, minLength: minLength(10)},
@@ -141,7 +142,14 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/self-employed/transaction-detail'); 
+            self_employed_form.businessLife=this.businessLife
+            self_employed_form.ownership=this.ownership
+            self_employed_form.pan_number=this.pan
+            self_employed_form.date_of_birth=this.dateOfBirth
+            self_employed_form.email=this.email
+            self_employed_form.name=this.fullName
+
+            this.$router.push('/self-employed/transaction-detail');
             alert('Data Submit');
         }},
 };

@@ -119,7 +119,7 @@ export default {
         submit: function() {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/salaried/offer-detail'); 
+            this.$router.push('/salaried/offer-detail');
             salariedObj.ownership=this.ownership;
             salariedObj.any_emi=this.any_emi
             salariedObj.salary_pay_type=this.salary_pay_type;

@@ -83,6 +83,7 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
+import {self_employed_form} from '../globalVariableSalaried.js'
 export default {
   name: "BasicDetailSelfEmployment",
   data:function()
@@ -113,7 +114,12 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/self-employed/personal-detail'); 
+            self_employed_form.mobile=this.mobileNumber
+            self_employed_form.loan_amount=this.loanAmount
+            self_employed_form.city=this.city
+            self_employed_form.annualSales=this.annualSales
+
+            this.$router.push('/self-employed/personal-detail');
             alert('Data Submit');
         }},
 };
