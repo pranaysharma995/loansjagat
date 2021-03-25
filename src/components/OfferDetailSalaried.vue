@@ -131,7 +131,6 @@
 </template>
 <script>
 import axios from 'axios';
-import salariedObj from '../globalVariableSalaried';
 export default{
   name:'home',
   props:{
@@ -139,12 +138,12 @@ export default{
   },
   mounted ()
   {
-    this.loan_amount=salariedObj.loan_amount;
-    this.any_emi=salariedObj.any_emi;
-    this.net_salary=salariedObj.net_salary;
-    this.mode_of_salary=salariedObj.mode_of_salary;
-    this.total_exp=salariedObj.total_exp;
-    this.company_id=salariedObj.company_id;
+    this.loan_amount=localStorage.getItem("loan_amount");
+    this.any_emi=localStorage.getItem("any_emi");
+    this.net_salary=localStorage.getItem("net_salary");
+    this.mode_of_salary=localStorage.getItem("mode_of_salary");
+    this.total_exp=localStorage.getItem("total_exp");
+    this.company_id=localStorage.getItem("company_id");
 
     axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan-result",{
       loan_amount:this.loan_amount,
@@ -166,19 +165,19 @@ export default{
     })
 
     axios.post(process.env.VUE_APP_LOCAL_HOST+"/personal-loan",{
-      loan_amount:salariedObj.loan_amount,
-      name:salariedObj.name,
-      email:salariedObj.email,
-      mobile:salariedObj.mobile,
-      city:salariedObj.city,
-      net_salary:salariedObj.net_salary,
-      date_of_birth:salariedObj.date_of_birth,
-      pan_number:salariedObj.pan_number,
-      company_id:salariedObj.company_id,
-      total_exp:salariedObj.total_exp,
-      salary_pay_type:salariedObj.salary_pay_type,
-      ownership:salariedObj.ownership,
-      credit_score:salariedObj.credit_score
+      loan_amount:localStorage.getItem("loan_amount"),
+      name:localStorage.getItem("name"),
+      email:localStorage.getItem("email"),
+      mobile:localStorage.getItem("mobile"),
+      city:localStorage.getItem("city"),
+      net_salary:localStorage.getItem("net_salary"),
+      date_of_birth:localStorage.getItem("date_of_birth"),
+      pan_number:localStorage.getItem("pan_number"),
+      company_id:localStorage.getItem("company_id"),
+      total_exp:localStorage.getItem("total_exp"),
+      salary_pay_type:localStorage.getItem("salary_pay_type"),
+      ownership:localStorage.getItem("ownership"),
+      credit_score:localStorage.getItem("credit_score")
     })
     .then((res) =>
     {

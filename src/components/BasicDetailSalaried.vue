@@ -82,7 +82,6 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
-import salariedObj from '../globalVariableSalaried';
 export default {
   name: "BasicDetailSalaried",
   data:function()
@@ -96,10 +95,10 @@ export default {
   },
   mounted ()
   {
-    this.loan_amount=salariedObj.loan_amount;
-    this.mobile=salariedObj.mobile;
-    this.city=salariedObj.city;
-    this.net_salary=salariedObj.net_salary;
+    this.loan_amount=localStorage.getItem("loan_amount") ? localStorage.getItem("loan_amount") : null;
+    this.mobile=localStorage.getItem("mobile") ? localStorage.getItem("mobile") : null;
+    this.city=localStorage.getItem("city") ? localStorage.getItem("city") :null ;
+    this.net_salary=localStorage.getItem("net_salary") ? localStorage.getItem("net_salary") : null;
   },
       validations: {
         loan_amount: {required},
@@ -115,10 +114,10 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/personal-detail'); 
-            salariedObj.loan_amount=this.loan_amount;
-            salariedObj.net_salary=this.net_salary;
-            salariedObj.city=this.city;
-            salariedObj.mobile=this.mobile;
+            localStorage.setItem("loan_amount",this.loan_amount);
+            localStorage.setItem("net_salary",this.net_salary);
+            localStorage.setItem("city",this.city);
+            localStorage.setItem("mobile",this.mobile);
         }},
   components: {
     ApplyProgress,
