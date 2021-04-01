@@ -94,7 +94,7 @@
                   </div>
                 </td >
               </tr>
-            <tr  v-for= '(i,index) in list' v-bind:key='index'>
+            <tr  v-else-if='!loader.table' v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" :src="get_image_link(i.bank_logo)">
               </td>

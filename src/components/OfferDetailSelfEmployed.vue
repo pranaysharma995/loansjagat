@@ -95,7 +95,7 @@
               </td >
             </tr>
 
-            <tr  v-for= '(i,index) in list' v-bind:key='index'>
+            <tr  v-else-if='!loader.table' v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
                 <img class='bank_img' alt="img" :src="get_image_link(i.bank_logo)">
               </td>
@@ -147,7 +147,7 @@ export default{
       console.log('called')
       this.loader.btn=true;
 
-      axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',
+      axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-business-loan',
       {
         'request_id':this.request_id
       }
