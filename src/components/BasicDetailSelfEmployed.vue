@@ -23,15 +23,21 @@
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="annual-sales" class="color-white">Annual Sales*</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Annual Sales"
-                name="annualSales"
-                id="annual-sales"
-                v-model.trim="$v.annualSales.$model"
-                :class="{'is-invalid': validationStatus($v.annualSales)}"
-              />
+
+              <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control">
+                <option value="5000000">Less than 50 Lacs</option>
+                <option value="7500000">50 Lacs - 1 Cr</option>
+                <option value="15000000">1 Cr - 2 Cr</option>
+                <option value="25000000">2 Cr - 3 Cr</option>
+                <option value="35000000">3 Cr - 4 Cr</option>
+                <option value="45000000">4 Cr - 5 Cr</option>
+                <option value="75000000">5 Cr - 10 Cr</option>
+                <option value="150000000">10 Cr - 20 Cr</option>
+                <option value="350000000">20 Cr - 50 Cr</option>
+                <option value="750000000">50 Cr - 100 Cr</option>
+                <option value="1000000000">More than 100 Cr</option>
+
+            </select>
               <div v-if="!$v.annualSales.required" class="invalid-feedback">Annual sales is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
@@ -116,8 +122,8 @@ export default {
             if (this.$v.$pendding || this.$v.$error) return;
             self_employed_form.mobile_number=this.mobileNumber
             self_employed_form.loan_amount_required=this.loanAmount
-            self_employed_form.current_city_of_residence=this.city
-            self_employed_form.gross_annual_income=this.annualSales
+            self_employed_form.city=this.city
+            self_employed_form.turn_over=this.annualSales
 
             this.$router.push('/self-employed/personal-detail');
             alert('Data Submit');

@@ -113,10 +113,10 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail');
-            localStorage.setItem("ownership",this.ownership);
-            localStorage.setItem("any_emai",this.any_emi)
-            localStorage.setItem("salary_pay_type",this.salary_pay_type);
-            localStorage.setItem("credit_score",this.credit_score)
+            // localStorage.setItem("ownership",this.ownership);
+            localStorage.setItem("any_loans_running_emi_monthly",this.any_emi)
+            localStorage.setItem("mode_of_salary",this.salary_pay_type);
+            localStorage.setItem("civil_score",this.credit_score)
         }},
 };
 </script>

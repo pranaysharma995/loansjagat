@@ -25,17 +25,14 @@
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gst" class="color-white">GST Registration*</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="GST"
-                name="gst"
-                id="gst"
-                v-model="gst"
-                v-model.trim="$v.gst.$model"
-                :class="{'is-invalid': validationStatus($v.gst)}"
-              />
-              <div v-if="!$v.gst.required" class="invalid-feedback">GST is required.</div>
+
+              <select name="gst" v-model="gst" id="gst" class="form-control">
+                <option value="">Select An Option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+
+            </select>
+              <!-- <div v-if="!$v.gst.required" class="invalid-feedback">GST is required.</div> -->
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -50,7 +47,7 @@
                 v-model.trim="$v.emi.$model"
                 :class="{'is-invalid': validationStatus($v.emi)}"
               />
-              <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div>
+              <!-- <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div> -->
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
@@ -60,6 +57,41 @@
               <option value="don't know">Don't Know</option>
               </select>
             </div>
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
+                 <label for="business_type" class="color-white">Business Type*</label>
+                <select name="business_type" v-model="business_type" id="business_type" class="form-control">
+                  <option value="">Select Business Type</option>
+                  <option value="Trader">Trader</option>
+                  <option value="Manufacturer">Manufacturer</option>
+                  <option value="Service Provider">Service Provider</option>
+                  <option value="Retailer">Retailer</option>
+                  <option value="E-commerce">E-commerce</option>
+                  <option value="Distributor">Distributor</option>
+                  <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
+                 <label for="industries_name" class="color-white">Industries Name*</label>
+                <select name="industries_name"
+                v-model="industries_name"
+                id="industries_name"
+                 class="form-control"
+                 @change="filterLists($event, $event.target.selectedIndex)"
+                 >
+              <option value="">Select Industry</option>
+              <option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
+                 <label for="industries_item" class="color-white">Industries Item*</label>
+                <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control">
+              <option value="">Select Industry</option>
+              <option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
+              </select>
+            </div>
+
             <div class="col-12 form-group mgt-15">
               <router-link to="/self-employed/personal-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
@@ -83,7 +115,7 @@ import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
 import {self_employed_form} from '../globalVariableSalaried.js'
-
+import axios from 'axios';
 export default {
   name: "TransactionDetailSelfEmployed",
   data:function()
@@ -92,7 +124,12 @@ export default {
        grossAnnualIncome:null,
        creditScore:'below-650',
        emi:null,
-       gst:null
+       gst:null,
+       industries:[],
+       items:[],
+       industries_name:'',
+       business_type:"",
+       industries_item:'',
       }
   },
   components: {
@@ -118,9 +155,35 @@ export default {
             self_employed_form.gross_annual_income=this.grossAnnualIncome
             self_employed_form.civil_score=this.creditScore
             self_employed_form.any_loans_running_emi_monthly=this.emi
-            self_employed_form.dateOfBirth=this.gst
+            self_employed_form.gst=this.gst
+            self_employed_form.business_type=this.business_type
+            self_employed_form.type_of_business_industry=this.business_type
+            self_employed_form.industry_type=this.industries_name
+            self_employed_form.industry_item=this.industries_item
             console.log(self_employed_form);
             alert('Data Submit');
-        }},
+        },
+        getIndustries: function(){
+          console.log(process.env.VUE_APP_LIVE_HOST+'/bl-margin-list');
+        axios.get(process.env.VUE_APP_LIVE_HOST+'/bl-margin-list')
+        .then((response)=>{
+        this.industries = response.data
+        console.log(response)
+        }).catch((err)=>{
+        console.log(err)
+        });
+        },//
+        filterLists:function(event,selectedIndex){
+        this.items = this.industries[selectedIndex-1].blmarginlist_item
+        //	this.lists  = this.industries[0].filter(c => c.industry_id.indexOf(val) > -1);
+        //console.log(this.industries[indval].blmarginlist_item);
+        },
+      },//methods
+      mounted ()
+      {
+        this.getIndustries();
+
+
+      },
 };
 </script>

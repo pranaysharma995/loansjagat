@@ -113,11 +113,11 @@ export default {
         submit: function() {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/salaried/personal-detail'); 
-            localStorage.setItem("loan_amount",this.loan_amount);
-            localStorage.setItem("net_salary",this.net_salary);
-            localStorage.setItem("city",this.city);
-            localStorage.setItem("mobile",this.mobile);
+            this.$router.push('/salaried/personal-detail');
+            localStorage.setItem("loan_amount_required",this.loan_amount);
+            localStorage.setItem("net_salary_all_deductions",this.net_salary);
+            localStorage.setItem("current_city_other",this.city);
+            localStorage.setItem("mobile_number",this.mobile);
         }},
   components: {
     ApplyProgress,

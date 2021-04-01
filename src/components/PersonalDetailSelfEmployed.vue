@@ -64,26 +64,24 @@
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="ownership" class="color-white">Ownership Status*</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Ownership Status"
-                name="ownership"
-                v-model.trim="$v.ownership.$model"
-                :class="{'is-invalid': validationStatus($v.ownership)}"
-              />
+              <select name="ownership" v-model="ownership" id="ownership" class="form-control" >
+                <option value="">Select An Option</option>
+                <option value="Owned">Owned</option>
+                <option value="Rented">Rented</option>
+
+            </select>
               <div v-if="!$v.ownership.required" class="invalid-feedback">Ownership status is required.</div>
             </div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="business-life" class="color-white">How Old is Business*</label>
                 <select name="businessLife" v-model="businessLife" id="business-life" class="form-control">
-              <option value="0">0</option>
-              <option value="1-3">1-3</option>
-              <option value="3-5">3-5</option>
-              <option value="5-7">5-7</option>
-              <option value="7-9">7-9</option>
-              <option value=">10">>10</option>
+                  <option value="">Select An Option</option>
+                  <option value="1">Less than 1 year</option>
+                  <option value="2">1 Yr - 3 Yr</option>
+                  <option value="3">3 Yr - 5 Yr</option>
+                  <option value="10">More than 5 Yr</option>
+
               </select>
             </div>
             <div class="col-12 form-group mgt-15">
@@ -119,7 +117,8 @@ export default {
        pan:null,
        dateOfBirth:null,
        email:null,
-       fullName:null
+       fullName:null,
+
    }
   },
   components: {
@@ -142,7 +141,7 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            self_employed_form.business_type=this.businessLife
+            self_employed_form.business_registration_years=this.businessLife
             self_employed_form.office_ownership=this.ownership
             self_employed_form.panno=this.pan
             self_employed_form.date_of_birth=this.dateOfBirth

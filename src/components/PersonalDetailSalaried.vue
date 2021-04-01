@@ -150,13 +150,13 @@ export default {
         submit: function() {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.$router.push('/salaried/transaction-detail'); 
+            this.$router.push('/salaried/transaction-detail');
             localStorage.setItem("pan_number",this.pan_number);
             localStorage.setItem("date_of_birth",this.date_of_birth);
             localStorage.setItem("company_id",this.company_id);
             localStorage.setItem("email",this.email);
             localStorage.setItem("name",this.name);
-            localStorage.setItem("total_exp",this.total_exp)
+            localStorage.setItem("total_work_experience",this.total_exp)
         }},
 };
 </script>

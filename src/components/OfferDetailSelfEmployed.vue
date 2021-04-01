@@ -23,7 +23,7 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' max='10000' value='0' class=' button-blue' v-model='filter'>
+            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
@@ -33,9 +33,12 @@
               <div>
               <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
                 <option selected>---</option>
-                <option value="1">3 Year</option>
-                <option value="2">6 Year</option>
-                <option value="3">7 Year</option>
+                <option value="1">1 Year</option>
+                <option value="2">2 Year</option>
+                <option value="3">3 Year</option>
+                <option value="4">4 Year</option>
+                <option value="5">5 Year</option>
+
               </select>
               </div>
 
@@ -110,14 +113,14 @@
 
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
-                <img class='bank_img' alt="img" src="../assets/logo.png">
+                <img class='bank_img' alt="img" :src="get_image_link(i.bank_logo)">
               </td>
-              <td  class='col_'>₹10000{{i}}</td>
-              <td  class='col_'>14.28%</td>
-              <td  class='col_'>₹6</td>
-              <td  class='col_'>₹8</td>
-              <td  class='col_'>Upto 4% of outstanding Loan</td>
-              <td  class='col_'>4</td>
+              <td  class='col_'>₹{{i.loan_amt}}</td>
+              <td  class='col_'>{{i.intrest}}%</td>
+              <td  class='col_'>₹{{i.process_fees}}</td>
+              <td  class='col_'>₹{{i.blemi}}</td>
+              <td  class='col_'>Upto 4{{i.special_emi}}% of outstanding Loan</td>
+              <td  class='col_'>{{i.label_value.split(" ")[0]}}</td>
               <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
@@ -177,25 +180,27 @@ export default{
     },
     filter_post(){
       this.loader.apply_filter=true;
-
-      axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan-filte/<id>/<price>/tenure',
-      {
-        'request_id':this.request_id
-      }
-      )
+      this.loader.table=true;
+      axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure      )
       .then((response)=>{console.log(response);
-        this.request_id=response.data.id;
-      this.loader.apply_filter=false
+        this.loader.table=false;
+        this.list=response.data;
+        this.loader.apply_filter=false;
       })
-      .catch((err)=>{console.log(err);
+      .catch((err)=>{console.log('error',err);
+        this.list=[];
+        this.loader.table=false;
       this.loader.apply_filter=false;
       })
     },
-
+    get_image_link(img){
+      return require('../assets/img/bank/'+img)
+    },
   },
   data(){
     return {
-      filter:5000,
+      filter:self_employed_form.loan_amount_required,
+      max_filter:self_employed_form.loan_amount_required,
       list:[],
       tenure:'1',
       loader:{
@@ -214,36 +219,43 @@ export default{
 
 mounted(){
 
-axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
-  self_employed_form
-})
-.then((response)=>{console.log(response);
-  this.request_id=response.data.id;
-this.loader.page=false;
+  axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
+    "city":self_employed_form.city,
+    "loan_amount_required":self_employed_form.loan_amount_required,
+    "mobile_number":self_employed_form.mobile_number,
+    "turn_over":self_employed_form.turn_over,
+  })
+  .then((response)=>{console.log('then-POST     -',response);
+    this.request_id=response.data.id;
+    this.loader.page=false;
+    console.log(this.loader.page);
+    axios.put(process.env.VUE_APP_LIVE_HOST+'/business-loan/'+this.request_id,{
+    ...self_employed_form
+      })
+      .then((response)=>{console.log(response);
+        this.request_id=response.data.id;
+        axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure)
+          .then((response)=>{console.log(response);
+          this.loader.table=false;
+          this.list=response.data;
+          console.log(this.loader.table,this.list);
+          })
+          .catch((err)=>{console.log('error',err);
+          this.loader.table=false;
+          this.list=[]
+          })
 
-    axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-business-loan',{
-
-    "request_id":this.request_id
-
-    })
-    .then((response)=>{console.log(response);
-      this.request_id=response.data.id;
-    this.loader.table=false;
-    this.list=[]
+      })
+      .catch((err)=>{console.log('err-POST     -',err);
+      this.loader.table=false;
+      this.list=[]
+      })
 
 
-
-    })
-    .catch((err)=>{console.log(err);
-    this.loader.table=false;
-    this.list=[]
-    })
-
-
-})
-.catch((err)=>{console.log(err);
-this.loader.page=false;
-})
+  })
+  .catch((err)=>{console.log(err);
+  this.loader.page=false;
+  })
 
 },
 }
