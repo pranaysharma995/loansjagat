@@ -75,40 +75,25 @@
 
             </tr>
           </thead>
-        </table>
-        <div v-if='loader.table' class="  d-flex justify-content-center align-items-center">
-          <div class="spinner-border text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-        <div v-else-if='list.length==0' class='text-center'>
-          <p >Sorry no result found</p>
-        </div>
-        <table v-else class="table ">
-          <tbody class= 'tbody'>
-            <!-- <tr >
-              <td class='col_' >
-                <img class='bank_img' alt="img" src="../assets/logo.png">
-              </td>
-              <td  class='col_'>₹10000</td>
-              <td  class='col_'>14.28%</td>
-              <td  class='col_'>₹6</td>
-              <td  class='col_'>₹8</td>
-              <td  class='col_'>Upto 4% of outstanding Loan</td>
-              <td  class='col_'>4</td>
-              <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
-                <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+          <tbody>
+            <tr v-if='loader.table' class="  ">
+              <td colspan="7"  >
+                <div class='d-flex justify-content-center align-items-center'>
+
+
+                  <div class="mx-auto spinner-border text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
                 </div>
-              </td>
-              <td  v-else class='end_col d-flex justify-content-center align-items-center'>
-
-                <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
-                 v-on:click='apply_loan'>Apply</button>
-              </td>
-
-
-            </tr> -->
+                </div>
+              </td >
+            </tr>
+            <tr v-else-if='list.length==0' class="">
+              <td colspan="7"  >
+                <div class='d-flex justify-content-center align-items-center'>
+                  <p >Sorry no result found</p>
+                </div>
+              </td >
+            </tr>
 
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
@@ -120,7 +105,7 @@
               <td  class='col_'>₹{{i.blemi}}</td>
               <td  class='col_'>Upto 4{{i.special_emi}}% of outstanding Loan</td>
               <td  class='col_'>{{i.label_value.split(" ")[0]}}</td>
-              <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
+              <td v-if='loader.btn &&loader.index==index' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
                 </div>
@@ -128,7 +113,7 @@
               <td  v-else class='end_col d-flex justify-content-center align-items-center'>
 
                 <button type="button" class="btn button-blue d-flex justify-content-center align-items-center color-white bg-blue"
-                 v-on:click='apply_loan'>Apply</button>
+                 v-on:click='apply_loan(index)'>Apply</button>
               </td>
 
 
@@ -157,7 +142,8 @@ export default{
   },
 
   methods:{
-    apply_loan(){
+    apply_loan(index){
+      this.loader.index=index;
       console.log('called')
       this.loader.btn=true;
 
