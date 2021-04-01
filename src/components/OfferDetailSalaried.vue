@@ -23,19 +23,21 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' max='10000' value='0' class=' button-blue' v-model='filter'>
+            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
           <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
                 <p class='padd_text'>Tenure:    </p>
               <div>
-              <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
-                <option selected>---</option>
-                <option value="1">3 Year</option>
-                <option value="2">6 Year</option>
-                <option value="3">7 Year</option>
-              </select>
+                <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
+                  <option selected>---</option>
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
+                  <option value="4">4 Year</option>
+                  <option value="5">5 Year</option>
+                </select>
               </div>
 
             </span>
@@ -66,7 +68,6 @@
               <th class='border_col' scope="col">Interest Rate</th>
               <th class='border_col' scope="col">Processing Fees</th>
               <th class='border_col' scope="col">Monthly EMI</th>
-              <th class='border_col' scope="col">Bal. t/f to other bank</th>
               <th class='border_col' scope="col">Tenure</th>
               <th class='border_col' scope="col">Action</th>
 
@@ -78,7 +79,7 @@
           <span class="sr-only">Loading...</span>
           </div>
         </div>
-        <div v-else-if='list.length==0' class='text-center'>
+        <div v-else-if='list==[]' class='text-center'>
           <p >Sorry no result found</p>
         </div>
         <table v-else class="table ">
@@ -108,14 +109,13 @@
               </tr> -->
             <tr  v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
-                <img class='bank_img' alt="img" src="../assets/logo.png">
+                <img class='bank_img' alt="img" :src="get_image_link(i.bank_logo)">
               </td>
-              <td  class='col_'>₹10000{{i}}</td>
-              <td  class='col_'>14.28%</td>
-              <td  class='col_'>₹6</td>
-              <td  class='col_'>₹8</td>
-              <td  class='col_'>Upto 4% of outstanding Loan</td>
-              <td  class='col_'>4</td>
+              <td  class='col_'>₹{{i.loan_amt}}</td>
+              <td  class='col_'>{{i.roi}}%</td>
+              <td  class='col_'>₹{{i.process_fees}}</td>
+              <td  class='col_'>₹{{i.emi}}</td>
+              <td  class='col_'>{{i.tenure}}</td>
               <td v-if='loader.btn' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
@@ -150,52 +150,36 @@ export default{
   },
   mounted ()
   {
-    this.loan_amount=localStorage.getItem("loan_amount");
-    this.any_emi=localStorage.getItem("any_emi");
-    this.net_salary=localStorage.getItem("net_salary");
-    this.mode_of_salary=localStorage.getItem("mode_of_salary");
-    this.total_exp=localStorage.getItem("total_exp");
-    this.company_id=localStorage.getItem("company_id");
-
-    axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan-result",{
-      loan_amount:this.loan_amount,
-      any_emi:this.any_emi,
-      net_salary_all_deductions:this.net_salary,
-      mode_of_salary:this.mode_of_salary,
-      total_exp:this.total_exp,
-      company_id:this.company_id
-    })
-    .then((res) =>
-    {
-      console.log(res);
-          this.loader.table=false;
-    })
-    .catch((err) =>
-    {
-      console.log(err)
-          this.loader.table=false;
-    })
-
-    axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan",{
-      loan_amount:localStorage.getItem("loan_amount"),
-      name:localStorage.getItem("name"),
-      email:localStorage.getItem("email"),
-      mobile:localStorage.getItem("mobile"),
-      city:localStorage.getItem("city"),
-      net_salary:localStorage.getItem("net_salary"),
-      date_of_birth:localStorage.getItem("date_of_birth"),
-      pan_number:localStorage.getItem("pan_number"),
-      company_id:localStorage.getItem("company_id"),
-      total_exp:localStorage.getItem("total_exp"),
-      salary_pay_type:localStorage.getItem("salary_pay_type"),
-      ownership:localStorage.getItem("ownership"),
-      credit_score:localStorage.getItem("credit_score")
-    })
+    axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan",{...this.post_data })
     .then((res) =>
     {
       console.log(res);
       this.request_id=res.data.id
-      this.loader.page=false;
+      axios.put(process.env.VUE_APP_LIVE_HOST+'/personal-loan/'+this.request_id,{
+      ...this.salariedObj
+        })
+        .then((response)=>{console.log(response);
+          // this.request_id=response.data.id;
+          this.loader.page=false;
+          this.response=response.data
+          this.search_data.company_id=0;
+          this.search_data.tenure=this.tenure
+          axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
+            .then((response)=>{console.log(response);
+            this.loader.table=false;
+            this.list=response.data;
+            console.log('loader is false ',this.loader.table,this.list);
+            })
+            .catch((err)=>{console.log('error',err);
+            this.loader.table=false;
+            this.list=[]
+            })
+
+        })
+        .catch((err)=>{console.log('err-POST     -',err);
+        this.loader.page=false;
+        this.list=[]
+        })
     })
     .catch((err) =>
     {
@@ -225,42 +209,103 @@ export default{
     },
     filter_post(){
       this.loader.apply_filter=true;
-
-      axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan-filte/<id>/<price>/tenure',
-      {
-        'request_id':this.request_id
-      }
-      )
-      .then((response)=>{console.log(response);
-        this.request_id=response.data.id;
-      this.loader.apply_filter=false
-      })
-      .catch((err)=>{console.log(err);
-      this.loader.apply_filter=false;
-      })
+      this.loader.table=true;
+      this.search_data.company_id=0;
+      this.search_data.tenure=this.tenure
+      this.search_data.loan_amount_required=this.filter
+      axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
+        .then((response)=>{console.log(response);
+        this.loader.table=false;
+        this.loader.apply_filter=false;
+        this.list=response.data;
+        console.log('loader is false ',this.loader.table,this.list);
+        })
+        .catch((err)=>{console.log('error',err);
+        this.loader.table=false;
+        this.loader.apply_filter=false;
+        this.list=[]
+        })
+    },
+    get_image_link(img){
+      return require('../assets/img/bank/'+img)
     },
   },
   data(){
     return {
-       request_id:null,
-       loan_amount:null,
-       net_salary:null,
-       mode_of_salary:null,
-       total_exp:null,
-       civil_score:null,
-       any_emi:null,
-       tensure:null,
-       company_id:null,
        loader:{
          page:true,
          btn:false,
-           table:true,
-           apply_filter:false,
+         table:true,
+         apply_filter:false,
        },
-       filter:5000,
-       list:[],
-       tenure:'1',
+       request_id:null,
+       tensure:null,
+       filter:localStorage.getItem("loan_amount_required"),
+       // filter:self_employed_form.loan_amount_required,
+       max_filter:localStorage.getItem("loan_amount_required"),
+       list:[
+    {
+        "is_min_greater_than_require": 0,
+        "minloan": 1500000,
+        "special_emi": 0,
+        "emi": 2745,
+        "id": 9,
+        "loan_amt": 100000,
+        "tenure": 4,
+        "process_fees": 2000,
+        "special_process_fees": 0,
+        "bank_id": 9,
+        "bank_name": "HDB",
+        "bank_logo": "hdb.jpg",
+        "special_roi": null,
+        "roi": 14.25,
+        "pf": "2.00%",
+        "duration": 4
     }
+],
+       tenure:'1',
+       salariedObj:{
+         "current_city_other":localStorage.getItem("current_city_other"),//
+         "loan_amount_required":localStorage.getItem("loan_amount_required"),//
+         "mobile_number":localStorage.getItem("mobile_number"),//
+         "net_salary_all_deductions":localStorage.getItem("net_salary_all_deductions"),//
+
+         "any_loans_running_emi_monthly":localStorage.getItem("any_loans_running_emi_monthly"),//
+         "civil_score":localStorage.getItem("civil_score"),///
+         "company_type":"",
+         "current_city_of_residence":"",
+         "current_company_name":localStorage.getItem("current_company_name"),///
+         "date_of_birth":localStorage.getItem("date_of_birth"),///
+         "email":localStorage.getItem("email"),///
+         "joining_date_in_current_company":localStorage.getItem("joining_date_in_current_company"),///
+         "mode_of_salary":localStorage.getItem("mode_of_salary"),///
+         "name":localStorage.getItem("name"),///
+         "other_company_name":"",
+         "panno":localStorage.getItem("panno"),//
+         "salary_account_name":localStorage.getItem("salary_account_name"),
+         "total_work_experience":localStorage.getItem("total_work_experience"),///
+         "ownership":localStorage.getItem("ownership")
+       },
+      post_data:{
+        "current_city_other":localStorage.getItem("current_city_other"),//
+        "loan_amount_required":localStorage.getItem("loan_amount_required"),//
+        "mobile_number":localStorage.getItem("mobile_number"),//
+        "net_salary_all_deductions":localStorage.getItem("net_salary_all_deductions"),//
+      },
+      response:{},
+      search_data:{
+                  "any_loans_running_emi_monthly": localStorage.getItem("any_loans_running_emi_monthly"),
+                  "civil_score": localStorage.getItem("civil_score"),
+                  "company_id": null,
+                  "company_type": "",
+                  "loan_amount_required": localStorage.getItem("loan_amount_required"),
+                  "mode_of_salary": localStorage.getItem("mode_of_salary"),
+                  "net_salary_all_deductions": localStorage.getItem("net_salary_all_deductions"),
+                  "tenure": this.tenure,
+                  "total_work_experience": localStorage.getItem("total_work_experience")
+                },
+    }
+
   },
 
   components: {

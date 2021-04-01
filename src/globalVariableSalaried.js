@@ -1,23 +1,28 @@
 var salariedObj={
-	"current_city_other":"",
-"loan_amount_required":"",
-"mobile_number":"",
-"net_salary_all_deductions":"",
+"current_city_other":"",//
+"loan_amount_required":"",//
+"mobile_number":"",//
+"net_salary_all_deductions":"",//
 
-"any_loans_running_emi_monthly":"",
-"civil_score":"",
+"any_loans_running_emi_monthly":"",//
+"civil_score":"",///
 "company_type":"",
 "current_city_of_residence":"",
-"current_company_name":"",
-"date_of_birth":"",
-"email":"",
-"joining_date_in_current_company":"",
-"mode_of_salary":"",
-"name":"",
+"current_company_name":"",///
+"date_of_birth":"",///
+"email":"",///
+"joining_date_in_current_company":"",///
+"mode_of_salary":"",///
+"name":"",///
 "other_company_name":"",
-"panno":"",
+"panno":"",//
 "salary_account_name":"",
-"total_work_experience":"",
+"total_work_experience":"",///
+"ownership":"",
+
+
+
+
 };
 // salariedObj.loan_amount="5000";
 // salariedObj.net_salary="";

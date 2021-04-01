@@ -126,7 +126,7 @@ export default {
             self_employed_form.turn_over=this.annualSales
 
             this.$router.push('/self-employed/personal-detail');
-            alert('Data Submit');
+            // alert('Data Submit');
         }},
 };
 </script>

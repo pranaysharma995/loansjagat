@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div v-if="$route.path == '/salaried/offer-detail' "></div>
-    <Header v-else />
+
+    <Header  />
     <router-view>
     </router-view>
     <div v-if="$route.path == '/salaried/offer-detail' || $route.path == '/self-employed/offer-detail'|| $route.path == '/self-employed/offer-detail'"></div>

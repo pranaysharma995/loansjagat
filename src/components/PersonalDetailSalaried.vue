@@ -87,6 +87,16 @@
               <option value="3 year above">Above 3 Years</option>
               </select>
             </div>
+            <div class="col-md-2 col-sm-12 col-xs-12"></div>
+            <div class="col-md-5 col-sm-6 col-xs-12 form-group">
+                 <label for="joining_date_in_current_company" class="color-white">Joining In Current Company*</label>
+              <select name="joining_date_in_current_company" v-model="joining_date_in_current_company" id="joining_date_in_current_company" class="form-control">
+                <option value="">Select Joining</option>
+                <option value="0 - 2 months">0 - 2 Months</option>
+                <option value="2- 6 months">2 - 6 Months</option>
+                <option value="6 months above">Greater than 6 Months</option>
+              </select>
+            </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/basic-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
@@ -119,7 +129,8 @@ export default {
           company_id:null,
           pan_number:null,
           email:null,
-          date_of_birth:null
+          date_of_birth:null,
+          joining_date_in_current_company:'',
       }
   },
   mounted ()
@@ -151,12 +162,13 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/transaction-detail');
-            localStorage.setItem("pan_number",this.pan_number);
+            localStorage.setItem("panno",this.pan_number);
             localStorage.setItem("date_of_birth",this.date_of_birth);
-            localStorage.setItem("company_id",this.company_id);
+            localStorage.setItem("current_company_name",this.company_id);
             localStorage.setItem("email",this.email);
             localStorage.setItem("name",this.name);
-            localStorage.setItem("total_work_experience",this.total_exp)
+            localStorage.setItem("total_work_experience",this.total_exp);
+            localStorage.setItem("joining_date_in_current_company",this.joining_date_in_current_company);
         }},
 };
 </script>

@@ -161,7 +161,7 @@ export default {
             self_employed_form.industry_type=this.industries_name
             self_employed_form.industry_item=this.industries_item
             console.log(self_employed_form);
-            alert('Data Submit');
+            // alert('Data Submit');
         },
         getIndustries: function(){
           console.log(process.env.VUE_APP_LIVE_HOST+'/bl-margin-list');

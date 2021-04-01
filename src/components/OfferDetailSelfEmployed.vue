@@ -38,7 +38,6 @@
                 <option value="3">3 Year</option>
                 <option value="4">4 Year</option>
                 <option value="5">5 Year</option>
-
               </select>
               </div>
 
@@ -233,7 +232,7 @@ mounted(){
     ...self_employed_form
       })
       .then((response)=>{console.log(response);
-        this.request_id=response.data.id;
+        // this.request_id=response.data.id;
         axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure)
           .then((response)=>{console.log(response);
           this.loader.table=false;

@@ -149,7 +149,7 @@ export default {
             self_employed_form.name=this.fullName
 
             this.$router.push('/self-employed/transaction-detail');
-            alert('Data Submit');
+            // alert('Data Submit');
         }},
 };
 </script>
