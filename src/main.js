@@ -20,8 +20,8 @@ import OfferDetailSalaried from './components/OfferDetailSalaried.vue';
 import BasicDetailSelfEmployed from './components/BasicDetailSelfEmployed.vue';
 import PersonalDetailSelfEmployed from './components/PersonalDetailSelfEmployed.vue';
 import TransactionDetailSelfEmployed from './components/TransactionDetailSelfEmployed.vue';
-// import OfferDetailSelfEmployed from './components/OfferDetailSelfEmployed.vue';
 import OfferDetailSelfEmployed from './components/OfferDetailSelfEmployed.vue';
+import AcknowledgementThankyouPage  from './components/AcknowledgementThankyouPage .vue';
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
 
@@ -35,7 +35,7 @@ const routes = [
   { path: '/self-employed/personal-detail', component:PersonalDetailSelfEmployed },
   { path: '/self-employed/transaction-detail', component:TransactionDetailSelfEmployed },
   { path: '/self-employed/offer-detail', component:OfferDetailSelfEmployed },
-  // { path: '/personal-loan-offers', component:PersonalLonOffers }
+   { path: '/acknowledgement-thankyou', component:AcknowledgementThankyouPage }
 ]
 
 const router = new VueRouter({

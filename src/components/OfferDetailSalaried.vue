@@ -187,12 +187,14 @@ export default{
       .then((response)=>{console.log(response);
         this.request_id=response.data.id;
       this.loader.btn=false;
+      this.$router.push('/acknowledgement-thankyou?no='+response.data.application_no);
 
 
 
       })
-      .catch((err)=>{console.log(err);
+      .catch((err)=>{console.log('ERROR',err);
       this.loader.btn=false;
+
       })
     },
     filter_post(){
