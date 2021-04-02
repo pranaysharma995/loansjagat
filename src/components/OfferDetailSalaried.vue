@@ -87,7 +87,7 @@
                   </div>
                 </td >
               </tr>
-              <tr v-else-if='list.length==0' class="">
+              <tr v-else-if='list.length==0 || list=="0"' class="">
                 <td colspan="7"  >
                   <div class='d-flex justify-content-center align-items-center'>
                     <p >Sorry no result found</p>
