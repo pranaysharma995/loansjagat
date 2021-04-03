@@ -15,11 +15,11 @@
                 class="form-control"
                 id="loan-amount"
                 placeholder="Loan Amount"
-                name="loan_amount"
-                v-model.trim="$v.loan_amount.$model"
-                :class="{'is-invalid': validationStatus($v.loan_amount)}"
+                name="loan_amount_required"
+                v-model.trim="$v.loan_amount_required.$model"
+                :class="{'is-invalid': validationStatus($v.loan_amount_required)}"
               />
-              <div v-if="!$v.loan_amount.required" class="invalid-feedback">Loan amount is required.</div>
+              <div v-if="!$v.loan_amount_required.required" class="invalid-feedback">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="monthly-salary" class="color-white">Net Monthly Salary*</label>
@@ -27,38 +27,38 @@
                 type="text"
                 class="form-control"
                 placeholder="Net Monthly Salary"
-                name="net_salary"
+                name="net_salary_all_deductions"
                 id="monthly-alary"
-                v-model.trim="$v.net_salary.$model"
-                :class="{'is-invalid': validationStatus($v.net_salary)}"
+                v-model.trim="$v.net_salary_all_deductions.$model"
+                :class="{'is-invalid': validationStatus($v.net_salary_all_deductions)}"
               />
-              <div v-if="!$v.net_salary.required" class="invalid-feedback">Monthly salary is required.</div>
+              <div v-if="!$v.net_salary_all_deductions.required" class="invalid-feedback">Monthly salary is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
-                <label for="city" class="color-white">City*</label>
+                <label for="current_city_other" class="color-white">City*</label>
               <input
                 type="text"
                 class="form-control"
-                id="city"
-                placeholder="Your City"
-                name="city"
-                v-model.trim="$v.city.$model"
-                :class="{'is-invalid': validationStatus($v.city)}"
+                id="current_city_other"
+                placeholder="Your current_city_other"
+                name="current_city_other"
+                v-model.trim="$v.current_city_other.$model"
+                :class="{'is-invalid': validationStatus($v.current_city_other)}"
               />
-              <div v-if="!$v.city.required" class="invalid-feedback">City is required.</div>
+              <div v-if="!$v.current_city_other.required" class="invalid-feedback">current_city_other is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
-                 <label for="mobile-number" class="color-white">Mobile Number*</label>
+                 <label for="mobile_number-number" class="color-white">Mobile Number*</label>
               <input
                 type="text"
                 class="form-control"
                 placeholder="Mobile Number"
-                name="mobile"
-                v-model.trim="$v.mobile.$model"
-                :class="{'is-invalid': validationStatus($v.mobile)}"
+                name="mobile_number"
+                v-model.trim="$v.mobile_number.$model"
+                :class="{'is-invalid': validationStatus($v.mobile_number)}"
               />
-              <div v-if="!$v.mobile.required" class="invalid-feedback">Mpbile number is required.</div>
+              <div v-if="!$v.mobile_number.required" class="invalid-feedback">Mpbile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/">
@@ -87,24 +87,24 @@ export default {
   data:function()
   {
       return{
-        loan_amount:null,
-        mobile:null,
-        city:null,
-        net_salary:null
+        loan_amount_required:null,
+        mobile_number:null,
+        current_city_other:null,
+        net_salary_all_deductions:null
       }
   },
   mounted ()
   {
-    this.loan_amount=localStorage.getItem("loan_amount") ? localStorage.getItem("loan_amount") : null;
-    this.mobile=localStorage.getItem("mobile") ? localStorage.getItem("mobile") : null;
-    this.city=localStorage.getItem("city") ? localStorage.getItem("city") :null ;
-    this.net_salary=localStorage.getItem("net_salary") ? localStorage.getItem("net_salary") : null;
+    this.loan_amount_required=localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null;
+    this.mobile_number=localStorage.getItem("mobile_number") ? localStorage.getItem("mobile_number") : null;
+    this.current_city_other=localStorage.getItem("current_city_other") ? localStorage.getItem("current_city_other") :null ;
+    this.net_salary_all_deductions=localStorage.getItem("net_salary_all_deductions") ? localStorage.getItem("net_salary_all_deductions") : null;
   },
       validations: {
-        loan_amount: {required},
-        net_salary: {required},
-        city: {required},
-        mobile: {required, minLength: minLength(10)}
+        loan_amount_required: {required},
+        net_salary_all_deductions: {required},
+        current_city_other: {required},
+        mobile_number: {required, minLength: minLength(10)}
     },
         methods: {
              validationStatus: function(validation) {
@@ -114,10 +114,10 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/personal-detail');
-            localStorage.setItem("loan_amount_required",this.loan_amount);
-            localStorage.setItem("net_salary_all_deductions",this.net_salary);
-            localStorage.setItem("current_city_other",this.city);
-            localStorage.setItem("mobile_number",this.mobile);
+            localStorage.setItem("loan_amount_required",this.loan_amount_required);
+            localStorage.setItem("net_salary_all_deductions",this.net_salary_all_deductions);
+            localStorage.setItem("current_city_other",this.current_city_other);
+            localStorage.setItem("mobile_number",this.mobile_number);
         }},
   components: {
     ApplyProgress,

@@ -57,11 +57,11 @@
                 class="form-control"
                 placeholder="PAN Number"
                 name="pan"
-                v-model="pan_number"
-                v-model.trim="$v.pan_number.$model"
-                :class="{'is-invalid': validationStatus($v.pan_number)}"
+                v-model="panno"
+                v-model.trim="$v.panno.$model"
+                :class="{'is-invalid': validationStatus($v.panno)}"
               />
-              <div v-if="!$v.pan_number.required" class="invalid-feedback">PAN is required.</div>
+              <div v-if="!$v.panno.required" class="invalid-feedback">PAN is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
@@ -71,17 +71,17 @@
                 type="text"
                 class="form-control"
                 placeholder="Company Name"
-                name="company_id"
-                v-model="company_id"
-                v-model.trim="$v.company_id.$model"
-                :class="{'is-invalid': validationStatus($v.company_id)}"
+                name="current_company_name"
+                v-model="current_company_name"
+                v-model.trim="$v.current_company_name.$model"
+                :class="{'is-invalid': validationStatus($v.current_company_name)}"
               />
-              <div v-if="!$v.company_id.required" class="invalid-feedback">Company name is required.</div>
+              <div v-if="!$v.current_company_name.required" class="invalid-feedback">Company name is required.</div>
             </div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="work-experience" class="color-white">Total Work Experience*</label>
-              <select name="workExperince" v-model="total_exp" id="work-experience" class="form-control">
+              <select name="workExperince" v-model="total_work_experience" id="work-experience" class="form-control">
               <option value="0 - 1">0 - 1 Year</option>
               <option value="1 - 3">1 - 3 Years</option>
               <option value="3 year above">Above 3 Years</option>
@@ -91,7 +91,6 @@
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="joining_date_in_current_company" class="color-white">Joining In Current Company*</label>
               <select name="joining_date_in_current_company" v-model="joining_date_in_current_company" id="joining_date_in_current_company" class="form-control">
-                <option value="">Select Joining</option>
                 <option value="0 - 2 months">0 - 2 Months</option>
                 <option value="2- 6 months">2 - 6 Months</option>
                 <option value="6 months above">Greater than 6 Months</option>
@@ -125,22 +124,22 @@ export default {
   {
       return{
           name:null,
-          total_exp:'0 - 1',
-          company_id:null,
-          pan_number:null,
+          total_work_experience:'0 - 1',
+          current_company_name:null,
+          panno:null,
           email:null,
           date_of_birth:null,
-          joining_date_in_current_company:'',
+          joining_date_in_current_company:"0 - 2 months",
       }
   },
   mounted ()
   {
     this.name=localStorage.getItem("name") ? localStorage.getItem("name") : null ;
-    this.total_exp=localStorage.getItem("total_exp") ? localStorage.getItem("total_exp") : '0 - 1';
-    this.pan_number=localStorage.getItem("pan_number") ? localStorage.getItem("pan_number") : null;
+    this.total_work_experience=localStorage.getItem("total_work_experience") ? localStorage.getItem("total_work_experience") : '0 - 1';
+    this.panno=localStorage.getItem("panno") ? localStorage.getItem("panno") : null;
     this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
     this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
-    this.company_id=localStorage.getItem("company_id") ? localStorage.getItem("company_id") : null;
+    this.current_company_name=localStorage.getItem("current_company_name") ? localStorage.getItem("current_company_name") : null;
   },
   components: {
     ApplyProgress,
@@ -149,9 +148,9 @@ export default {
   },
           validations: {
         name: {required},
-        company_id: {required},
+        current_company_name: {required},
         date_of_birth:{required},
-        pan_number: {required, minLength: minLength(10)},
+        panno: {required, minLength: minLength(10)},
         email:{required}
     },
         methods: {
@@ -162,12 +161,12 @@ export default {
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/transaction-detail');
-            localStorage.setItem("panno",this.pan_number);
+            localStorage.setItem("panno",this.panno);
             localStorage.setItem("date_of_birth",this.date_of_birth);
-            localStorage.setItem("current_company_name",this.company_id);
+            localStorage.setItem("current_company_name",this.current_company_name);
             localStorage.setItem("email",this.email);
             localStorage.setItem("name",this.name);
-            localStorage.setItem("total_work_experience",this.total_exp);
+            localStorage.setItem("total_work_experience",this.total_work_experience);
             localStorage.setItem("joining_date_in_current_company",this.joining_date_in_current_company);
         }},
 };

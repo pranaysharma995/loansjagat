@@ -64,7 +64,9 @@
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="ownership" class="color-white">Ownership Status*</label>
-              <select name="ownership" v-model="ownership" id="ownership" class="form-control" >
+              <select name="ownership" v-model="ownership" id="ownership" class="form-control"
+              v-model.trim="$v.ownership.$model"
+              :class="{'is-invalid': validationStatus($v.ownership)}" >
                 <option value="">Select An Option</option>
                 <option value="Owned">Owned</option>
                 <option value="Rented">Rented</option>
@@ -75,7 +77,9 @@
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="business-life" class="color-white">How Old is Business*</label>
-                <select name="businessLife" v-model="businessLife" id="business-life" class="form-control">
+                <select name="businessLife" v-model="businessLife" id="business-life" class="form-control"
+                v-model.trim="$v.businessLife.$model"
+                :class="{'is-invalid': validationStatus($v.businessLife)}">
                   <option value="">Select An Option</option>
                   <option value="1">Less than 1 year</option>
                   <option value="2">1 Yr - 3 Yr</option>
@@ -83,6 +87,7 @@
                   <option value="10">More than 5 Yr</option>
 
               </select>
+              <div v-if="!$v.businessLife.required" class="invalid-feedback">How Old is Business is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/self-employed/basic-detail">
@@ -131,7 +136,8 @@ export default {
         dateOfBirth: {required},
         pan: {required, minLength: minLength(10)},
         email:{required},
-        fullName:{required}
+        fullName:{required},
+        businessLife:{required},
     },
         methods: {
              validationStatus: function(validation) {

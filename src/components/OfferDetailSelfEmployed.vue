@@ -103,7 +103,10 @@
               <td  class='col_'>{{i.intrest}}%</td>
               <td  class='col_'>₹{{i.process_fees}}</td>
               <td  class='col_'>₹{{i.blemi}}</td>
-              <td  class='col_'>Upto 4{{i.special_emi}}% of outstanding Loan</td>
+              <td  v-if='i.bal_t_or_f_to_other_bank !=null' class='col_'>Upto {{i.bal_t_or_f_to_other_bank}}% of outstanding Loan</td>
+              <td v-else  class='col_'>
+
+              </td>
               <td  class='col_'>{{i.label_value.split(" ")[0]}}</td>
               <td v-if='loader.btn &&loader.index==index' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">

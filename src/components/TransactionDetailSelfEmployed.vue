@@ -27,7 +27,6 @@
               <label for="gst" class="color-white">GST Registration*</label>
 
               <select name="gst" v-model="gst" id="gst" class="form-control">
-                <option value="">Select An Option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
 
@@ -47,7 +46,7 @@
                 v-model.trim="$v.emi.$model"
                 :class="{'is-invalid': validationStatus($v.emi)}"
               />
-              <!-- <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div> -->
+              <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
@@ -60,7 +59,12 @@
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="business_type" class="color-white">Business Type*</label>
-                <select name="business_type" v-model="business_type" id="business_type" class="form-control">
+                <select name="business_type" v-model="business_type"
+                  id="business_type"
+                  class="form-control"
+                  v-model-trim="business_type"
+                  :class="{'is-invalid': validationStatus($v.business_type)}"
+                  >
                   <option value="">Select Business Type</option>
                   <option value="Trader">Trader</option>
                   <option value="Manufacturer">Manufacturer</option>
@@ -70,6 +74,9 @@
                   <option value="Distributor">Distributor</option>
                   <option value="Others">Others</option>
               </select>
+
+
+            <div v-if="!$v.business_type.required" class="invalid-feedback">Business Type required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="industries_name" class="color-white">Industries Name*</label>
@@ -78,18 +85,24 @@
                 id="industries_name"
                  class="form-control"
                  @change="filterLists($event, $event.target.selectedIndex)"
+                 v-model-trim="industries_name"
+                 :class="{'is-invalid': validationStatus($v.industries_name)}"
                  >
               <option value="">Select Industry</option>
               <option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
               </select>
+              <div v-if="!$v.industries_name.required" class="invalid-feedback">Industries Name required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="industries_item" class="color-white">Industries Item*</label>
-                <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control">
+                <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control"
+                v-model-trim="industries_item"
+                :class="{'is-invalid': validationStatus($v.industries_item)}">
               <option value="">Select Industry</option>
               <option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
               </select>
+              <div v-if="!$v.industries_item.required" class="invalid-feedback">Industries Item required.</div>
             </div>
 
             <div class="col-12 form-group mgt-15">
@@ -124,7 +137,7 @@ export default {
        grossAnnualIncome:null,
        creditScore:'below-650',
        emi:null,
-       gst:null,
+       gst:"No",
        industries:[],
        items:[],
        industries_name:'',
@@ -141,7 +154,11 @@ export default {
         grossAnnualIncome: {required},
         creditScore: {required},
         emi: {required},
-        gst:{required}
+        gst:{required},
+        business_type:{required},
+        industries_name:{required},
+        industries_item:{required},
+
     },
         methods: {
              validationStatus: function(validation) {
