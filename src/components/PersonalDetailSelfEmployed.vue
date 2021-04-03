@@ -111,7 +111,7 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
-import {self_employed_form} from '../globalVariableSalaried.js'
+// import {self_employed_form} from '../globalVariableSalaried.js'
 export default {
   name: "PersonalDetailSelfEmployed",
   data:function()
@@ -139,6 +139,14 @@ export default {
         fullName:{required},
         businessLife:{required},
     },
+    mounted (){
+this.businessLife=localStorage.getItem("business_registration_years") ? localStorage.getItem("business_registration_years") : null;
+this.ownership=localStorage.getItem("office_ownership") ? localStorage.getItem("office_ownership") : null;
+this.pan=localStorage.getItem("panno") ? localStorage.getItem("panno") : null;
+this.dateOfBirth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
+this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
+this.fullName=localStorage.getItem("name") ? localStorage.getItem("name") : null;
+},
         methods: {
              validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
@@ -147,12 +155,13 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            self_employed_form.business_registration_years=this.businessLife
-            self_employed_form.office_ownership=this.ownership
-            self_employed_form.panno=this.pan
-            self_employed_form.date_of_birth=this.dateOfBirth
-            self_employed_form.email=this.email
-            self_employed_form.name=this.fullName
+
+            localStorage.setItem("business_registration_years",this.businessLife);
+            localStorage.setItem("office_ownership",this.ownership);
+            localStorage.setItem("panno",this.pan);
+            localStorage.setItem("date_of_birth",this.dateOfBirth);
+            localStorage.setItem("email",this.email);
+            localStorage.setItem("name",this.fullName);
 
             this.$router.push('/self-employed/transaction-detail');
             // alert('Data Submit');

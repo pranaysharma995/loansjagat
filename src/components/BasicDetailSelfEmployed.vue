@@ -89,7 +89,7 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from './ApplyProgress';
 import ApplyFeature from './ApplyFeature';
 import ApplyReview from './ApplyReview';
-import {self_employed_form} from '../globalVariableSalaried.js'
+// import {self_employed_form} from '../globalVariableSalaried.js'
 export default {
   name: "BasicDetailSelfEmployment",
   data:function()
@@ -112,6 +112,12 @@ export default {
         city: {required},
         mobileNumber: {required, minLength: minLength(10)}
     },
+      mounted (){
+        this.mobileNumber=localStorage.getItem("mobile_number") ? localStorage.getItem("mobile_number") : null;
+        this.loanAmount=localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null;
+        this.city=localStorage.getItem("city") ? localStorage.getItem("city") : null;
+        this.annualSales=localStorage.getItem("turn_over") ? localStorage.getItem("turn_over") : null;
+      },
         methods: {
              validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
@@ -120,10 +126,10 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            self_employed_form.mobile_number=this.mobileNumber
-            self_employed_form.loan_amount_required=this.loanAmount
-            self_employed_form.city=this.city
-            self_employed_form.turn_over=this.annualSales
+            localStorage.setItem("mobile_number",this.mobileNumber);
+            localStorage.setItem("loan_amount_required",this.loanAmount);
+            localStorage.setItem("city",this.city);
+            localStorage.setItem("turn_over",this.annualSales);
 
             this.$router.push('/self-employed/personal-detail');
             // alert('Data Submit');
