@@ -4,7 +4,7 @@
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
     <div class="col-md-8 col-sm-12 col-xs-12">
-      <h3 class="color-white roboto-bold mgb-30">
+      <h3 class="color-white roboto-bold mgb-30 heading">
         Transaction Detail Salaried
       </h3>
       <div class="row mgb-60">
@@ -83,10 +83,6 @@ import ApplyReview from '../sub-components/ApplyReview';
 import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-import '@fortawesome/fontawesome-free/js/all.js';
 export default {
   name: "TransactionDetailSalaried",
   data:function()

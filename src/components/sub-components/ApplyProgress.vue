@@ -9,7 +9,7 @@
             }"
           >
           <i v-if=" $route.path == '/salaried/basic-detail' || $route.path == '/self-employed/basic-detail'" class="number-icon">1</i> 
-          <i class="fa fa-check" v-else />
+          <i class="fa fa-check number-icon" v-else />
           <p class="color-white">Basic Details</p>
           </li>
           <li 
@@ -20,7 +20,7 @@
             }"
           >
           <i v-if=" $route.path == '/salaried/personal-detail' || $route.path == '/self-employed/personal-detail'" class="number-icon">2</i> 
-          <i class="fa fa-check" v-else />
+          <i class="fa fa-check number-icon" v-else />
           <p class="color-white">Personal Details</p>
           </li>
           <li 
@@ -31,7 +31,7 @@
             }"
           >
           <i v-if=" $route.path == '/salaried/transaction-detail' || $route.path == '/self-employed/transaction-detail'" class="number-icon">3</i> 
-          <i class="fa fa-check" v-else />
+          <i class="fa fa-check number-icon" v-else />
           <p class="color-white">Financial Details</p>
           </li>
           <li 
@@ -41,7 +41,7 @@
             }"
           >
           <i v-if=" $route.path == '/salaried/offer-detail' || $route.path == '/self-employed/offer-detail'" class="number-icon">4</i> 
-          <i class="fa fa-check" v-else />
+          <i class="fa fa-check number-icon" v-else />
             <p class="color-white">Get Offers</p>
           </li>
         </ul>
@@ -98,7 +98,7 @@ export default {
 {
   background-color: #fff;
 }
-.progress-list > li > svg{
+.progress-list > li > i{
   background-color: rgba(255,255,255,0.3);
   width: 18px;
   height: 18px;
@@ -113,9 +113,8 @@ p{
 }
 .number-icon
 {
-  display: inline-flex;
+    display: inline-flex;
     background-color:rgba(255,255,255,0.3);
-    font-family: sans-serif;
     height: 18px;
     width: 18px;
     border-radius: 50px;

@@ -133,10 +133,6 @@
 <script>
 import axios from 'axios';
 import Header from '../sub-components/Header';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-import '@fortawesome/fontawesome-free/js/all.js';
 
 export default{
   name:'home',

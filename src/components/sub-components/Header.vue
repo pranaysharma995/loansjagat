@@ -1,18 +1,14 @@
 <template>
-<div>
-  <!-- Just an image -->
-  <b-navbar variant="faded" type="light">
-    <b-navbar-brand href="#">
+<div class="row bg-white">
+  <div class="col-md-3">
+    <router-link to="/">
       <img src="../../assets/logo.png" alt="Loanjagat">
-    </b-navbar-brand>
-  </b-navbar>
+    </router-link>
+  </div>
 </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import { BNavbar } from 'bootstrap-vue'
-Vue.component('b-navbar', BNavbar)
 
 export default {
   name: 'Header',
@@ -20,3 +16,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.row{
+  padding: 10px;
+}
+</style>

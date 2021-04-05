@@ -4,10 +4,10 @@
   <div class="row bg-blue content-padding pdt-70 relative d-flex">
     <ApplyProgress />
     <div class="col-md-8 col-sm-12 col-xs-12">
-      <h3 class="color-white roboto-bold mgb-30">
+      <h3 class="color-white roboto-bold mgb-30 heading">
         Basic Detail Salaried
       </h3>
-      <div class="row mgb-60">
+      <div class="row mgb-60 sub-heading">
         <form v-on:submit.prevent="submit">
           <div class="row">
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -88,10 +88,6 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-import '@fortawesome/fontawesome-free/js/all.js';
 import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
