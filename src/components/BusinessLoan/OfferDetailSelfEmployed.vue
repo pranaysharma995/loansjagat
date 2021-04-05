@@ -257,7 +257,8 @@ mounted(){
           .then((response)=>{//console.log(response);
           this.loader.table=false;
           this.list=response.data;
-          //console.log(this.loader.table,this.list);
+          this.loader.table=false;
+          console.log(this.loader.table,this.list);
           })
           .catch((err)=>{console.log('error',err);
           this.loader.table=false;
