@@ -3,7 +3,7 @@
     <Header />
 <div v-if='loader.page' class=" load d-flex justify-content-center align-items-center">
   <div class="spinner-border text-primary" role="status">
-  <span class="sr-only">Loading...</span>
+  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
             <span class='pad_top btm_top '>
               <div v-if='loader.apply_filter' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>
               </div>
               <button v-else type="button" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue"
@@ -84,7 +84,7 @@
 
 
                     <div class="mx-auto spinner-border text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                   </div>
                   </div>
                 </td >
@@ -107,7 +107,7 @@
               <td  class='col_'>{{i.tenure}}</td>
               <td v-if='loader.btn &&loader.index==index' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>
               </td>
               <td v-else class='end_col d-flex justify-content-center align-items-center'>
