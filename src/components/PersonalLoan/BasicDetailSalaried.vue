@@ -43,12 +43,12 @@
                 type="text"
                 class="form-control"
                 id="current_city_other"
-                placeholder="Your current_city_other"
+                placeholder="City"
                 name="current_city_other"
                 v-model.trim="$v.current_city_other.$model"
                 :class="{'is-invalid': validationStatus($v.current_city_other)}"
               />
-              <div v-if="!$v.current_city_other.required" class="invalid-feedback">current_city_other is required.</div>
+              <div v-if="!$v.current_city_other.required" class="invalid-feedback">City is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                  <label for="mobile_number-number" class="color-white">Mobile Number*</label>
@@ -60,7 +60,7 @@
                 v-model.trim="$v.mobile_number.$model"
                 :class="{'is-invalid': validationStatus($v.mobile_number)}"
               />
-              <div v-if="!$v.mobile_number.required" class="invalid-feedback">Mpbile number is required.</div>
+              <div v-if="!$v.mobile_number.required" class="invalid-feedback">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/">

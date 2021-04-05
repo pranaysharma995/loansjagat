@@ -69,7 +69,6 @@
               <select name="ownership" v-model="ownership" id="ownership" class="form-control"
               v-model.trim="$v.ownership.$model"
               :class="{'is-invalid': validationStatus($v.ownership)}" >
-                <option value="">Select An Option</option>
                 <option value="Owned">Owned</option>
                 <option value="Rented">Rented</option>
 
@@ -82,7 +81,6 @@
                 <select name="businessLife" v-model="businessLife" id="business-life" class="form-control"
                 v-model.trim="$v.businessLife.$model"
                 :class="{'is-invalid': validationStatus($v.businessLife)}">
-                  <option value="">Select An Option</option>
                   <option value="1">Less than 1 year</option>
                   <option value="2">1 Yr - 3 Yr</option>
                   <option value="3">3 Yr - 5 Yr</option>
@@ -126,8 +124,8 @@ export default {
   data:function()
   {
    return{
-         businessLife:0,
-       ownership:null,
+         businessLife:1,
+       ownership:"Owned",
        pan:null,
        dateOfBirth:null,
        email:null,
