@@ -81,6 +81,7 @@
                 <select name="businessLife" v-model="businessLife" id="business-life" class="form-control"
                 v-model.trim="$v.businessLife.$model"
                 :class="{'is-invalid': validationStatus($v.businessLife)}">
+                <option value=null>Select An Option</option>
                   <option value="1">Less than 1 year</option>
                   <option value="2">1 Yr - 3 Yr</option>
                   <option value="3">3 Yr - 5 Yr</option>
@@ -125,7 +126,7 @@ export default {
   {
    return{
          businessLife:1,
-       ownership:"Owned",
+       ownership:null,
        pan:null,
        dateOfBirth:null,
        email:null,

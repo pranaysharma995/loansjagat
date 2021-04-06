@@ -83,20 +83,32 @@
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="work-experience" class="color-white">Total Work Experience*</label>
-              <select name="workExperince" v-model="total_work_experience" id="work-experience" class="form-control">
+
+              <select name="workExperince" v-model="total_work_experience" id="work-experience"
+              class="form-control"
+              v-model.trim="$v.total_work_experience.$model"
+              :class="{'is-invalid': validationStatus($v.total_work_experience)}"
+              >
+                <option value=null>Select An Option</option>
               <option value="0 - 1">0 - 1 Year</option>
               <option value="1 - 3">1 - 3 Years</option>
               <option value="3 year above">Above 3 Years</option>
               </select>
+              <div v-if="!$v.total_work_experience.required" class="invalid-feedback">Total Work Experience is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="joining_date_in_current_company" class="color-white">Joining In Current Company*</label>
-              <select name="joining_date_in_current_company" v-model="joining_date_in_current_company" id="joining_date_in_current_company" class="form-control">
+              <select name="joining_date_in_current_company" v-model="joining_date_in_current_company" id="joining_date_in_current_company" class="form-control"
+              v-model.trim="$v.joining_date_in_current_company.$model"
+              :class="{'is-invalid': validationStatus($v.joining_date_in_current_company)}"
+              >
+              <option value=null>Select An Option</option>
                 <option value="0 - 2 months">0 - 2 Months</option>
                 <option value="2- 6 months">2 - 6 Months</option>
                 <option value="6 months above">Greater than 6 Months</option>
               </select>
+              <div v-if="!$v.joining_date_in_current_company.required" class="invalid-feedback">Joining In Current Company is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/basic-detail">
@@ -132,18 +144,18 @@ export default {
   {
       return{
           name:null,
-          total_work_experience:'0 - 1',
+          total_work_experience:null,
           current_company_name:null,
           panno:null,
           email:null,
           date_of_birth:null,
-          joining_date_in_current_company:"0 - 2 months",
+          joining_date_in_current_company:null,
       }
   },
   mounted ()
   {
     this.name=localStorage.getItem("name") ? localStorage.getItem("name") : null ;
-    this.total_work_experience=localStorage.getItem("total_work_experience") ? localStorage.getItem("total_work_experience") : '0 - 1';
+    this.total_work_experience=localStorage.getItem("total_work_experience") ? localStorage.getItem("total_work_experience") : null;
     this.panno=localStorage.getItem("panno") ? localStorage.getItem("panno") : null;
     this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
     this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
@@ -162,7 +174,9 @@ export default {
         current_company_name: {required},
         date_of_birth:{required},
         panno: {required, minLength: minLength(10)},
-        email:{required}
+        email:{required},
+        joining_date_in_current_company:{required},
+        total_work_experience:{required},
     },
         methods: {
              validationStatus: function(validation) {

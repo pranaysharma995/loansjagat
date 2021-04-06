@@ -27,6 +27,7 @@
               <label for="annual-sales" class="color-white">Annual Sales*</label>
 
               <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control">
+                <option value="">Select An Option</option>
                 <option value="5000000">Less than 50 Lacs</option>
                 <option value="7500000">50 Lacs - 1 Cr</option>
                 <option value="15000000">1 Cr - 2 Cr</option>
@@ -107,7 +108,7 @@ export default {
        mobileNumber:null,
        loanAmount:null,
        city:null,
-       annualSales:"5000000",
+       annualSales:"",
        self_employed_form:{},
    }
   },
@@ -130,7 +131,7 @@ export default {
          { mobile_number:null,
          loan_amount_required:null,
          city:null,
-         turn_over:"5000000"};
+         turn_over:""};
         this.mobileNumber=this.self_employed_form.mobile_number;
         this.loanAmount=this.self_employed_form.loan_amount_required;
         this.city=this.self_employed_form.city;

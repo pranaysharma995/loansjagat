@@ -28,12 +28,16 @@
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gst" class="color-white">GST Registration*</label>
 
-              <select name="gst" v-model="gst" id="gst" class="form-control">
+              <select name="gst" v-model="gst" id="gst" class="form-control"
+              v-model.trim="$v.gst.$model"
+              :class="{'is-invalid': validationStatus($v.gst)}"
+              >
+              <option value=null>Select An Option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
 
             </select>
-              <!-- <div v-if="!$v.gst.required" class="invalid-feedback">GST is required.</div> -->
+              <div v-if="!$v.gst.required" class="invalid-feedback">GST is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -52,11 +56,17 @@
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
-                <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control">
+                <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control"
+                v-model-trim="creditScore"
+                :class="{'is-invalid': validationStatus($v.creditScore)}"
+
+                >
+                  <option value=null>Select An Option</option>
               <option value="below-650">Below 650</option>
               <option value="above-650">Above 650</option>
               <option value="don't know">Don't Know</option>
               </select>
+              <div v-if="!$v.creditScore.required" class="invalid-feedback">Credit Score is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -67,6 +77,7 @@
                   v-model-trim="business_type"
                   :class="{'is-invalid': validationStatus($v.business_type)}"
                   >
+                  <option value=null>Select An Option</option>
                   <option value="Trader">Trader</option>
                   <option value="Manufacturer">Manufacturer</option>
                   <option value="Service Provider">Service Provider</option>
@@ -89,7 +100,8 @@
                  v-model-trim="industries_name"
                  :class="{'is-invalid': validationStatus($v.industries_name)}"
                  >
-              <option value="">Select Industry</option>
+
+              <option value=null>Select Industry</option>
               <option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
               </select>
               <div v-if="!$v.industries_name.required" class="invalid-feedback">Industries Name required.</div>
@@ -100,7 +112,7 @@
                 <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control"
                 v-model-trim="industries_item"
                 :class="{'is-invalid': validationStatus($v.industries_item)}">
-              <option value="">Select Industry</option>
+              <option value=null>Select Industry</option>
               <option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
               </select>
               <div v-if="!$v.industries_item.required" class="invalid-feedback">Industries Item required.</div>
@@ -143,14 +155,14 @@ export default {
   {
       return{
        grossAnnualIncome:null,
-       creditScore:'below-650',
+       creditScore:null,
        emi:null,
-       gst:"No",
+       gst:null,
        industries:[],
        items:[],
-       industries_name:'',
-       business_type:"Trader",
-       industries_item:'',
+       industries_name:null,
+       business_type:null,
+       industries_item:null,
        self_employed_form:{},
       }
   },
@@ -178,9 +190,9 @@ export default {
       this.grossAnnualIncome=this.self_employed_form.gross_annual_income ? this.self_employed_form.gross_annual_income : null;
       this.creditScore=this.self_employed_form.civil_score ? this.self_employed_form.civil_score : null;
       this.emi=this.self_employed_form.any_loans_running_emi_monthly ? this.self_employed_form.any_loans_running_emi_monthly : null;
-      this.gst=this.self_employed_form.gst ? this.self_employed_form.gst : 'No';
-      this.business_type=this.self_employed_form.business_type ? this.self_employed_form.business_type : "Trader";
-      this.business_type=this.self_employed_form.type_of_business_industry ? this.self_employed_form.type_of_business_industry : "Trader";
+      this.gst=this.self_employed_form.gst ? this.self_employed_form.gst : null;
+      this.business_type=this.self_employed_form.business_type ? this.self_employed_form.business_type : null;
+      this.business_type=this.self_employed_form.type_of_business_industry ? this.self_employed_form.type_of_business_industry : null;
       this.industries_name=this.self_employed_form.industry_type ? this.self_employed_form.industry_type : null;
       this.industries_item=this.self_employed_form.industry_item ? this.self_employed_form.industry_item : null;
 },

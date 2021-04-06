@@ -26,7 +26,10 @@
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="annual-sales" class="color-white">Annual Sales*</label>
 
-              <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control">
+              <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control"
+              v-model.trim="$v.annualSales.$model"
+              :class="{'is-invalid': validationStatus($v.loanAmount)}">
+                <option value=null>Select An Option</option>
                 <option value="5000000">Less than 50 Lacs</option>
                 <option value="7500000">50 Lacs - 1 Cr</option>
                 <option value="15000000">1 Cr - 2 Cr</option>
@@ -107,7 +110,7 @@ export default {
        mobileNumber:null,
        loanAmount:null,
        city:null,
-       annualSales:"5000000",
+       annualSales:"",
        self_employed_form:{},
    }
   },
@@ -123,14 +126,16 @@ export default {
         annualSales: {required},
         loanAmount: {required},
         city: {required},
-        mobileNumber: {required, minLength: minLength(10)}
+        mobileNumber: {required, minLength: minLength(10)},
+        annualSales:{required},
+
     },
       mounted (){
         this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
         this.mobileNumber=this.self_employed_form.mobile_number ? this.self_employed_form.mobile_number : null;
         this.loanAmount=this.self_employed_form.loan_amount_required ? this.self_employed_form.loan_amount_required : null;
         this.city=this.self_employed_form.city ? this.self_employed_form.city : null;
-        this.annualSales=this.self_employed_form.turn_over ? this.self_employed_form.turn_over :"5000000" ;
+        this.annualSales=this.self_employed_form.turn_over ? this.self_employed_form.turn_over :null ;
       },
         methods: {
              validationStatus: function(validation) {

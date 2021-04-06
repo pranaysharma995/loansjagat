@@ -26,11 +26,16 @@
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary-type" class="color-white">Salary Type*</label>
-              <select name="salary-type" v-model="mode_of_salary" class="form-control" id="salary-type">
+              <select name="salary-type" v-model="mode_of_salary" class="form-control" id="salary-type"
+              v-model.trim="$v.mode_of_salary.$model"
+              :class="{'is-invalid': validationStatus($v.mode_of_salary)}"
+              >
+                <option value=null>Select An Option</option>
               <option value="Cash">Cash</option>
               <option value="Check">Check</option>
               <option value="Direct Bank">Direct Bank</option>
               </select>
+              <div v-if="!$v.mode_of_salary.required" class="invalid-feedback">Salary Type is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -49,11 +54,16 @@
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score*</label>
-              <select name="civil_score" v-model="civil_score" id="credit-score" class="form-control">
+              <select name="civil_score" v-model="civil_score" id="credit-score" class="form-control"
+              v-model.trim="$v.civil_score.$model"
+              :class="{'is-invalid': validationStatus($v.civil_score)}"
+              >
+                <option value=null>Select An Option</option>
               <option value="Below 650">Below 650</option>
               <option value="Above 650">Above 650</option>
               <option value="Don't know">Don't Know</option>
               </select>
+                <div v-if="!$v.civil_score.required" class="invalid-feedback">Credit Score is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/personal-detail">
@@ -97,9 +107,9 @@ export default {
   },
   mounted ()
   {
-    this.civil_score=localStorage.getItem("civil_score") ? localStorage.getItem("civil_score") : 'Below 650';
+    this.civil_score=localStorage.getItem("civil_score") ? localStorage.getItem("civil_score") : null;
     this.any_loans_running_emi_monthly=localStorage.getItem("any_loans_running_emi_monthly") ? localStorage.getItem("any_loans_running_emi_monthly") : null;
-    this.mode_of_salary=localStorage.getItem("mode_of_salary") ? localStorage.getItem("mode_of_salary") : 'Cash';
+    this.mode_of_salary=localStorage.getItem("mode_of_salary") ? localStorage.getItem("mode_of_salary") : null;
     this.ownership=localStorage.getItem("ownership") ? localStorage.getItem("ownership") : null;
   },
   components: {
@@ -114,7 +124,8 @@ export default {
         civil_score: {required},
         any_loans_running_emi_monthly: {required},
         mode_of_salary: {required},
-        ownership:{required}
+        ownership:{required},
+
     },
         methods: {
              validationStatus: function(validation) {
