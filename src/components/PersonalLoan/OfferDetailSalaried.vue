@@ -23,13 +23,13 @@
     <div class='first_container'>
       <div class='slider_container row'>
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
-          <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
+          <span class='col-md-6 pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
             <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
-          <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
+          <span class='col-md-4 pad_top d-flex flex-row align-items-center '>
                 <p class='padd_text'>Tenure:    </p>
                 <input type='range' min='1' :max='5' value='0' class=' button-blue' v-model='tenure' v-on:change='filter_post'>
                 <p class='padd_text padd_left'>{{tenure}}Years   </p>
@@ -41,7 +41,7 @@
             </span>
         <span class='pad_top btm_top '>
           <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
-          <p class='result_count'><span >We have</span>{{list.length}} Bank Results</p>
+          <p class='result_count'><span >We have </span>{{list.length}} Bank Results</p>
         </span>
 
 
@@ -150,6 +150,17 @@ export default{
           axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
             .then((response)=>{console.log(response);
             this.loader.table=false;
+            var maix_data=this.findWinConfirmed(response.data);
+
+            if(parseInt(localStorage.getItem("loan_amount_required")) > parseInt(this.max_filter)){
+    					var max = parseInt(localStorage.getItem("loan_amount_required"))
+    					maix_data = parseInt(localStorage.getItem("loan_amount_required"));
+    				}else{
+    					max = maix_data
+    				}
+    				var mx_amt = maix_data / 100000
+            this.max_filter = mx_amt.toFixed(2)
+            console.log('this.max_filter',this.max_filter);
             this.list=response.data;
             console.log('loader is false ',this.loader.table,this.list);
             })

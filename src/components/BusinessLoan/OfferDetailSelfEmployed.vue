@@ -23,13 +23,13 @@
     <div class='first_container'>
       <div class='slider_container row'>
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
-          <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
+          <span class='col-md-6   pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
             <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
-          <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
+          <span class='col-md-4  pad_top d-flex flex-row align-items-center '>
                 <p class='padd_text'>Tenure:    </p>
                 <input type='range' min='1' :max='5' value='0' class=' button-blue' v-model='tenure' v-on:change='filter_post'>
                 <p class='padd_text padd_left'>{{tenure}}Years   </p>
@@ -41,7 +41,7 @@
             </span>
         <span class='pad_top btm_top '>
           <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
-          <p class='result_count'><span >We have</span>{{list.length}} Bank Results</p>
+          <p class='result_count'><span >We have </span>{{list.length}} Bank Results</p>
         </span>
 
         <!-- </div> -->
@@ -114,6 +114,24 @@
 
           </tbody>
         </table>
+        <!-- <nav aria-label="...">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+              <span class="page-link">
+                2
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
       </div>
 
     </div>
@@ -137,8 +155,9 @@ export default{
   },
   data(){
     return {
-      filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
-      max_filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
+      self_employed_form:localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {},
+      filter:JSON.parse(localStorage.getItem("self_employed_form")).loan_amount_required ,
+      max_filter:JSON.parse(localStorage.getItem("self_employed_form")).loan_amount_required ,
   list:[
     {
         "loan_amt": "1222",
@@ -409,7 +428,7 @@ export default{
         apply_filters:false,
       },
       request_id:0,
-      self_employed_form:localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {},
+
 
     }
   },
@@ -452,7 +471,6 @@ export default{
         for (var i = 0; i < response.data.length ; i++) {
               // this.list.push(response.data[i]);
             }
-        this.max_filter=this.findWinConfirmed(response.data);
         this.loader.apply_filters=false;
       })
       .catch((err)=>{console.log('error',err);
@@ -465,10 +483,9 @@ export default{
       return require('../../assets/img/bank/'+img)
     },
     findWinConfirmed(topConfirmed) {
-      if (topConfirmed.length==0){return this.max_filter}
-  			let findTop = -1;
-  			topConfirmed.forEach(obj => {if (findTop <obj.minloan){findTop=obj.minloan}});
-  			return findTop;
+      let findTop = [];
+      topConfirmed.data.forEach(obj => findTop.push(obj.minloan));
+      return Math.max(...findTop);
   		},
   },
 
@@ -499,11 +516,24 @@ mounted(){
             .then((response)=>{
               console.log(response);
             this.loader.table=false;
-            this.max_filter=this.findWinConfirmed(response.data);
-            this.list=response.data.slice(0,response.data>13?13:response.data.length);
+            var maix_data=this.findWinConfirmed(response.data);
+
+            if(parseInt(this.self_employed_form.loan_amount_required) > parseInt(this.max_filter)){
+    					var max = parseInt(this.self_employed_form.loan_amount_required)
+    					maix_data = parseInt(this.self_employed_form.loan_amount_required);
+    				}else{
+    					max = maix_data
+    				}
+    				var mx_amt = maix_data / 100000
+            this.max_filter = mx_amt.toFixed(2)
+            console.log('this.max_filter',this.max_filter);
+
+
+
+            this.list=response.data//.slice(0,response.data>13?13:response.data.length);
             this.loader.table=false;
 
-            console.log(this.loader.table,this.list);
+            console.log(this.loader.table,this.list.length);
             })
             .catch((err)=>{console.log('error',err);
             this.loader.table=false;
