@@ -12,6 +12,14 @@ import PersonalDetailSalaried from "../src/components/PersonalLoan/PersonalDetai
 import TransactionDetailSalaried  from "../src/components/PersonalLoan/TransactionDetailSalaried.vue";
 import OfferDetailSalaried  from "../src/components/PersonalLoan/OfferDetailSalaried.vue";
 
+import PersonalBenefits from '../src/components/PersonalLoan/PersonalBenefits.vue'
+import PersonalDocumentRequirement from '../src/components/PersonalLoan/PersonDocumentRequired.vue'
+import PersonalEligibility from '../src/components/PersonalLoan/PersonalEligibility.vue'
+
+import BusinessBenefits from '../src/components/BusinessLoan/BusinessBenifits.vue';
+import BusinessDocumentRequirement from '../src/components/BusinessLoan/BusinessDocumentRequired.vue';
+import BusinessEligibility from '../src/components/BusinessLoan/BusinessEligibility.vue';
+
 import BasicDetailSelfEmployed  from "../src/components/BusinessLoan/BasicDetailSelfEmployed.vue";
 import PersonalDetailSelfEmployed  from "../src/components/BusinessLoan/PersonalDetailSelfEmployed.vue";
 import TransactionDetailSelfEmployed  from "../src/components/BusinessLoan/TransactionDetailSelfEmployed.vue";
@@ -45,6 +53,12 @@ export default new Router({
       name:'personal-loan',
       component: () => import("../src/components/PersonalLoan/LandingPage.vue")
     },
+    { path: '/personal-loan/eligibility', component:PersonalEligibility },
+    { path: '/personal-loan/benefits', component:PersonalBenefits},
+    { path: '/personal-loan/document-requirements', component:PersonalDocumentRequirement },
+    { path: '/business-loan/eligibility', component:BusinessEligibility },
+    { path: '/business-loan/benefits', component:BusinessBenefits},
+    { path: '/business-loan/document-requirements', component:BusinessDocumentRequirement },
     { path: '/salaried/basic-detail', component:BasicDetailSalaried },
     { path: '/salaried/personal-detail', component:PersonalDetailSalaried},
     { path: '/salaried/transaction-detail', component:TransactionDetailSalaried },

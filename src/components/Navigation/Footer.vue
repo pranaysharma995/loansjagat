@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="footer-container">
 	<div class="footer padding50">
 		<div class="container">
 			<div class="row">
@@ -117,3 +117,8 @@
 	</div>
 	</div>
 	</template>
+	<style scoped>
+	.footer-container{
+		width: 100%;
+	}
+	</style>
