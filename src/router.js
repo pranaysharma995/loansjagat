@@ -12,6 +12,14 @@ import PersonalDetailSalaried from "../src/components/PersonalLoan/PersonalDetai
 import TransactionDetailSalaried  from "../src/components/PersonalLoan/TransactionDetailSalaried.vue";
 import OfferDetailSalaried  from "../src/components/PersonalLoan/OfferDetailSalaried.vue";
 
+import PersonalBenefits from '../src/components/PersonalLoan/PersonalBenefits.vue'
+import PersonalDocumentRequirement from '../src/components/PersonalLoan/PersonDocumentRequired.vue'
+import PersonalEligibility from '../src/components/PersonalLoan/PersonalEligibility.vue'
+
+import BusinessBenefits from '../src/components/BusinessLoan/BusinessBenifits.vue';
+import BusinessDocumentRequirement from '../src/components/BusinessLoan/BusinessDocumentRequired.vue';
+import BusinessEligibility from '../src/components/BusinessLoan/BusinessEligibility.vue';
+
 import BasicDetailSelfEmployed  from "../src/components/BusinessLoan/BasicDetailSelfEmployed.vue";
 import PersonalDetailSelfEmployed  from "../src/components/BusinessLoan/PersonalDetailSelfEmployed.vue";
 import TransactionDetailSelfEmployed  from "../src/components/BusinessLoan/TransactionDetailSelfEmployed.vue";
@@ -66,6 +74,18 @@ export default new Router({
     meta: {title: 'Personal Loan | LoansJagat.com',}},
     { path: '/acknowledgement-thankyou', component:AcknowledgementThankyouPage ,
     meta: {title: '| LoansJagat.com',}},
+    { path: '/business-loan/eligibility', component:BusinessEligibility ,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/business-loan/document-requirements', component:BusinessDocumentRequirement ,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/business-loan/benefits', component:BusinessBenefits,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/personal-loan/document-requirements', component:PersonalDocumentRequirement ,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
+    { path: '/personal-loan/eligibility', component:PersonalEligibility ,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
+    { path: '/personal-loan/benefits', component:PersonalBenefits,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
 
     {
       path: '/login',

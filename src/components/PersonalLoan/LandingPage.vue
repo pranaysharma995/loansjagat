@@ -28,10 +28,10 @@
          <ApplyReview />
       </div>
       <div class="col-md-4">
-       <ApplyFeature />
+       <ApplyFeature v-bind:list="list" />
       </div>
     </div>
-    <OtherPages/>
+    <OtherPages v-bind:page="loan"/>
     <Footer/>
 </div>
 </template>
@@ -47,9 +47,48 @@ export default {
   data: function()
   {
       return{
-      page:'self-employed'
+      page:'self-employed',
+                list:[
+          {
+            "title":"Personal Loan Starting at 10.40%",
+            "new":false
+          },
+          {
+            "title":"Free and Quick Service",
+            "new":false
+          },
+          {
+            "title":"Cashback upto Rs 5,000",
+            "new":true
+          },
+          {
+            "title":"Instant Paperless Approvals",
+            "new":true
+          },
+          {
+            "title":"10.4% interest rate",
+            "new":true
+          },
+          {
+            "title":"Servicing Pan India Cities",
+            "new":false
+          },
+          {
+            "title":"Money in Account in 24 hrs ",
+            "new":false
+          },
+          {
+            "title":"Easy Debt Consolidation",
+            "new":true
+          },
+        ]
       }
   },
+  computed:{
+    loan(){
+           return this.page === 'self-employed' ? 'business-loan' : 'personal-loan'
+         }
+   },
   components: {
     ApplyFeature,
     ApplyReview,

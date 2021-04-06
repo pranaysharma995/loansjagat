@@ -102,11 +102,13 @@
        <ApplyReview />
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-     <ApplyFeature />
+     <ApplyFeature v-bind:list="list" />
     </div>
   </div>
-  <OtherPages/>
-  <Footer/>
+  <OtherPages page="business-loan" />
+  <Footer
+  content="For instance, if Rahul applies for a Business loan of INR 5 Lacs and get the loan sanctioned at the rate of 15.99% with a tenure range of 3 years, in such a case his EMI would be INR 17,576 and complete repayment amount till the end of 3 years tenure would be INR 6,32,738 (i.e 17,576 EMI * 36 months), wherein the total interest amount is INR 1,32,738 along with principal repayment of INR 5,00,000. Few additional charges like those of minimal one-time processing fee ranging from 1% to 3% of loan amount, pre-payment penalty on an earlier foreclosure of loan ranging from 1% to 5% may also apply. T& C apply."
+  />
 </div>
 </template>
 
@@ -131,7 +133,41 @@ export default {
        dateOfBirth:null,
        email:null,
        fullName:null,
-       self_employed_form:{},
+          self_employed_form:{},
+             list:[
+          {
+            "title":"Business Loan Starting at 12.99%",
+            "new":true
+          },
+          {
+            "title":"Free and Quick Service",
+            "new":false
+          },
+          {
+            "title":"Cashback upto Rs 5,000",
+            "new":true
+          },
+          {
+            "title":"Instant Paperless Approvals",
+            "new":true
+          },
+          {
+            "title":"10.4% interest rate",
+            "new":true
+          },
+          {
+            "title":"Servicing Pan India Cities",
+            "new":false
+          },
+          {
+            "title":"Money in Account in 24 hrs ",
+            "new":false
+          },
+          {
+            "title":"Easy Debt Consolidation",
+            "new":true
+          },
+        ]
 
    }
   },

@@ -74,12 +74,14 @@
        <ApplyReview />
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-     <ApplyFeature />
+     <ApplyFeature v-bind:list="list" />
     </div>
 
   </div>
-  <OtherPages/>
-  <Footer/>
+  <OtherPages page="personal-loan"/>
+  <Footer
+  content="For instance, if Megha applies for a Personal loan of INR 3 Lacs and get the loan sanctioned at the rate of 11.99% with a tenure range of 5 years, in such a case her EMI would be INR 6,672 and complete repayment amount till the end of 5 years tenure would be INR 4,00,309 (i.e 6,672 EMI * 60 months), wherein the total interest amount is INR 1,00,309 along with principal repayment of INR 3,00,000. Few additional charges like those of minimal one-time processing fee ranging from 0.5% to 3% of loan amount, pre-payment penalty on an earlier foreclosure of loan ranging from 1% to 5% may also apply. T& C apply."
+  />
 </div>
 </template>
 
@@ -99,7 +101,41 @@ export default {
         loan_amount_required:null,
         mobile_number:null,
         current_city_other:null,
-        net_salary_all_deductions:null
+        net_salary_all_deductions:null,
+        list:[
+          {
+            "title":"Personal Loan Starting at 10.40%",
+            "new":false
+          },
+          {
+            "title":"Free and Quick Service",
+            "new":false
+          },
+          {
+            "title":"Cashback upto Rs 5,000",
+            "new":true
+          },
+          {
+            "title":"Instant Paperless Approvals",
+            "new":true
+          },
+          {
+            "title":"10.4% interest rate",
+            "new":true
+          },
+          {
+            "title":"Servicing Pan India Cities",
+            "new":false
+          },
+          {
+            "title":"Money in Account in 24 hrs ",
+            "new":false
+          },
+          {
+            "title":"Easy Debt Consolidation",
+            "new":true
+          },
+        ]
       }
   },
   mounted ()
