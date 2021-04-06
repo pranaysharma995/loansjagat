@@ -74,7 +74,7 @@ export default {
 
 .progress-list > li.active:not(:last-child):after{
  content: "";
-  width: 88px;
+  width: 79px;
   height: 2px;
   background-color: #fff;
   position: absolute;
@@ -84,7 +84,7 @@ export default {
 
 .progress-list > li:not(:last-child):after{
   content: "";
-  width: 88px;
+  width: 79px;
   height: 2px;
   background-color: rgba(255,255,255,0.3);
   position: absolute;

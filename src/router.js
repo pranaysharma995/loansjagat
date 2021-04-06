@@ -43,17 +43,29 @@ export default new Router({
     {
       path: '/personal-loan',
       name:'personal-loan',
-      component: () => import("../src/components/PersonalLoan/LandingPage.vue")
+      component: () => import("../src/components/PersonalLoan/LandingPage.vue"),
+      meta: {
+        title: 'LoansJagat.com',}
     },
-    { path: '/salaried/basic-detail', component:BasicDetailSalaried },
-    { path: '/salaried/personal-detail', component:PersonalDetailSalaried},
-    { path: '/salaried/transaction-detail', component:TransactionDetailSalaried },
-    { path: '/salaried/offer-detail', component: OfferDetailSalaried},
-    { path: '/self-employed/basic-detail', component:BasicDetailSelfEmployed },
-    { path: '/self-employed/personal-detail', component:PersonalDetailSelfEmployed },
-    { path: '/self-employed/transaction-detail', component:TransactionDetailSelfEmployed },
-    { path: '/self-employed/offer-detail', component:OfferDetailSelfEmployed },
-    { path: '/acknowledgement-thankyou', component:AcknowledgementThankyouPage },
+    { path: '/salaried/basic-detail', component:BasicDetailSalaried,
+      meta: {title: 'Business Loan | LoansJagat.com',}
+    },
+    { path: '/salaried/personal-detail', component:PersonalDetailSalaried,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/salaried/transaction-detail', component:TransactionDetailSalaried ,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/salaried/offer-detail', component: OfferDetailSalaried,
+    meta: {title: 'Business Loan | LoansJagat.com',}},
+    { path: '/self-employed/basic-detail', component:BasicDetailSelfEmployed ,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
+    { path: '/self-employed/personal-detail', component:PersonalDetailSelfEmployed,
+    meta: {title: 'Personal Loan | LoansJagat.com',} },
+    { path: '/self-employed/transaction-detail', component:TransactionDetailSelfEmployed ,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
+    { path: '/self-employed/offer-detail', component:OfferDetailSelfEmployed ,
+    meta: {title: 'Personal Loan | LoansJagat.com',}},
+    { path: '/acknowledgement-thankyou', component:AcknowledgementThankyouPage ,
+    meta: {title: '| LoansJagat.com',}},
 
     {
       path: '/login',

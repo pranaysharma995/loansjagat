@@ -25,33 +25,23 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter'>
+            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
           <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
                 <p class='padd_text'>Tenure:    </p>
+                <input type='range' min='1' :max='5' value='0' class=' button-blue' v-model='tenure' v-on:change='filter_post'>
+                <p class='padd_text padd_left'>{{tenure}}Years   </p>
 
               <div>
-              <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
-                <option selected>---</option>
-                <option value="1">1 Year</option>
-                <option value="2">2 Year</option>
-                <option value="3">3 Year</option>
-                <option value="4">4 Year</option>
-                <option value="5">5 Year</option>
-              </select>
+
               </div>
 
             </span>
         <span class='pad_top btm_top '>
-          <div v-if='loader.apply_filter' class="  d-flex justify-content-center align-items-center">
-            <div class="spinner-border text-primary" role="status">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>
-          </div>
-          <button v-else type="button" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue"
-          v-on:click='filter_post'>Apply Filter</button>
+          <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
+          <p class='result_count'><span >We have</span>{{list.length}} Bank Results</p>
         </span>
 
         <!-- </div> -->
@@ -81,8 +71,6 @@
             <tr v-if='loader.table' class="  ">
               <td colspan="7"  >
                 <div class='d-flex justify-content-center align-items-center'>
-
-
                   <div class="mx-auto spinner-border text-primary" role="status">
                   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>
@@ -92,7 +80,7 @@
             <tr v-else-if='list.length==0' class="">
               <td colspan="7"  >
                 <div class='d-flex justify-content-center align-items-center'>
-                  <p >Sorry no result found</p>
+                  <p >Sorry no result found{{list.length,list}}</p>
                 </div>
               </td >
             </tr>
@@ -147,6 +135,284 @@ export default{
   props:{
 
   },
+  data(){
+    return {
+      filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
+      max_filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
+  list:[
+    {
+        "loan_amt": "1222",
+        "minloan": 138799496461164690,
+        "intrest": 16.5,
+        "process_fees": 27,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "HDFC",
+        "bank_logo": "hdfc_bank.jpg",
+        "blemi": 111,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 137364239240973400,
+        "intrest": 18.5,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "TATA CAPITAL",
+        "bank_logo": "tata_capital.jpg",
+        "blemi": 112,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 138618907773141180,
+        "intrest": 16.75,
+        "process_fees": 12,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "ICICI",
+        "bank_logo": "icici.jpg",
+        "blemi": 111,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 138799496461164690,
+        "intrest": 16.5,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "KOTAK",
+        "bank_logo": "kotak.jpg",
+        "blemi": 111,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 133527030848909100,
+        "intrest": 24,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Edelweiss",
+        "bank_logo": "edelweiss.jpg",
+        "blemi": 116,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 126234795998471460,
+        "intrest": 21.5,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "RBL",
+        "bank_logo": "rbl.jpg",
+        "blemi": 114,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 137008802043874720,
+        "intrest": 19,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Bajaj ",
+        "bank_logo": "bajaj_finserv.jpg",
+        "blemi": 113,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 137008802043874720,
+        "intrest": 19,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Aditya Birla",
+        "bank_logo": "aditya_birla_capital.jpg",
+        "blemi": 113,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 145388726814783680,
+        "intrest": 20,
+        "process_fees": 24,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Lending Kart",
+        "bank_logo": "lendingkart.jpg",
+        "blemi": 113,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 127544397349235820,
+        "intrest": 19.5,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Capital First",
+        "bank_logo": "capital_first.jpg",
+        "blemi": 113,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 138438651783602320,
+        "intrest": 17,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "YES BANK",
+        "bank_logo": "yes_bank.jpg",
+        "blemi": 111,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 135600380333225730,
+        "intrest": 21,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "Fullerton",
+        "bank_logo": "fullerton.jpg",
+        "blemi": 114,
+        "label_value": "1 Years"
+    },
+    {
+        "loan_amt": "1222",
+        "minloan": 138438651783602320,
+        "intrest": 17,
+        "process_fees": 21,
+        "special_intrest": 0,
+        "special_fees": "",
+        "special_emi": "",
+        "bank_name": "IDFC",
+        "bank_logo": "idfc.jpg",
+        "blemi": 111,
+        "label_value": "1 Years"
+    },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 138438651783602320,
+    //     "intrest": 17,
+    //     "process_fees": 21,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "SCB",
+    //     "bank_logo": "scb.jpg",
+    //     "blemi": 111,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 129715071650151540,
+    //     "intrest": 16.25,
+    //     "process_fees": 9,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "Axis Bank",
+    //     "bank_logo": "axis.jpg",
+    //     "blemi": 111,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 124625228792313680,
+    //     "intrest": 24,
+    //     "process_fees": 24,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "HDB",
+    //     "bank_logo": "hdb.jpg",
+    //     "blemi": 116,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 129517225773909890,
+    //     "intrest": 30,
+    //     "process_fees": 31,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "NEO GROWTH",
+    //     "bank_logo": "neogrowth.jpg",
+    //     "blemi": 119,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 148278509031016500,
+    //     "intrest": 28,
+    //     "process_fees": 27,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "Capital Float",
+    //     "bank_logo": "capital_float.jpg",
+    //     "blemi": 118,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 142428832905504560,
+    //     "intrest": 24,
+    //     "process_fees": 27,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "CLIX",
+    //     "bank_logo": "clxx.jpg",
+    //     "blemi": 116,
+    //     "label_value": "1 Years"
+    // },
+    // {
+    //     "loan_amt": "1222",
+    //     "minloan": 134212973320602930,
+    //     "intrest": 23,
+    //     "process_fees": 37,
+    //     "special_intrest": 0,
+    //     "special_fees": "",
+    //     "special_emi": "",
+    //     "bank_name": "PNB Housing",
+    //     "bank_logo": "pnbhousing.jpg",
+    //     "blemi": 115,
+    //     "label_value": "1 Years"
+    // }
+],
+      tenure:'1',
+      loader:{
+        page:false,
+        btn:false,
+        table:false ,
+        apply_filters:false,
+      },
+      request_id:0,
+      self_employed_form:localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {},
+
+    }
+  },
 
   methods:{
     apply_loan(index){
@@ -160,9 +426,13 @@ export default{
       }
       )
       .then((response)=>{//console.log(response);
-        this.request_id=response.data.id;
+        // this.request_id=response.data.id;
       this.loader.btn=false;
-      this.$router.push('/acknowledgement-thankyou?no='+response.data.application_no);
+      this.$router.push({ name: 'apply-result',
+              params: {
+                    applocation_no: response.data.application_no,
+                    type:'Business Loan'
+                  }});
 
 
 
@@ -172,112 +442,88 @@ export default{
       })
     },
     filter_post(){
-      this.loader.apply_filter=true;
+      this.loader.apply_filters=true;
       this.loader.table=true;
       axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure      )
-      .then((response)=>{//console.log(response);
+      .then((response)=>{
+        console.log('response',response,response.data.length>13?13:response.data.length);
         this.loader.table=false;
-        this.list=response.data;
-        this.loader.apply_filter=false;
+        this.list=response.data.slice(0,13);
+        for (var i = 0; i < response.data.length ; i++) {
+              // this.list.push(response.data[i]);
+            }
+        this.max_filter=this.findWinConfirmed(response.data);
+        this.loader.apply_filters=false;
       })
       .catch((err)=>{console.log('error',err);
         this.list=[];
         this.loader.table=false;
-      this.loader.apply_filter=false;
+      this.loader.apply_filters=false;
       })
     },
     get_image_link(img){
       return require('../../assets/img/bank/'+img)
     },
+    findWinConfirmed(topConfirmed) {
+      if (topConfirmed.length==0){return this.max_filter}
+  			let findTop = -1;
+  			topConfirmed.forEach(obj => {if (findTop <obj.minloan){findTop=obj.minloan}});
+  			return findTop;
+  		},
   },
-  data(){
-    return {
-      filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
-      max_filter:localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
-      list:[],
-      tenure:'1',
-      loader:{
-        page:true,
-        btn:false,
-        table:true,
-        apply_filter:false,
-      },
-      request_id:0,
-      self_employed_form:{},
 
-    }
-  },
 
   components: {
     Header,
     },
 
 mounted(){
-  this.self_employed_form={"city":localStorage.getItem("city") ? localStorage.getItem("city") : null,
-"loan_amount_required":localStorage.getItem("loan_amount_required") ? localStorage.getItem("loan_amount_required") : null,
-"mobile_number":localStorage.getItem("mobile_number") ? localStorage.getItem("mobile_number") : null,
-"turn_over":localStorage.getItem("turn_over") ? localStorage.getItem("turn_over") : null,
-"any_loans_running_emi_monthly":localStorage.getItem("any_loans_running_emi_monthly") ? localStorage.getItem("any_loans_running_emi_monthly") : null,
-"business_registration_years":localStorage.getItem("business_registration_years") ? localStorage.getItem("business_registration_years") : null,
-"business_type":localStorage.getItem("business_type") ? localStorage.getItem("business_type") : null,
-"civil_score":localStorage.getItem("civil_score") ? localStorage.getItem("civil_score") : null,
-"date_of_birth":localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null,
-"gross_annual_income":localStorage.getItem("gross_annual_income") ? localStorage.getItem("gross_annual_income") : null,
-"industry_item":localStorage.getItem("industry_item") ? localStorage.getItem("industry_item") : null,
-"industry_type":localStorage.getItem("industry_type") ? localStorage.getItem("industry_type") : null,
-"mini_introduction":localStorage.getItem("mini_introduction") ? localStorage.getItem("mini_introduction") : null,
-"name":localStorage.getItem("name") ? localStorage.getItem("name") : null,
-"office_ownership":localStorage.getItem("office_ownership") ? localStorage.getItem("office_ownership") : null,
-"panno":localStorage.getItem("panno") ? localStorage.getItem("panno") : null,
-"residence_ownership":localStorage.getItem("residence_ownership") ? localStorage.getItem("residence_ownership") : null,
-"type_of_business_industry":localStorage.getItem("type_of_business_industry") ? localStorage.getItem("type_of_business_industry") : null,
-"current_city_of_residence ":localStorage.getItem("current_city_of_residence ") ? localStorage.getItem("current_city_of_residence ") : null,
-"email":localStorage.getItem("email") ? localStorage.getItem("email") : null,
-"gst":localStorage.getItem("gst") ? localStorage.getItem("gst") : null,
-};
 
 
-  axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
-    "city":this.self_employed_form.city,
-    "loan_amount_required":this.self_employed_form.loan_amount_required,
-    "mobile_number":this.self_employed_form.mobile_number,
-    "turn_over":this.self_employed_form.turn_over,
-  })
-  .then((response)=>{//console.log('then-POST     -',response);
-    this.request_id=response.data.id;
+    // this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
+    axios.post(process.env.VUE_APP_LIVE_HOST+'/business-loan',{
+      ...this.self_employed_form
+    })
+    .then((response)=>{//console.log('then-POST     -',response);
+      this.request_id=response.data.id;
+      this.loader.page=false;
+      console.log(this.loader.page);
+      axios.put(process.env.VUE_APP_LIVE_HOST+'/business-loan/'+this.request_id,{
+      ...this.self_employed_form
+        })
+        .then((response)=>{
+          console.log(response);
+          response
+          // this.request_id=response.data.id;
+          axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure)
+            .then((response)=>{
+              console.log(response);
+            this.loader.table=false;
+            this.max_filter=this.findWinConfirmed(response.data);
+            this.list=response.data.slice(0,response.data>13?13:response.data.length);
+            this.loader.table=false;
+
+            console.log(this.loader.table,this.list);
+            })
+            .catch((err)=>{console.log('error',err);
+            this.loader.table=false;
+            this.list=[]
+            })
+
+        })
+        .catch((err)=>{console.log('err-POST     -',err);
+        this.loader.table=false;
+        this.list=[]
+        })
+
+
+    })
+    .catch((err)=>{console.log(err);
     this.loader.page=false;
-    //console.log(this.loader.page);
-    axios.put(process.env.VUE_APP_LIVE_HOST+'/business-loan/'+this.request_id,{
-    ...this.self_employed_form
-      })
-      .then((response)=>{//console.log(response);
-        response
-        // this.request_id=response.data.id;
-        axios.get(process.env.VUE_APP_LIVE_HOST+'/business-loan-filter/'+this.request_id+'/'+this.filter+'/'+this.tenure)
-          .then((response)=>{//console.log(response);
-          this.loader.table=false;
-          this.list=response.data;
-          this.loader.table=false;
-          console.log(this.loader.table,this.list);
-          })
-          .catch((err)=>{console.log('error',err);
-          this.loader.table=false;
-          this.list=[]
-          })
-
-      })
-      .catch((err)=>{console.log('err-POST     -',err);
-      this.loader.table=false;
-      this.list=[]
-      })
-
-
-  })
-  .catch((err)=>{console.log(err);
-  this.loader.page=false;
-  })
+    })
 
 },
+
 }
 
 </script>
@@ -388,6 +634,9 @@ mounted(){
 .bank_img {
   width: 10rem;
   height: auto;
+}
+.result_count{
+  font-size: 0.9rem;
 }
 @media screen and (max-width: 767px) {
   .heading_one {

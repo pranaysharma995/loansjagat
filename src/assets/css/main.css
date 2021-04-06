@@ -87,6 +87,12 @@
       color:white;
       font-size: 15px;
   }
+  .bg-blue .form-control{
+    font-size: 1.4rem;
+  }
+  .bg-blue select.form-control:not([size]):not([multiple]) {
+    height: calc(2.85rem + 2px);
+  }
   label{
     margin-bottom: 10px;
     font-size: 14px;

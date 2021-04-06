@@ -130,6 +130,7 @@ export default {
        dateOfBirth:null,
        email:null,
        fullName:null,
+       self_employed_form:{},
 
    }
   },
@@ -150,12 +151,13 @@ export default {
         businessLife:{required},
     },
     mounted (){
-this.businessLife=localStorage.getItem("business_registration_years") ? localStorage.getItem("business_registration_years") : null;
-this.ownership=localStorage.getItem("office_ownership") ? localStorage.getItem("office_ownership") : null;
-this.pan=localStorage.getItem("panno") ? localStorage.getItem("panno") : null;
-this.dateOfBirth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
-this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
-this.fullName=localStorage.getItem("name") ? localStorage.getItem("name") : null;
+      this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
+      this.businessLife=this.self_employed_form.business_registration_years ? this.self_employed_form.business_registration_years : null;
+      this.ownership=this.self_employed_form.office_ownership ? this.self_employed_form.office_ownership : null;
+      this.pan=this.self_employed_form.panno ? this.self_employed_form.panno : null;
+      this.dateOfBirth=this.self_employed_form.date_of_birth ? this.self_employed_form.date_of_birth : null;
+      this.email=this.self_employed_form.email ? this.self_employed_form.email : null;
+      this.fullName=this.self_employed_form.name ? this.self_employed_form.name : null;
 },
         methods: {
              validationStatus: function(validation) {
@@ -166,12 +168,13 @@ this.fullName=localStorage.getItem("name") ? localStorage.getItem("name") : null
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
 
-            localStorage.setItem("business_registration_years",this.businessLife);
-            localStorage.setItem("office_ownership",this.ownership);
-            localStorage.setItem("panno",this.pan);
-            localStorage.setItem("date_of_birth",this.dateOfBirth);
-            localStorage.setItem("email",this.email);
-            localStorage.setItem("name",this.fullName);
+            this.self_employed_form.business_registration_years=this.businessLife
+            this.self_employed_form.office_ownership=this.ownership
+            this.self_employed_form.panno=this.pan
+            this.self_employed_form.date_of_birth=this.dateOfBirth
+            this.self_employed_form.email=this.email
+            this.self_employed_form.name=this.fullName
+            localStorage.setItem("self_employed_form",JSON.stringify(this.self_employed_form));
 
             this.$router.push('/self-employed/transaction-detail');
             // alert('Data Submit');

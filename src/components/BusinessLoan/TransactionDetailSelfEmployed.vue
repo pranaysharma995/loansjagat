@@ -151,6 +151,7 @@ export default {
        industries_name:'',
        business_type:"Trader",
        industries_item:'',
+       self_employed_form:{},
       }
   },
   components: {
@@ -173,14 +174,15 @@ export default {
     },
     mounted (){
       this.getIndustries();
-this.grossAnnualIncome=localStorage.getItem("gross_annual_income") ? localStorage.getItem("gross_annual_income") : null;
-this.creditScore=localStorage.getItem("civil_score") ? localStorage.getItem("civil_score") : 'below-650';
-this.emi=localStorage.getItem("any_loans_running_emi_monthly") ? localStorage.getItem("any_loans_running_emi_monthly") : null;
-this.gst=localStorage.getItem("gst") ? localStorage.getItem("gst") : 'No';
-this.business_type=localStorage.getItem("business_type") ? localStorage.getItem("business_type") : "Trader";
-this.business_type=localStorage.getItem("type_of_business_industry") ? localStorage.getItem("type_of_business_industry") : "Trader";
-this.industries_name=localStorage.getItem("industry_type") ? localStorage.getItem("industry_type") : null;
-this.industries_item=localStorage.getItem("industry_item") ? localStorage.getItem("industry_item") : null;
+      this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
+      this.grossAnnualIncome=this.self_employed_form.gross_annual_income ? this.self_employed_form.gross_annual_income : null;
+      this.creditScore=this.self_employed_form.civil_score ? this.self_employed_form.civil_score : null;
+      this.emi=this.self_employed_form.any_loans_running_emi_monthly ? this.self_employed_form.any_loans_running_emi_monthly : null;
+      this.gst=this.self_employed_form.gst ? this.self_employed_form.gst : 'No';
+      this.business_type=this.self_employed_form.business_type ? this.self_employed_form.business_type : "Trader";
+      this.business_type=this.self_employed_form.type_of_business_industry ? this.self_employed_form.type_of_business_industry : "Trader";
+      this.industries_name=this.self_employed_form.industry_type ? this.self_employed_form.industry_type : null;
+      this.industries_item=this.self_employed_form.industry_item ? this.self_employed_form.industry_item : null;
 },
         methods: {
              validationStatus: function(validation) {
@@ -191,14 +193,15 @@ this.industries_item=localStorage.getItem("industry_item") ? localStorage.getIte
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/self-employed/offer-detail');
-            localStorage.setItem("gross_annual_income",this.grossAnnualIncome);
-            localStorage.setItem("civil_score",this.creditScore);
-            localStorage.setItem("any_loans_running_emi_monthly",this.emi);
-            localStorage.setItem("gst",this.gst);
-            localStorage.setItem("business_type",this.business_type);
-            localStorage.setItem("type_of_business_industry",this.business_type);
-            localStorage.setItem("industry_type",this.industries_name);
-            localStorage.setItem("industry_item",this.industries_item);
+            this.self_employed_form.gross_annual_income=this.grossAnnualIncome
+            this.self_employed_form.civil_score=this.creditScore
+            this.self_employed_form.any_loans_running_emi_monthly=this.emi
+            this.self_employed_form.gst=this.gst
+            this.self_employed_form.business_type=this.business_type
+            this.self_employed_form.type_of_business_industry=this.business_type
+            this.self_employed_form.industry_type=this.industries_name
+            this.self_employed_form.industry_item=this.industries_item
+            localStorage.setItem("self_employed_form",JSON.stringify(this.self_employed_form));
             // console.log(self_employed_form);
             // alert('Data Submit');
         },

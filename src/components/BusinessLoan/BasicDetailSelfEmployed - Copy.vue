@@ -126,11 +126,15 @@ export default {
         mobileNumber: {required, minLength: minLength(10)}
     },
       mounted (){
-        this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
-        this.mobileNumber=this.self_employed_form.mobile_number ? this.self_employed_form.mobile_number : null;
-        this.loanAmount=this.self_employed_form.loan_amount_required ? this.self_employed_form.loan_amount_required : null;
-        this.city=this.self_employed_form.city ? this.self_employed_form.city : null;
-        this.annualSales=this.self_employed_form.turn_over ? this.self_employed_form.turn_over :"5000000" ;
+        this.self_employed_form=localStorage.getItem("self_employed_form") ? localStorage.getItem("self_employed_form") :
+         { mobile_number:null,
+         loan_amount_required:null,
+         city:null,
+         turn_over:"5000000"};
+        this.mobileNumber=this.self_employed_form.mobile_number;
+        this.loanAmount=this.self_employed_form.loan_amount_required;
+        this.city=this.self_employed_form.city;
+        this.annualSales=this.self_employed_form.turn_over;
       },
         methods: {
              validationStatus: function(validation) {
@@ -140,11 +144,10 @@ export default {
             console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
-            this.self_employed_form.mobile_number=this.mobileNumber
-            this.self_employed_form.loan_amount_required=this.loanAmount
-            this.self_employed_form.city=this.city
-            this.self_employed_form.turn_over=this.annualSales
-            localStorage.setItem("self_employed_form",JSON.stringify(this.self_employed_form));
+            localStorage.setItem("mobile_number",this.mobileNumber);
+            localStorage.setItem("loan_amount_required",this.loanAmount);
+            localStorage.setItem("city",this.city);
+            localStorage.setItem("turn_over",this.annualSales);
 
             this.$router.push('/self-employed/personal-detail');
             // alert('Data Submit');

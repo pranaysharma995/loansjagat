@@ -25,33 +25,25 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-6 col-sm-6 col-xl-6 col-6  pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter'>
+            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
           <span class='col-md-4  col-sm-6 col-xl-4 col-6 pad_top d-flex flex-row align-items-center mbl_tenure'>
                 <p class='padd_text'>Tenure:    </p>
+                <input type='range' min='1' :max='5' value='0' class=' button-blue' v-model='tenure' v-on:change='filter_post'>
+                <p class='padd_text padd_left'>{{tenure}}Years   </p>
+
               <div>
-                <select class="form-select dropdown" aria-label="Default select example " v-model='tenure'>
-                  <option selected>---</option>
-                  <option value="1">1 Year</option>
-                  <option value="2">2 Year</option>
-                  <option value="3">3 Year</option>
-                  <option value="4">4 Year</option>
-                  <option value="5">5 Year</option>
-                </select>
+
               </div>
 
             </span>
-            <span class='pad_top btm_top '>
-              <div v-if='loader.apply_filter' class="  d-flex justify-content-center align-items-center">
-                <div class="spinner-border text-primary" role="status">
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                </div>
-              </div>
-              <button v-else type="button" class="btn btn_big button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue"
-              v-on:click='filter_post'>Apply Filter</button>
-            </span>
+        <span class='pad_top btm_top '>
+          <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
+          <p class='result_count'><span >We have</span>{{list.length}} Bank Results</p>
+        </span>
+
 
         <!-- </div> -->
       </div>
@@ -186,12 +178,18 @@ export default{
       this.loader.btn=true;
 
       axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{
-        'request_id':this.request_id
+        'request_id':this.request_id,
+          roi:this.list[index].roi,
+  				pf:this.list[index].pf,
+  				emi:this.list[index].emi,
+  				bank_id:this.list[index].bank_id,
+  				bank_name:this.list[index].bank_name,
+  				loan_amount:this.list[index].loan_amt
       })
       .then((response)=>{console.log(response);
         this.request_id=response.data.id;
       this.loader.btn=false;
-      this.$router.push('/acknowledgement-thankyou?no='+response.data.application_no);
+      this.$router.push('apply_consent_thank/'+this.request_id);
 
 
 
@@ -211,6 +209,7 @@ export default{
         .then((response)=>{console.log(response);
         this.loader.table=false;
         this.loader.apply_filter=false;
+        this.max_filter=this.findWinConfirmed(response.data);
         this.list=response.data;
         console.log('loader is false ',this.loader.table,this.list);
         })
@@ -223,6 +222,14 @@ export default{
     get_image_link(img){
       return require('../../assets/img/bank/'+img)
     },
+    findWinConfirmed(topConfirmed) {
+  			let findTop = -1;
+  			topConfirmed.forEach(obj => {if (findTop <obj.minloan){findTop=obj.minloan}});
+  			return findTop;
+  		},
+
+
+
   },
   data(){
     return {
