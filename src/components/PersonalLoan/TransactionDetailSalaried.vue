@@ -12,16 +12,16 @@
           <div class="row">
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="residential-ownership" class="color-white">Residential Ownership*</label>
-              <input
-                type="text"
-                class="form-control"
-                id="residential-ownership"
-                placeholder="Residential Ownership"
-                name="ownership"
-                v-model="ownership"
-                v-model.trim="$v.ownership.$model"
-                :class="{'is-invalid': validationStatus($v.ownership)}"
-              />
+              <select name="ownership" v-model="ownership"
+              class="form-control"
+              id="residential-ownership"
+              v-model.trim="$v.ownership.$model"
+              :class="{'is-invalid': validationStatus($v.ownership)}"
+              >
+                <option value=null>Select An Option</option>
+                  <option value="Owned">Owned</option>
+                  <option value="Rented">Rented</option>
+                </select>
               <div v-if="!$v.ownership.required" class="invalid-feedback">Residential ownership is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">

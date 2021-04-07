@@ -69,16 +69,21 @@
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="company-name" class="color-white">Company Name*</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Company Name"
-                name="current_company_name"
-                v-model="current_company_name"
-                v-model.trim="$v.current_company_name.$model"
-                :class="{'is-invalid': validationStatus($v.current_company_name)}"
-              />
-              <div v-if="!$v.current_company_name.required" class="invalid-feedback">Company name is required.</div>
+                 <typeahead
+                 :data = "autocomplete"
+                 :minMatchingChars = "1"
+                 class=""
+                 id="current_company_name"
+                 :placeholder="current_company_name?current_company_name:'Company Name'"
+                 name="current_company_name"
+                 v-model.trim="$v.current_company_name.$model"
+                 :class="{'is-invalids': validationStatus($v.current_company_name)}"
+                 @input="autocomplete_method"
+                 >
+                 </typeahead>
+
+
+              <div v-if="!$v.current_company_name.required&&flg" class="invalid-feedbacks">Company name is required.</div>
             </div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -140,11 +145,14 @@ import ApplyReview from '../sub-components/ApplyReview';
 import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
+import typeahead from 'vue-bootstrap-typeahead';
+import axios from 'axios';
 export default {
   name: "PersonalDetailSalaried",
   data:function()
   {
       return{
+        flg:false,
           name:null,
           total_work_experience:null,
           current_company_name:null,
@@ -152,6 +160,7 @@ export default {
           email:null,
           date_of_birth:null,
           joining_date_in_current_company:null,
+          autocomplete:[],
           list:[
           {
             "title":"Personal Loan Starting at 10.40%",
@@ -196,6 +205,7 @@ export default {
     this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
     this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
     this.current_company_name=localStorage.getItem("current_company_name") ? localStorage.getItem("current_company_name") : null;
+    this.joining_date_in_current_company=localStorage.getItem("joining_date_in_current_company") ? localStorage.getItem("joining_date_in_current_company") : null;
   },
   components: {
     ApplyProgress,
@@ -204,6 +214,7 @@ export default {
     Header,
     Footer,
     OtherPages,
+    typeahead,
   },
           validations: {
         name: {required},
@@ -219,6 +230,7 @@ export default {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
+          this.flg=true;
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/transaction-detail');
@@ -229,6 +241,19 @@ export default {
             localStorage.setItem("name",this.name);
             localStorage.setItem("total_work_experience",this.total_work_experience);
             localStorage.setItem("joining_date_in_current_company",this.joining_date_in_current_company);
-        }},
+        },
+      autocomplete_method:function() {
+        console.log(this.current_company_name.length)
+          if (this.current_company_name.length==3){
+            axios.get(process.env.VUE_APP_LIVE_HOST+"/company-filter/"+this.current_company_name)
+            .then((res) =>this.autocomplete=res.data)
+            .catch((err)=>console.log(err))
+          }
+
+      },
+
+
+      },
+
 };
 </script>
