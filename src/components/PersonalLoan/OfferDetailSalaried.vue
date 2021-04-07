@@ -23,7 +23,7 @@
     <div class='first_container'>
       <div class='slider_container row'>
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
-          <span class='col-md-6 pad_top d-flex flex-row align-items-center'>
+          <span class='col-md-4 pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
             <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
@@ -90,7 +90,7 @@
               </tr>
             <tr  v-else-if='!loader.table' v-for= '(i,index) in list' v-bind:key='index'>
               <td class='col_' >
-                <img class='bank_img' alt="img" :src="get_image_link(i.bank_logo)">
+                <img :src="'/img/bank/' + i.bank_logo" v-bind:alt=" i.bank_name" >
               </td>
               <td  class='col_'>₹{{i.loan_amt}}</td>
               <td  class='col_'>{{i.roi}}%</td>
@@ -136,19 +136,19 @@ export default{
     axios.post(process.env.VUE_APP_LIVE_HOST+"/personal-loan",{...this.post_data })
     .then((res) =>
     {
-      console.log(res);
+      //console.log(res);
       this.request_id=res.data.id
       axios.put(process.env.VUE_APP_LIVE_HOST+'/personal-loan/'+this.request_id,{
       ...this.salariedObj
         })
-        .then((response)=>{console.log(response);
+        .then((response)=>{//console.log(response);
           // this.request_id=response.data.id;
           this.loader.page=false;
           this.response=response.data
           this.search_data.company_id=0;
           this.search_data.tenure=this.tenure
           axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
-            .then((response)=>{console.log(response);
+            .then((response)=>{//console.log(response);
             this.loader.table=false;
             var maix_data=this.findWinConfirmed(response.data);
 
@@ -160,24 +160,24 @@ export default{
     				}
     				var mx_amt = maix_data / 100000
             this.max_filter = mx_amt.toFixed(2)
-            console.log('this.max_filter',this.max_filter);
+            //console.log('this.max_filter',this.max_filter);
             this.list=response.data;
-            console.log('loader is false ',this.loader.table,this.list);
+            //console.log('loader is false ',this.loader.table,this.list);
             })
-            .catch((err)=>{console.log('error',err);
+            .catch((err)=>{//console.log('error',err);
             this.loader.table=false;
             this.list=[]
             })
 
         })
-        .catch((err)=>{console.log('err-POST     -',err);
+        .catch((err)=>{//console.log('err-POST     -',err);
         this.loader.page=false;
         this.list=[]
         })
     })
     .catch((err) =>
     {
-      console.log(err);
+      //console.log(err);
       this.loader.page=false;
     })
 
@@ -185,7 +185,7 @@ export default{
   methods:{
     apply_loan(index){
       this.loader.index=index;
-      console.log('called');
+      //console.log('called');
       this.loader.btn=true;
 
       axios.post(process.env.VUE_APP_LIVE_HOST+'/applied-personal-loan',{
@@ -197,7 +197,7 @@ export default{
   				bank_name:this.list[index].bank_name,
   				loan_amount:this.list[index].loan_amt
       })
-      .then((response)=>{console.log(response);
+      .then((response)=>{//console.log(response);
         this.request_id=response.data.id;
       this.loader.btn=false;
       this.$router.push('apply_consent_thank/'+this.request_id);
@@ -205,7 +205,7 @@ export default{
 
 
       })
-      .catch((err)=>{console.log('ERROR',err);
+      .catch((err)=>{//console.log('ERROR',err);
       this.loader.btn=false;
 
       })
@@ -217,14 +217,14 @@ export default{
       this.search_data.tenure=this.tenure
       this.search_data.loan_amount_required=this.filter
       axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
-        .then((response)=>{console.log(response);
+        .then((response)=>{//console.log(response);
         this.loader.table=false;
         this.loader.apply_filter=false;
         this.max_filter=this.findWinConfirmed(response.data);
         this.list=response.data;
-        console.log('loader is false ',this.loader.table,this.list);
+        //console.log('loader is false ',this.loader.table,this.list);
         })
-        .catch((err)=>{console.log('error',err);
+        .catch((err)=>{//console.log('error',err);
         this.loader.table=false;
         this.loader.apply_filter=false;
         this.list=[]

@@ -4,10 +4,10 @@
     <div class="row bg-blue px-10">
       <div class="container">
           <div class="row">
-        <div class="col-md-8 d-flex justify-content-start align-items-center">
+        <div class="col-md-8 col-sm-8 col-8 d-flex justify-content-start align-items-center">
           <h3 class="heading color-white roboto-bold banner-heading">Some Key Benefits of Personal Loans</h3>
         </div>
-        <div class="col-md-4 banner-image-section d-flex justify-content-end">
+        <div class="col-md-4 col-sm-4 col-4 banner-image-section d-flex justify-content-end">
           <img src="../../assets/img/benefits-banner.png" />
         </div>
           </div>
@@ -21,7 +21,7 @@
                 <p class="sub-heading">
                   A personal loan is one of the best remedies of modern life's financial concern.
                   Today almost everyone came across cash crunch situation and financial requirement that need fund at the moment,
-                  while one can gradually pay them over the period of time, these requirement from 
+                  while one can gradually pay them over the period of time, these requirement from
                   educationfor self or family. medical requirements, need to travel or fullfill a long wishlist of a gadget and several other requirements.
                 </p>
                  <p class="sub-heading">
@@ -34,7 +34,7 @@
                 <div class="col-md-12 mgt-60">
                     <h3 class="heading">Features and Benefits</h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 img-2">
                     <img class="img-fluid" src="../../assets/img/benefits-page.png" />
                 </div>
                 <div class="mgb-30 col-md-6 list-container flex-column d-flex justify-content-center">
@@ -46,7 +46,7 @@
                      <li class="list-heading">Loans Jagat Service is Absolutely Free of Cost for their Customers</li>
                      <li class="list-heading">Best Deal Guranteed</li>
                      <li class="list-heading">No Collatoral or Gurantor Needed</li>
-                     <li class="list-heading">Dedicated Loan Professional For Profile Based Accessment</li> 
+                     <li class="list-heading">Dedicated Loan Professional For Profile Based Accessment</li>
                      <li class="list-heading">Highest Apporval Ratio</li>
                      <li class="list-heading">Maximum Loan Eligibity Offers</li>
                      <li class="list-heading">Cashback upto RS 5000 On Disbursal of Your Loan</li>

@@ -115,38 +115,38 @@ export default {
        annualSales:"",
        self_employed_form:{},
        list:[
-    {
-      "title":"Business Loan Starting at 12.99%",
-      "new":true
-    },
-    {
-      "title":"Free and Quick Service",
-      "new":false
-    },
-    {
-      "title":"Cashback upto Rs 5,000",
-      "new":true
-    },
-    {
-      "title":"Instant Paperless Approvals",
-      "new":true
-    },
-    {
-      "title":"10.4% interest rate",
-      "new":true
-    },
-    {
-      "title":"Servicing Pan India Cities",
-      "new":false
-    },
-    {
-      "title":"Money in Account in 24 hrs ",
-      "new":false
-    },
-    {
-      "title":"Easy Debt Consolidation",
-      "new":true
-    },
+        {
+          "title":"Business Loan Starting at 12.99%",
+          "new":true
+        },
+        {
+          "title":"Free and Quick Service",
+          "new":false
+        },
+        {
+          "title":"Cashback upto Rs 5,000",
+          "new":true
+        },
+        {
+          "title":"Instant Paperless Approvals",
+          "new":true
+        },
+        {
+          "title":"10.4% interest rate",
+          "new":true
+        },
+        {
+          "title":"Servicing Pan India Cities",
+          "new":false
+        },
+        {
+          "title":"Money in Account in 24 hrs ",
+          "new":false
+        },
+        {
+          "title":"Easy Debt Consolidation",
+          "new":true
+        },
   ],
    }
   },

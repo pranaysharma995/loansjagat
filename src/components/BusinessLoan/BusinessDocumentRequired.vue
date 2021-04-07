@@ -4,12 +4,12 @@
     <div class="row bg-blue px-10">
       <div class="container">
         <div class="row">
-          <div class="col-md-8 d-flex justify-content-start align-items-center">
+          <div class="col-md-8 col-sm-8 col-8 d-flex justify-content-start align-items-center">
             <h3 class="heading color-white roboto-bold banner-heading">
               Document Requirement For Business Loan
             </h3>
           </div>
-          <div class="col-md-4 banner-image-section d-flex justify-content-end">
+          <div class="col-md-4 col-sm-4 col-4 banner-image-section d-flex justify-content-end">
             <img src="../../assets/img/document-banner.png" />
           </div>
         </div>
@@ -35,7 +35,7 @@
               as per the lender.
             </h3>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 img-2">
             <img class="img-fluid" src="../../assets/img/benefits-page.png" />
           </div>
           <div
