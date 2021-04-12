@@ -1,29 +1,29 @@
 <template>
   <div class="row content-padding pd-30-0 bg-white">
     <div
-      class="col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
+      class=" other-page col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
     >
       <router-link
         class="pagelink d-flex flex-column justify-content-center align-items-center"
         v-bind:to="`/${page}/benefits`"
       >
         <img src="../../assets/img/benefits@2x.png" alt="Benifits" />
-        <p class="mgt-15 color-black">Features and Benefits</p>
+        <p class="mgt-15 color-black sub-heading">Features and Benefits</p>
       </router-link>
     </div>
     <div
-      class="col-md-8 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
+      class=" other-page col-md-8 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
     >
       <router-link
         class="pagelink d-flex flex-column justify-content-center align-items-center"
         v-bind:to="`/${page}/eligibility`"
       >
         <img src="../../assets/img/eligibility.png" alt="Eligibility" />
-        <p class="mgt-15 color-black">Eligibility</p>
+        <p class="mgt-15 color-black sub-heading">Eligibility</p>
       </router-link>
     </div>
     <div
-      class="col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
+      class="other-page col-md-2 col-sm-4 col-xl-4 d-flex flex-column align-items-center"
     >
       <router-link
         class="pagelink d-flex flex-column justify-content-center align-items-center"
@@ -33,7 +33,7 @@
           src="../../assets/img/document-required.png"
           alt="Document Required"
         />
-        <p class="mgt-15 color-black">Document Required</p>
+        <p class="mgt-15 color-black sub-heading">Document Required</p>
       </router-link>
     </div>
   </div>

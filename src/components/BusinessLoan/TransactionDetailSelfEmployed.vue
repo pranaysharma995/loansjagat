@@ -11,7 +11,7 @@
         <form v-on:submit.prevent="submit">
           <div class="row">
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="gross-annual-income" class="color-white">Gross Annual Income*</label>
+              <label for="gross-annual-income" class="color-white">Gross Annual Income <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -26,7 +26,7 @@
               <div v-if="!$v.grossAnnualIncome.required" class="invalid-feedback">Gross annual income is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="gst" class="color-white">GST Registration*</label>
+              <label for="gst" class="color-white">GST Registration <span class="color-red">*</span></label>
 
               <select name="gst" v-model="gst" id="gst" class="form-control"
               v-model.trim="$v.gst.$model"
@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                <label for="current-emi" class="color-white">Current EMI*</label>
+                <label for="current-emi" class="color-white">Current EMI <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -55,7 +55,7 @@
               <div v-if="!$v.emi.required" class="invalid-feedback">Current EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="credit-score" class="color-white">Credit Score*</label>
+                 <label for="credit-score" class="color-white">Credit Score <span class="color-red">*</span></label>
                 <select name="creditScore" v-model="creditScore" id="credit-score" class="form-control"
                 v-model-trim="creditScore"
                 :class="{'is-invalid': validationStatus($v.creditScore)}"
@@ -70,7 +70,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="business_type" class="color-white">Business Type*</label>
+                 <label for="business_type" class="color-white">Business Type <span class="color-red">*</span></label>
                 <select name="business_type" v-model="business_type"
                   id="business_type"
                   class="form-control"
@@ -91,7 +91,7 @@
             <div v-if="!$v.business_type.required" class="invalid-feedback">Business Type required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="industries_name" class="color-white">Industries Name*</label>
+                 <label for="industries_name" class="color-white">Industries Name <span class="color-red">*</span></label>
                 <select name="industries_name"
                 v-model="industries_name"
                 id="industries_name"
@@ -108,7 +108,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="industries_item" class="color-white">Industries Item*</label>
+                 <label for="industries_item" class="color-white">Industries Item <span class="color-red">*</span></label>
                 <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control"
                 v-model-trim="industries_item"
                 :class="{'is-invalid': validationStatus($v.industries_item)}">
@@ -122,7 +122,7 @@
               <router-link to="/self-employed/personal-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
-                <button v-on:click="submit" type="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
+                <button v-on:click="submit" type="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Get Offers</button>
             </div>
           </div>
         </form>

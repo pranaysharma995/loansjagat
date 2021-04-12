@@ -11,7 +11,7 @@
         <form v-on:submit.prevent="submit">
           <div class="row">
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
-              <label for="loan-amount" class="color-white">Loan Amount*</label>
+              <label for="loan-amount" class="color-white">Loan Amount <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -24,7 +24,7 @@
               <div v-if="!$v.loanAmount.required" class="invalid-feedback">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
-              <label for="annual-sales" class="color-white">Annual Sales*</label>
+              <label for="annual-sales" class="color-white">Annual Sales <span class="color-red">*</span></label>
 
               <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control"
               v-model.trim="$v.annualSales.$model"
@@ -50,7 +50,7 @@
               <div>
 
 
-                <label for="city" class="color-white">City*</label>
+                <label for="city" class="color-white">City <span class="color-red">*</span></label>
                 <typeahead
                 :data = "cities"
                 :minMatchingChars = "1"
@@ -67,7 +67,7 @@
               <div v-if="!$v.city.required&&flg" class="invalid-feedbacks">City is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
-                 <label for="mobile-number" class="color-white">Mobile Number*</label>
+                 <label for="mobile-number" class="color-white">Mobile Number <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"

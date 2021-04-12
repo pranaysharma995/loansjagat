@@ -1,7 +1,7 @@
 <template>
   <div class="row bg-black pd-15-15">
     <div class="col-md-12">
-        <p class="color-white roboto">
+        <p class="color-white roboto sub-heading">
         {{content}}</p>
     </div>
   </div>

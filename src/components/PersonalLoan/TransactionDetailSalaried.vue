@@ -11,7 +11,7 @@
         <form v-on:submit.prevent="submit">
           <div class="row">
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="residential-ownership" class="color-white">Residential Ownership*</label>
+              <label for="residential-ownership" class="color-white">Residential Ownership<span class="color-red">*</span></label>
               <select name="ownership" v-model="ownership"
               class="form-control"
               id="residential-ownership"
@@ -25,7 +25,7 @@
               <div v-if="!$v.ownership.required" class="invalid-feedback">Residential ownership is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="salary-type" class="color-white">Salary Type*</label>
+              <label for="salary-type" class="color-white">Salary Type<span class="color-red">*</span></label>
               <select name="salary-type" v-model="mode_of_salary" class="form-control" id="salary-type"
               v-model.trim="$v.mode_of_salary.$model"
               :class="{'is-invalid': validationStatus($v.mode_of_salary)}"
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                <label for="any_loans_running_emi_monthly" class="color-white">Current EMI*</label>
+                <label for="any_loans_running_emi_monthly" class="color-white">Current EMI<span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -53,7 +53,7 @@
               <div v-if="!$v.any_loans_running_emi_monthly.required" class="invalid-feedback">EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="credit-score" class="color-white">Credit Score*</label>
+                 <label for="credit-score" class="color-white">Credit Score<span class="color-red">*</span></label>
               <select name="civil_score" v-model="civil_score" id="credit-score" class="form-control"
               v-model.trim="$v.civil_score.$model"
               :class="{'is-invalid': validationStatus($v.civil_score)}"
@@ -69,7 +69,7 @@
               <router-link to="/salaried/personal-detail">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
-                <button v-on:click="submit" type="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
+                <button v-on:click="submit" type="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Get Offers</button>
             </div>
           </div>
         </form>
