@@ -13,7 +13,7 @@
 
 
   <div class='text_container color_white'>
-    <p class='heading_one p-0'>Congratulations! You Are Eligible for Personal Loan Offers </p>
+    <p class='big-heading d-flex justify-content-center pdt-60'>Congratulations! You Are Eligible for Personal Loan Offers </p>
     <p class='heading_two'>
       Adjust the loan amount and choose tenure to suit the EMI paying capacity.
     </p>
@@ -327,7 +327,7 @@ text-align: center;
 }
 .heading_two{
 margin-top:2rem;
-font-size: 1.5rem;
+font-size: 24px;
 font-weight: 100;
 text-align: center;
 }
@@ -335,7 +335,7 @@ text-align: center;
   margin-bottom:2rem;
 }
 .container_two{
-  margin-top:2rem;
+  margin-top:4rem;
   background-color:#fff;
   min-height:22rem;
   border-radius: 5px;
@@ -361,7 +361,7 @@ text-align: center;
 }
 .padd_text{
   padding-right:1rem;
-  font-size: .9rem;
+  font-size: 2rem;
   font-weight: normal;
 }
 .btn_big{

@@ -11,7 +11,7 @@
         <form v-on:submit.prevent="submit">
           <div class="row">
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="full-name" class="color-white">Full Name*</label>
+              <label for="full-name" class="color-white">Full Name <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -24,7 +24,7 @@
               <div v-if="!$v.name.required" class="invalid-feedback">Full name is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-              <label for="email" class="color-white">Email*</label>
+              <label for="email" class="color-white">Email <span class="color-red">*</span></label>
               <input
                 type="email"
                 class="form-control"
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                <label for="date-of-birth" class="color-white">Date of Birth*</label>
+                <label for="date-of-birth" class="color-white">Date of Birth <span class="color-red">*</span></label>
               <input
                 type="date"
                 class="form-control"
@@ -53,7 +53,7 @@
               <div v-if="!$v.date_of_birth.required" class="invalid-feedback">Date of birth is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="pan" maxlength="10" class="color-white">PAN Number*</label>
+                 <label for="pan" maxlength="10" class="color-white">PAN Number <span class="color-red">*</span></label>
               <input
                 type="text"
                 class="form-control"
@@ -68,7 +68,7 @@
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="company-name" class="color-white">Company Name*</label>
+                 <label for="company-name" class="color-white">Company Name <span class="color-red">*</span></label>
                  <typeahead
                  :data = "autocomplete"
                  :minMatchingChars = "1"
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="work-experience" class="color-white">Total Work Experience*</label>
+                 <label for="work-experience" class="color-white">Total Work Experience <span class="color-red">*</span></label>
 
               <select name="workExperince" v-model="total_work_experience" id="work-experience"
               class="form-control"
@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
-                 <label for="joining_date_in_current_company" class="color-white">Joining In Current Company*</label>
+                 <label for="joining_date_in_current_company" class="color-white">Joining In Current Company <span class="color-red">*</span></label>
               <select name="joining_date_in_current_company" v-model="joining_date_in_current_company" id="joining_date_in_current_company" class="form-control"
               v-model.trim="$v.joining_date_in_current_company.$model"
               :class="{'is-invalid': validationStatus($v.joining_date_in_current_company)}"

@@ -13,6 +13,9 @@
   body,h1,h2,h3,h4,h5,p{
       margin: 0px;
   }
+  body, html{
+    font-size: 66%;
+  }
   .roboto{
       font-family: Roboto;
   }
@@ -47,6 +50,10 @@
   {
     color: #333;
   }
+  .color-red
+  {
+    color: #f00;
+  }
   .row.content-padding{
       padding-left: 30px;
       padding-right: 30px;
@@ -66,6 +73,10 @@
   }
   .pdt-70{
       padding-top: 70px;
+  }
+  .pdt-60
+  {
+    padding-top: 60px;
   }
   .pdt-30{
       padding-top: 30px;
@@ -109,7 +120,7 @@
   }
   label{
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .relative
   {
@@ -159,6 +170,10 @@
 {
   font-size: 24px;
 }
+.big-heading
+{
+  font-size: 40px;
+}
 sub,sup{
   font-size: 75%;
 }
@@ -171,6 +186,17 @@ sub,sup{
   margin-bottom: 30px;
   line-height: 20px;
 }
+.input-tooltip
+{
+  position: absolute;
+    top: 72%;
+    right: 25px;
+    font-size: 15px;
+    transform: translateY(-50%);
+    color: #064C95;
+}
+
+.input-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
 /* loader  */
 .lds-ring {
   display: inline-block;
@@ -240,6 +266,15 @@ sub,sup{
   font-size: 80%;
   color: #dc3545;
 }
+.table_container td{
+  font-size: 2em;
+}
+.table_container button{
+  font-size: 1em;
+}
+.list-group-item{
+  font-size: 2em;
+}
 @media screen and (max-width: 767px) {
   .list-heading{
     font-size: 13px;
@@ -283,4 +318,33 @@ sub,sup{
     display:flex;
     justify-content:center;
   }
+  .other-page:not(:last-child)
+  {
+    margin-bottom: 25px;
+  }
+  .progress-list .list-inline-item:not(:last-child) {
+    margin-right: 0rem;
+}
+.progress-list > li.active.list-inline-item:not(:last-child):after {
+  content: "";
+  width: 64px;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 25%;
+  left: 48px;
+}
+.progress-list > li.list-inline-item:not(:last-child):after {
+  content: "";
+  width: 64px;
+  height: 2px;
+  background-color: rgba(255,255,255,0.3);
+  position: absolute;
+  top: 25%;
+  left: 48px;
+}
+.big-heading{
+  font-size: 25px;
+  text-align: center;
+}
 }
