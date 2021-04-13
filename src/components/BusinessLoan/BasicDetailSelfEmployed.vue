@@ -21,7 +21,7 @@
                 v-model.trim="$v.loanAmount.$model"
                 :class="{'is-invalid': validationStatus($v.loanAmount)}"
               />
-              <div v-if="!$v.loanAmount.required" class="error-message color-red sub-heading">Loan amount is required.</div>
+              <div v-if="!$v.loanAmount.required&&flg" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="annual-sales" class="color-white">Annual Sales <span class="color-red">*</span></label>
@@ -43,7 +43,7 @@
                 <option value="1000000000">More than 100 Cr</option>
 
             </select>
-              <div v-if="!$v.annualSales.required" class="error-message color-red sub-heading">Annual sales is required.</div>
+              <div v-if="!$v.annualSales.required&&flg" class="error-message color-red sub-heading">Annual sales is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -84,10 +84,10 @@
                 data-placement="top"
                 title="To receive live updates of your application with complete data privacy."
               ></i>
-              <div v-if="!$v.mobileNumber.required" class="error-message color-red sub-heading">Mobile number is required.</div>
+              <div v-if="!$v.mobileNumber.required&&flg" class="error-message color-red sub-heading">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
-              <router-link to="/">
+              <router-link to="/personal-loan">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
                 <button type="button" v-on:click="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
@@ -199,7 +199,7 @@ export default {
             },
         submit: function() {
           this.flg=true;
-            console.log(this.loanAmount);
+            //console.log(this.loanAmount);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.self_employed_form.mobile_number=this.mobileNumber

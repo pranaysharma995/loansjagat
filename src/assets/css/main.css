@@ -262,11 +262,13 @@ sub,sup{
   font-size: 1em;
 }
 .list-group-item{
-  font-size: 2em;
+  font-size: 16px;
 }
 .error-message
 {
-  margin-top: 5px;
+  position: absolute;
+  margin-top: 1px;
+  font-size: 14px;
 }
 .input-tooltip
 {
@@ -277,7 +279,16 @@ sub,sup{
     transform: translateY(-50%);
     color: #064C95;
 }
+.bg-blue .form-group{
+  margin-bottom:  2.5em;
+}
+.total_result{
+  font-size: 2em;
+}
 @media screen and (max-width: 767px) {
+  .desktop-version{
+    display:none;
+  }
   .list-heading{
     font-size: 13px;
     position: relative;

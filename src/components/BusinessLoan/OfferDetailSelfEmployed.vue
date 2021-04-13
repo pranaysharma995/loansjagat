@@ -40,8 +40,8 @@
 
             </span>
         <span class='pad_top btm_top '>
-          <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
-          <p class='result_count'><span >We have </span>{{list.length}} Bank Results</p>
+          <span class="blinking maxLoanAmt">     Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
+          <p class='total_result'><span >     We have </span>{{list.length}} Bank Results</p>
         </span>
 
         <!-- </div> -->
@@ -95,9 +95,8 @@
               <td  class='col_'>₹{{i.blemi}}</td>
               <td  v-if='i.bal_t_or_f_to_other_bank !=null' class='col_'>Upto {{i.bal_t_or_f_to_other_bank}}% of outstanding Loan</td>
               <td v-else  class='col_'>
-
               </td>
-              <td  class='col_'>{{i.label_value.split(" ")[0]}}</td>
+              <td  class='col_'>{{i.label_value.split(" ")[0]}} Year</td>
               <td v-if='loader.btn &&loader.index==index' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>

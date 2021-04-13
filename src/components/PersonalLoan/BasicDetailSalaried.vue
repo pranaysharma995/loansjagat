@@ -21,7 +21,7 @@
                 v-model.trim="$v.loan_amount_required.$model"
                 :class="{'is-invalid': validationStatus($v.loan_amount_required)}"
               />
-              <div v-if="!$v.loan_amount_required.required" class="error-message color-red sub-heading">Loan amount is required.</div>
+              <div v-if="!$v.loan_amount_required.required&&flg" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="monthly-salary" class="color-white">Net Monthly Salary <span class="color-red">*</span></label>
@@ -41,9 +41,9 @@
                 data-placement="top"
                 title="It Is The Fixed Net Monthly Salary Credited To Your Account AFTER All Deductions. Do Not Include Any Incentives, Bonus Or One-Time Payments."
               ></i>
-              <div v-if="!$v.net_salary_all_deductions.required" class="error-message color-red sub-heading">Monthly salary is required.</div>
+              <div v-if="!$v.net_salary_all_deductions.required&&flg" class="error-message color-red sub-heading">Monthly salary is required.</div>
             </div>
-            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+            <div class="col-md-2 col-sm-12 col-xs-12 form-group desktop-version"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                 <label for="current_city_other" class="color-white">City <span class="color-red">*</span></label>
                 <typeahead
@@ -86,10 +86,10 @@
                 data-placement="top"
                 title="To receive live updates of your application with complete data privacy."
               ></i>
-              <div v-if="!$v.mobile_number.required" class="error-message color-red sub-heading">Mobile number is required.</div>
+              <div v-if="!$v.mobile_number.required&&flg" class="error-message color-red sub-heading">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
-              <router-link to="/">
+              <router-link to="/personal-loan">
                 <button type="button" class="btn button-dark-blue form-button d-flex-inline justify-content-center align-items-center color-white bg-blue mgr-15">Previous</button>
               </router-link>
                 <button type="submit" v-on:click="submit" class="btn form-button button-blue d-flex-inline justify-content-center align-items-center color-white bg-blue">Countinue</button>
@@ -130,6 +130,7 @@ export default {
         mobile_number:null,
         current_city_other:null,
         net_salary_all_deductions:null,
+
         list:[
           {
             "title":"Personal Loan Starting at 10.40%",

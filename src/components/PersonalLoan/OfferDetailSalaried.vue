@@ -41,7 +41,7 @@
             </span>
         <span class='pad_top btm_top '>
           <span class="blinking maxLoanAmt">Max. Loan Amount - Rs <span v-html="max_filter"></span> rupes</span>
-          <p class='result_count'><span >We have </span>{{list.length}} Bank Results</p>
+          <p class=' total_result'><span >We have </span>{{list.length}} Bank Results</p>
         </span>
 
 
@@ -96,7 +96,7 @@
               <td  class='col_'>{{i.roi}}%</td>
               <td  class='col_'>₹{{i.process_fees}}</td>
               <td  class='col_'>₹{{i.emi}}</td>
-              <td  class='col_'>{{i.tenure}}</td>
+              <td  class='col_'>{{i.tenure}} Year</td>
               <td v-if='loader.btn &&loader.index==index' class="  d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">
                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -198,9 +198,9 @@ export default{
   				loan_amount:this.list[index].loan_amt
       })
       .then((response)=>{//console.log(response);
-        this.request_id=response.data.id;
+        //this.request_id=response.data.id;
       this.loader.btn=false;
-      this.$router.push('apply_consent_thank/'+this.request_id);
+      window.location.href = "apply_consent_thank/"+this.request_id
 
 
 

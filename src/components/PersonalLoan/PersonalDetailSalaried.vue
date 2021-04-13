@@ -21,7 +21,7 @@
                 v-model.trim="$v.name.$model"
                 :class="{'is-invalid': validationStatus($v.name)}"
               />
-              <div v-if="!$v.name.required" class="error-message color-red sub-heading">Full name is required.</div>
+              <div v-if="!$v.name.required&&flag" class="error-message color-red sub-heading">Full name is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="email" class="color-white">Email <span class="color-red">*</span></label>
@@ -41,7 +41,7 @@
                 data-placement="top"
                 title="Ensure valid Email ID to receive timely communication for your application."
               ></i>
-              <div v-if="!$v.email.required" class="error-message color-red sub-heading">Email is required.</div>
+              <div v-if="!$v.email.required&&flag" class="error-message color-red sub-heading">Email is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -57,7 +57,7 @@
                 :class="{'is-invalid': validationStatus($v.date_of_birth)}"
               />
 
-              <div v-if="!$v.date_of_birth.required" class="error-message color-red sub-heading">Date of birth is required.</div>
+              <div v-if="!$v.date_of_birth.required&&flag" class="error-message color-red sub-heading">Date of birth is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="pan" maxlength="10" class="color-white">PAN Number <span class="color-red">*</span></label>
@@ -77,7 +77,7 @@
                 data-placement="top"
                 title="Permanent account number is requred"
               ></i>
-              <div v-if="!$v.panno.required" class="error-message color-red sub-heading">PAN is required.</div>
+              <div v-if="!$v.panno.required&&flag" class="error-message color-red sub-heading">PAN is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
@@ -119,7 +119,7 @@
               <option value="1 - 3">1 - 3 Years</option>
               <option value="3 year above">Above 3 Years</option>
               </select>
-              <div v-if="!$v.total_work_experience.required" class="error-message color-red sub-heading">Total Work Experience is required.</div>
+              <div v-if="!$v.total_work_experience.required&&flag" class="error-message color-red sub-heading">Total Work Experience is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -133,7 +133,7 @@
                 <option value="2- 6 months">2 - 6 Months</option>
                 <option value="6 months above">Greater than 6 Months</option>
               </select>
-              <div v-if="!$v.joining_date_in_current_company.required" class="error-message color-red sub-heading">Joining In Current Company is required.</div>
+              <div v-if="!$v.joining_date_in_current_company.required&&flag" class="error-message color-red sub-heading">Joining In Current Company is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/basic-detail">
@@ -263,6 +263,7 @@ export default {
             localStorage.setItem("joining_date_in_current_company",this.joining_date_in_current_company);
         },
       autocomplete_method:function() {
+        this.flg=true;
         //console.log(this.current_company_name.length)
           if (this.current_company_name.length==3){
             axios.get(process.env.VUE_APP_LIVE_HOST+"/company-filter/"+this.current_company_name)

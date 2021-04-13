@@ -7,7 +7,7 @@ export default {
 		appFooter: Footer,
 		appHeader: Header
 	},
-	name: 'apply-result', 
+	name: 'apply-result',
 	data(){
 		return{
 			value : '',
@@ -35,7 +35,7 @@ export default {
 		}
 	},
 	created(){
-		
+
 		this.getApplyData(this.$router.history.current.params.id)
 		// this.value = this.$router.history.current.params.applocation_no;
 		// this.type = this.$router.history.current.params.type;
@@ -45,7 +45,7 @@ export default {
 			if(val=='Yes'){
 				this.permanent_landmark = this.landmark
 				this.permanent_address1 = this.residence_address
-			}		
+			}
 		},
 		getApplyData(id){
 			axios.get('get/applied/data/'+id)
@@ -60,7 +60,7 @@ export default {
 					this.first_name = res[0]
 					this.last_name = res[1]
 				}
-				
+
 				console.log(response);
 			}).catch((err) => {
 				console.log(err)
@@ -94,13 +94,13 @@ export default {
 			axios.post('/update-applied-aditional', addData)
 			.then((response) => {
 				console.log(response);
-		
+
 			}).catch((err) => {
 				console.log(err)
 			});
 
 		}
 
-	
+
 	},
 }

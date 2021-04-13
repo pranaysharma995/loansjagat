@@ -23,7 +23,7 @@
                   v-model.trim="$v.fullName.$model"
                   :class="{ 'is-invalid': validationStatus($v.fullName) }"
                 />
-                <div v-if="!$v.fullName.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.fullName.required&&flg" class="error-message color-red sub-heading">
                   Full name is required.
                 </div>
               </div>
@@ -49,7 +49,7 @@
                   title="Ensure valid Email ID to receive timely communication for your application."
                 ></i>
 
-                <div v-if="!$v.email.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.email.required&&flg" class="error-message color-red sub-heading">
                   Email is required.
                 </div>
               </div>
@@ -67,7 +67,7 @@
                   v-model.trim="$v.dateOfBirth.$model"
                   :class="{ 'is-invalid': validationStatus($v.dateOfBirth) }"
                 />
-                <div v-if="!$v.dateOfBirth.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.dateOfBirth.required&&flg" class="error-message color-red sub-heading">
                   Date of birth is required.
                 </div>
               </div>
@@ -90,7 +90,7 @@
                   data-placement="top"
                   title="Permanent account number is requred"
                 ></i>
-                <div v-if="!$v.pan.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.pan.required&&flg" class="error-message color-red sub-heading">
                   PAN is required.
                 </div>
               </div>
@@ -108,10 +108,11 @@
                   v-model.trim="$v.ownership.$model"
                   :class="{ 'is-invalid': validationStatus($v.ownership) }"
                 >
+                <option value=null>Select An Option</option>
                   <option value="Owned">Owned</option>
                   <option value="Rented">Rented</option>
                 </select>
-                <div v-if="!$v.ownership.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.ownership.required&&flg" class="error-message color-red sub-heading">
                   Ownership status is required.
                 </div>
               </div>
@@ -128,13 +129,13 @@
                   v-model.trim="$v.businessLife.$model"
                   :class="{ 'is-invalid': validationStatus($v.businessLife) }"
                 >
-                  <option value="null">Select An Option</option>
+                  <option value=null>Select An Option</option>
                   <option value="1">Less than 1 year</option>
                   <option value="2">1 Yr - 3 Yr</option>
                   <option value="3">3 Yr - 5 Yr</option>
                   <option value="10">More than 5 Yr</option>
                 </select>
-                <div v-if="!$v.businessLife.required" class="error-message color-red sub-heading">
+                <div v-if="!$v.businessLife.required&&flg" class="error-message color-red sub-heading">
                   How Old is Business is required.
                 </div>
               </div>
@@ -186,6 +187,7 @@ export default {
   data: function () {
     return {
       businessLife: 1,
+      flg:false,
       ownership: null,
       pan: null,
       dateOfBirth: null,
@@ -272,7 +274,8 @@ export default {
       return typeof validation != "undefined" ? validation.$error : false;
     },
     submit: function () {
-      console.log(this.loanAmount);
+      //console.log(this.loanAmount);
+      this.flg=true;
       this.$v.$touch();
       if (this.$v.$pendding || this.$v.$error) return;
 

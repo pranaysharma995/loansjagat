@@ -30,7 +30,7 @@
                 title="Your Last Financial Year Turnover, As Filed With ITR."
               ></i>
 
-              <div v-if="!$v.grossAnnualIncome.required" class="error-message color-red sub-heading">Gross annual income is required.</div>
+              <div v-if="!$v.grossAnnualIncome.required&&flag" class="error-message color-red sub-heading">Gross annual income is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gst" class="color-white">GST Registration <span class="color-red">*</span></label>
@@ -44,7 +44,7 @@
                 <option value="No">No</option>
 
             </select>
-              <div v-if="!$v.gst.required" class="error-message color-red sub-heading">GST is required.</div>
+              <div v-if="!$v.gst.required&&flag" class="error-message color-red sub-heading">GST is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -66,7 +66,7 @@
                 data-placement="top"
                 title="It Helps Calculate The Correct Eligible Loan Amount."
               ></i>
-              <div v-if="!$v.emi.required" class="error-message color-red sub-heading">Current EMI is required.</div>
+              <div v-if="!$v.emi.required&&flag" class="error-message color-red sub-heading">Current EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score <span class="color-red">*</span></label>
@@ -80,7 +80,7 @@
               <option value="above-650">Above 650</option>
               <option value="don't know">Don't Know</option>
               </select>
-              <div v-if="!$v.creditScore.required" class="error-message color-red sub-heading">Credit Score is required.</div>
+              <div v-if="!$v.creditScore.required&&flag" class="error-message color-red sub-heading">Credit Score is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -102,7 +102,7 @@
               </select>
 
 
-            <div v-if="!$v.business_type.required" class="error-message color-red sub-heading">Business Type required.</div>
+            <div v-if="!$v.business_type.required&&flag" class="error-message color-red sub-heading">Business Type required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="industries_name" class="color-white">Industries Name <span class="color-red">*</span></label>
@@ -118,7 +118,7 @@
               <option value=null>Select Industry</option>
               <option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
               </select>
-              <div v-if="!$v.industries_name.required" class="error-message color-red sub-heading">Industries Name required.</div>
+              <div v-if="!$v.industries_name.required&&flag" class="error-message color-red sub-heading">Industries Name required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -129,7 +129,7 @@
               <option value=null>Select Industry</option>
               <option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
               </select>
-              <div v-if="!$v.industries_item.required" class="error-message color-red sub-heading">Industries Item required.</div>
+              <div v-if="!$v.industries_item.required&&flag" class="error-message color-red sub-heading">Industries Item required.</div>
             </div>
 
             <div class="col-12 form-group mgt-15">
@@ -176,6 +176,7 @@ export default {
        gst:null,
        industries:[],
        items:[],
+       flag:false,
        industries_name:null,
        business_type:null,
        industries_item:null,
@@ -251,7 +252,8 @@ export default {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
-            console.log(this.loanAmount);
+            //console.log(this.loanAmount);
+            this.flg=true;
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/self-employed/offer-detail');

@@ -22,7 +22,7 @@
                   <option value="Owned">Owned</option>
                   <option value="Rented">Rented</option>
                 </select>
-              <div v-if="!$v.ownership.required" class="error-message color-red sub-heading">Residential ownership is required.</div>
+              <div v-if="!$v.ownership.required&&flg" class="error-message color-red sub-heading">Residential ownership is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary-type" class="color-white">Salary Type<span class="color-red">*</span></label>
@@ -35,7 +35,7 @@
               <option value="Check">Check</option>
               <option value="Direct Bank">Direct Bank</option>
               </select>
-              <div v-if="!$v.mode_of_salary.required" class="error-message color-red sub-heading">Salary Type is required.</div>
+              <div v-if="!$v.mode_of_salary.required&&flg" class="error-message color-red sub-heading">Salary Type is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -57,7 +57,7 @@
                 data-placement="top"
                 title="It Helps Calculate The Correct Eligible Loan Amount."
               ></i>
-              <div v-if="!$v.any_loans_running_emi_monthly.required" class="error-message color-red sub-heading">EMI is required.</div>
+              <div v-if="!$v.any_loans_running_emi_monthly.required&&flg" class="error-message color-red sub-heading">EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score<span class="color-red">*</span></label>
@@ -70,7 +70,7 @@
               <option value="Above 650">Above 650</option>
               <option value="Don't know">Don't Know</option>
               </select>
-                <div v-if="!$v.civil_score.required" class="error-message color-red sub-heading">Credit Score is required.</div>
+                <div v-if="!$v.civil_score.required&&flg" class="error-message color-red sub-heading">Credit Score is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/personal-detail">
@@ -107,6 +107,7 @@ export default {
   data:function()
   {
       return{
+        flag:false,
           civil_score:'Below 650',
           any_loans_running_emi_monthly:null,
           mode_of_salary:"Cash",
@@ -175,6 +176,7 @@ export default {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
+          this.flg=true;
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail');
