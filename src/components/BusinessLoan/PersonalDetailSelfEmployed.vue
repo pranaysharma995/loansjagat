@@ -18,12 +18,12 @@
                   type="text"
                   class="form-control"
                   id="full-name"
-                  placeholder="Full Name"
+                  placeholder="Name as per PAN Card"
                   name="fullName"
                   v-model.trim="$v.fullName.$model"
                   :class="{ 'is-invalid': validationStatus($v.fullName) }"
                 />
-                <div v-if="!$v.fullName.required" class="invalid-feedback">
+                <div v-if="!$v.fullName.required" class="error-message color-red sub-heading">
                   Full name is required.
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Email ID"
+                  placeholder="abc@gmail.com"
                   name="email"
                   id="email"
                   v-model.trim="$v.email.$model"
@@ -49,7 +49,7 @@
                   title="Ensure valid Email ID to receive timely communication for your application."
                 ></i>
                 -->
-                <div v-if="!$v.email.required" class="invalid-feedback">
+                <div v-if="!$v.email.required" class="error-message color-red sub-heading">
                   Email is required.
                 </div>
               </div>
@@ -67,7 +67,7 @@
                   v-model.trim="$v.dateOfBirth.$model"
                   :class="{ 'is-invalid': validationStatus($v.dateOfBirth) }"
                 />
-                <div v-if="!$v.dateOfBirth.required" class="invalid-feedback">
+                <div v-if="!$v.dateOfBirth.required" class="error-message color-red sub-heading">
                   Date of birth is required.
                 </div>
               </div>
@@ -78,12 +78,12 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="PAN Number"
+                  placeholder="ABCDE1321G"
                   name="pan"
                   v-model.trim="$v.pan.$model"
                   :class="{ 'is-invalid': validationStatus($v.pan) }"
                 />
-                <div v-if="!$v.pan.required" class="invalid-feedback">
+                <div v-if="!$v.pan.required" class="error-message color-red sub-heading">
                   PAN is required.
                 </div>
               </div>
@@ -104,7 +104,7 @@
                   <option value="Owned">Owned</option>
                   <option value="Rented">Rented</option>
                 </select>
-                <div v-if="!$v.ownership.required" class="invalid-feedback">
+                <div v-if="!$v.ownership.required" class="error-message color-red sub-heading">
                   Ownership status is required.
                 </div>
               </div>
@@ -127,7 +127,7 @@
                   <option value="3">3 Yr - 5 Yr</option>
                   <option value="10">More than 5 Yr</option>
                 </select>
-                <div v-if="!$v.businessLife.required" class="invalid-feedback">
+                <div v-if="!$v.businessLife.required" class="error-message color-red sub-heading">
                   How Old is Business is required.
                 </div>
               </div>

@@ -186,18 +186,7 @@ sub,sup{
   margin-bottom: 30px;
   line-height: 20px;
 }
-.input-tooltip
-{
-  position: absolute;
-    top: 72%;
-    right: 25px;
-    font-size: 15px;
-    transform: translateY(-50%);
-    color: #064C95;
-}
 
-.input-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
-/* loader  */
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -274,6 +263,10 @@ sub,sup{
 }
 .list-group-item{
   font-size: 2em;
+}
+.error-message
+{
+  margin-top: 5px;
 }
 @media screen and (max-width: 767px) {
   .list-heading{

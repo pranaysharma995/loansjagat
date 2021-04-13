@@ -21,7 +21,7 @@
                 v-model.trim="$v.loan_amount_required.$model"
                 :class="{'is-invalid': validationStatus($v.loan_amount_required)}"
               />
-              <div v-if="!$v.loan_amount_required.required" class="invalid-feedback">Loan amount is required.</div>
+              <div v-if="!$v.loan_amount_required.required" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="monthly-salary" class="color-white">Net Monthly Salary <span class="color-red">*</span></label>
@@ -34,7 +34,7 @@
                 v-model.trim="$v.net_salary_all_deductions.$model"
                 :class="{'is-invalid': validationStatus($v.net_salary_all_deductions)}"
               />
-              <div v-if="!$v.net_salary_all_deductions.required" class="invalid-feedback">Monthly salary is required.</div>
+              <div v-if="!$v.net_salary_all_deductions.required" class="error-message color-red sub-heading">Monthly salary is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -60,7 +60,7 @@
                 v-model.trim="$v.current_city_other.$model"
                 :class="{'is-invalid': validationStatus($v.current_city_other)}"
               /> -->
-              <div v-if="!$v.current_city_other.required&&flg" class="invalid-feedbacks">City is required.</div>
+              <div v-if="!$v.current_city_other.required&&flg" class="error-message color-red sub-headings">City is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                  <label for="mobile_number-number" class="color-white">Mobile Number <span class="color-red">*</span></label>
@@ -72,7 +72,7 @@
                 v-model.trim="$v.mobile_number.$model"
                 :class="{'is-invalid': validationStatus($v.mobile_number)}"
               />
-              <div v-if="!$v.mobile_number.required" class="invalid-feedback">Mobile number is required.</div>
+              <div v-if="!$v.mobile_number.required" class="error-message color-red sub-heading">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/">

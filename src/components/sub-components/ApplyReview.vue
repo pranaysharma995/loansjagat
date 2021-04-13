@@ -7,7 +7,7 @@
         <li class="list-inline-item"><img src="../../assets/img/star.png" /></li>
         <li class="list-inline-item"><img src="../../assets/img/half-star.png" /></li>
     </ul>
-    <p class="color-white">4.5/5 rating, 1488 reviews</p>
+    <p class="color-white">4.6/5 Rating, 1488 Reviews</p>
 </div>
 </template>
 
