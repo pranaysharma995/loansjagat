@@ -361,7 +361,7 @@ text-align: center;
 }
 .padd_text{
   padding-right:1rem;
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: normal;
 }
 .btn_big{
@@ -403,7 +403,7 @@ overflow:auto;
 
   background-color:#034E9A;
   color:#fff;
-  font-size: 0.9rem;
+  font-size: 1.3em;
   font-weight: normal;
 
 }
@@ -423,6 +423,11 @@ overflow:auto;
 .bank_img{
   width:10rem;
   height:auto;
+}
+@media screen and (max-width: 1000px ) and (min-width:768px) {
+  .padd_text{
+    font-size: 1.5em;
+  }
 }
 @media screen and (max-width: 767px) {
   .heading_one{

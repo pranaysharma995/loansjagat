@@ -16,12 +16,12 @@
                 type="text"
                 class="form-control"
                 id="loan-amount"
-                placeholder="Loan Amount"
+                placeholder="5,00,000"
                 name="loanAmount"
                 v-model.trim="$v.loanAmount.$model"
                 :class="{'is-invalid': validationStatus($v.loanAmount)}"
               />
-              <div v-if="!$v.loanAmount.required" class="invalid-feedback">Loan amount is required.</div>
+              <div v-if="!$v.loanAmount.required" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <label for="annual-sales" class="color-white">Annual Sales <span class="color-red">*</span></label>
@@ -43,7 +43,7 @@
                 <option value="1000000000">More than 100 Cr</option>
 
             </select>
-              <div v-if="!$v.annualSales.required" class="invalid-feedback">Annual sales is required.</div>
+              <div v-if="!$v.annualSales.required" class="error-message color-red sub-heading">Annual sales is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -64,7 +64,7 @@
                 >
                 </typeahead>
                 </div>
-              <div v-if="!$v.city.required&&flg" class="invalid-feedbacks">City is required.</div>
+              <div v-if="!$v.city.required&&flg" class="error-message color-red sub-heading">City is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
                  <label for="mobile-number" class="color-white">Mobile Number <span class="color-red">*</span></label>
@@ -77,7 +77,14 @@
                 v-model.trim="$v.mobileNumber.$model"
                 :class="{'is-invalid': validationStatus($v.mobileNumber)}"
               />
-              <div v-if="!$v.mobileNumber.required" class="invalid-feedback">Mobile number is required.</div>
+              <i
+                class="fa fa-info-circle input-tooltip color-blue"
+                delay="0"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="To receive live updates of your application with complete data privacy."
+              ></i>
+              <div v-if="!$v.mobileNumber.required" class="error-message color-red sub-heading">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/">

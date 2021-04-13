@@ -9,6 +9,10 @@
 </template>
 
 <script>
+import jQuery from 'jquery';
+jQuery(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
 export default {
   name: 'Header',

@@ -285,153 +285,161 @@ mounted(){
 
 </script>
 <style scoped>
-.contai {
-  min-height: calc(100vh - 59px);
-  background-color: #0255ab;
+.contai{
+  min-height:calc(100vh - 59px);
+  background-color:#0255AB;
+
+
   /* position: fixed; */
 }
-.color_white {
-  color: white;
+.color_white{
+  color:white;
+
 }
-.heading_one {
-  margin-top: 5rem;
-  font-size: 2.5rem;
-  font-weight: 600;
-  text-align: center;
+
+.heading_one{
+margin-top:5rem;
+font-size: 2.5rem;
+font-weight: 600;
+text-align: center;
 }
-.heading_two {
-  margin-top: 2rem;
-  font-size: 24px;
-  font-weight: 100;
-  text-align: center;
+.heading_two{
+margin-top:2rem;
+font-size: 24px;
+font-weight: 100;
+text-align: center;
 }
-.containz {
-  margin-bottom: 2rem;
+.containz{
+  margin-bottom:2rem;
 }
-.container_two {
-  margin-top: 4rem;
-  background-color: #fff;
-  min-height: 22rem;
+.container_two{
+  margin-top:4rem;
+  background-color:#fff;
+  min-height:22rem;
   border-radius: 5px;
-  max-width: 100%;
+  max-width:100%;
   /* padding-left:1rem;
-    padding-right:1rem; */
-  padding-top: 0.01rem;
+  padding-right:1rem; */
+  padding-top:0.01rem;
 }
-.first_container {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.first_container{
+  padding-left:1rem;
+  padding-right:1rem;
 }
-.slider_container {
+.slider_container{
   /* height:7rem; */
   /* border-bottom:1px solid #B3B3B3; */
-  margin-top: 2.5rem;
+ margin-top:2.5rem;
 }
-.dropdown {
+.dropdown{
   border-radius: 5px;
   /* height:2.1rem; */
   /* width:4rem; */
-  padding: 0.7rem;
+  padding:0.7rem;
 }
-.padd_text {
-  padding-right: 1rem;
+.padd_text{
+  padding-right:1rem;
   font-size: 2em;
   font-weight: normal;
 }
-.btn_big {
-  height: 3rem;
-  width: 7rem;
+.btn_big{
+  height:3rem;
+  width:7rem;
 }
-.padd_left {
-  padding-left: 0.7rem;
+.padd_left{
+  padding-left:0.7rem;
 }
-.table_container {
-  overflow: auto;
-  /* border : 1px solid #000; */
+.table_container{
+
+overflow:auto;
+/* border : 1px solid #000; */
 }
-.tbl {
-  min-width: 690px;
+.tbl{
+  min-width:690px;
 }
-.result_size {
-  margin-top: 1.5rem;
-  border-top: 1px solid #b3b3b3;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.result_size{
+  margin-top:1.5rem;
+  border-top:1px solid  #B3B3B3;
+  padding-top:1rem;
+  padding-bottom:1rem;
   font-size: 1rem;
 }
-.border {
+
+.border{
   border-style: groove;
-  border-width: 0px !important;
-  border-color: coral;
+    border-width: 0px!important;
+    border-color: coral;
+
 }
-.head {
-  margin-top: 1rem !important;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
+.head{
+  margin-top:1rem!important;
+  margin-bottom:1rem;
+  padding-bottom:1rem;
   font-size: 1rem;
 }
-.border_col {
-  background-color: #034e9a;
-  color: #fff;
-  font-size: 1.2em;
+.border_col{
+
+  background-color:#034E9A;
+  color:#fff;
+  font-size: 1.3em;
   font-weight: normal;
+
 }
-.tbody {
-  padding: 2rem !important;
-  border-top: 1px solid #000;
-  font-size: 1rem;
+.tbody{
+  padding:2rem!important;
+  border-top:1px solid #000;
+  font-size:1rem;
 }
-.col_ {
-  border-top: 0px solid #000;
-  border-right: 1px solid #000;
+
+.col_{
+    border-top:0px solid #000;
+    border-right:1px solid #000;
 }
-.end_col {
-  border-top: 0px solid #000;
+.end_col{
+  border-top:0px solid #000;
 }
-.bank_img {
-  width: 10rem;
-  height: auto;
+.bank_img{
+  width:10rem;
+  height:auto;
 }
-.result_count{
-  font-size: 0.9rem;
+@media screen and (max-width: 1000px ) and (min-width:768px) {
+  .padd_text{
+    font-size: 1.5em;
+  }
 }
 @media screen and (max-width: 767px) {
-  .heading_one {
-    margin-top: 5rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
+  .heading_one{
+  margin-top:5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
   }
-  .heading_two {
-    margin-top: 2rem;
-    font-size: 1rem;
-    font-weight: 100;
-    text-align: center;
+  .heading_two{
+  margin-top:2rem;
+  font-size: 1rem;
+  font-weight: 100;
+  text-align: center;
   }
-  .pad_top {
-    padding-top: .5rem;
-  }
-  .bank_img {
-    width: 5rem;
-    height: auto;
-  }
-  .tbody {
-    padding: 2rem !important;
-    border-top: 1px solid #000;
-    font-size: 0.8rem;
-  }
-  .border_col {
-    background-color: #034e9a;
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: normal;
-  }
-  .btm_top{
-    margin-left:1rem;
-  }
-  .mbl_tenure{
-    display:flex;
-    justify-content:flex-end;
-  }
+.pad_top{
+  padding-top:.5rem;
+}
+.bank_img{
+  width:5rem;
+  height:auto;
+}
+.tbody{
+  padding:2rem!important;
+  border-top:1px solid #000;
+  font-size:0.8rem;
+}
+.head{
+  margin-top:1rem!important;
+  margin-bottom:1rem;
+  padding-bottom:1rem;
+  font-size: 0.8rem;
+}
+.btm_top{
+  margin-left:1rem;
+}
 }
 </style>

@@ -86,7 +86,6 @@
                  <typeahead
                  :data = "autocomplete"
                  :minMatchingChars = "1"
-                 :serializer="name => name.name"
                  class=""
                  id="current_company_name"
                  :placeholder="current_company_name?current_company_name:'Company Name'"
@@ -96,13 +95,9 @@
                  @input="autocomplete_method"
                  >
                  </typeahead>
-                 <i
-                   class="fa fa-info-circle input-tooltip color-blue"
-                   delay="0"
-                   data-toggle="tooltip"
-                   data-placement="top"
-                   title="Choose Your Current Company Name From Dropdown As It Plays A Key Role In Best Loan Offers. If You Don't Find A Valid Auto Suggestion, Type Your Company Name & Proceed Ahead."
-                 ></i>
+                 
+
+
               <div v-if="!$v.current_company_name.required&&flg" class="error-message color-red sub-headings">Company name is required.</div>
             </div>
 
@@ -263,11 +258,10 @@ export default {
             localStorage.setItem("joining_date_in_current_company",this.joining_date_in_current_company);
         },
       autocomplete_method:function() {
-        //console.log(this.current_company_name.length)
+        console.log(this.current_company_name.length)
           if (this.current_company_name.length==3){
             axios.get(process.env.VUE_APP_LIVE_HOST+"/company-filter/"+this.current_company_name)
-            .then((res) =>this.autocomplete=res.data
-          )
+            .then((res) =>this.autocomplete=res.data)
             .catch((err)=>console.log(err))
           }
 
