@@ -28,7 +28,7 @@
 
               <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control"
               v-model.trim="$v.annualSales.$model"
-              :class="{'is-invalid': validationStatus($v.loanAmount)}">
+              :class="{'is-invalid': validationStatus($v.annualSales)}">
                 <option value=null>Select An Option</option>
                 <option value="5000000">Less than 50 Lacs</option>
                 <option value="7500000">50 Lacs - 1 Cr</option>
@@ -84,6 +84,7 @@
                 data-placement="top"
                 title="To receive live updates of your application with complete data privacy."
               ></i>
+              <!-- <div v-if="!$v.mobileNumber.numeric&&flg" class="error-message color-red sub-heading">Invalid Input </div> -->
               <div v-if="!$v.mobileNumber.required&&flg" class="error-message color-red sub-heading">Mobile number is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
@@ -109,7 +110,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength,numeric } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
@@ -180,11 +181,9 @@ export default {
   },
         validations: {
         annualSales: {required},
-        loanAmount: {required},
+        loanAmount: {required,numeric},
         city: {required},
-        mobileNumber: {required, minLength: minLength(10)},
-        annualSales:{required},
-
+        mobileNumber: {required,numeric, minLength: minLength(10)},
     },
       mounted (){
         this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};

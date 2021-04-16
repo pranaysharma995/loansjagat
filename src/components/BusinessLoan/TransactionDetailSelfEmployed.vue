@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
+import { required,numeric } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
@@ -226,9 +226,9 @@ export default {
     OtherPages,
   },
                 validations: {
-        grossAnnualIncome: {required},
+        grossAnnualIncome: {required,numeric},
         creditScore: {required},
-        emi: {required},
+        emi: {required,numeric},
         gst:{required},
         business_type:{required},
         industries_name:{required},

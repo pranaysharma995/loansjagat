@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
+import { required,numeric } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
@@ -166,7 +166,7 @@ export default {
   },
               validations: {
         civil_score: {required},
-        any_loans_running_emi_monthly: {required},
+        any_loans_running_emi_monthly: {required,numeric},
         mode_of_salary: {required},
         ownership:{required},
 

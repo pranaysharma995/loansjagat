@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength,numeric } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
@@ -177,10 +177,10 @@ export default {
     this.net_salary_all_deductions=localStorage.getItem("net_salary_all_deductions") ? localStorage.getItem("net_salary_all_deductions") : null;
   },
       validations: {
-        loan_amount_required: {required},
-        net_salary_all_deductions: {required},
+        loan_amount_required: {required,numeric},
+        net_salary_all_deductions: {required,numeric},
         current_city_other: {required},
-        mobile_number: {required, minLength: minLength(10)}
+        mobile_number: {required,numeric, minLength: minLength(10)}
     },
         methods: {
              validationStatus: function(validation) {
