@@ -20,7 +20,9 @@
                 name="loan_amount_required"
                 v-model.trim="$v.loan_amount_required.$model"
                 :class="{'is-invalid': validationStatus($v.loan_amount_required)}"
+                v-on:input="words"
               />
+              <div v-if="loan_amount_required!=''" class="color-white number2words">{{words_str}}</div>
               <div v-if="!$v.loan_amount_required.required&&flg" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -33,6 +35,7 @@
                 id="monthly-alary"
                 v-model.trim="$v.net_salary_all_deductions.$model"
                 :class="{'is-invalid': validationStatus($v.net_salary_all_deductions)}"
+                v-on:input="words2"
               />
               <i
                 class="fa fa-info-circle input-tooltip color-blue"
@@ -41,6 +44,7 @@
                 data-placement="top"
                 title="It Is The Fixed Net Monthly Salary Credited To Your Account AFTER All Deductions. Do Not Include Any Incentives, Bonus Or One-Time Payments."
               ></i>
+              <div v-if="net_salary_all_deductions!=''" class="color-white number2words">{{words_str2}}</div>
               <div v-if="!$v.net_salary_all_deductions.required&&flg" class="error-message color-red sub-heading">Monthly salary is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group desktop-version"></div>
@@ -120,11 +124,22 @@ import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
 import typeahead from 'vue-bootstrap-typeahead';
+import { ToWords } from 'to-words';
+const toWords = new ToWords({
+  localeCode: 'en-IN',
+  converterOptions: {
+    currency: true,
+    ignoreDecimal: false,
+    ignoreZeroCurrency: false,
+  }
+});
 export default {
   name: "BasicDetailSalaried",
   data:function()
   {
       return{
+        words_str:'',
+        words_str2:'',
         flg:false,
         loan_amount_required:null,
         mobile_number:null,
@@ -175,6 +190,8 @@ export default {
     this.mobile_number=localStorage.getItem("mobile_number") ? localStorage.getItem("mobile_number") : null;
     this.current_city_other=localStorage.getItem("current_city_other") ? localStorage.getItem("current_city_other") :null ;
     this.net_salary_all_deductions=localStorage.getItem("net_salary_all_deductions") ? localStorage.getItem("net_salary_all_deductions") : null;
+    this.words();
+    this.words2();
   },
       validations: {
         loan_amount_required: {required,numeric},
@@ -195,7 +212,29 @@ export default {
             localStorage.setItem("net_salary_all_deductions",this.net_salary_all_deductions);
             localStorage.setItem("current_city_other",this.current_city_other);
             localStorage.setItem("mobile_number",this.mobile_number);
-        }},
+        },
+        words:function(){
+
+          if (this.loan_amount_required.match("[0-9]+")==this.loan_amount_required){
+
+          this.words_str=toWords.convert(this.loan_amount_required)}
+          if(this.loan_amount_required=='' || this.loan_amount_required==null){
+            console.log(this.loan_amount_required);
+            this.words_str=''
+          }
+        },
+        words2:function(){
+
+          if (this.net_salary_all_deductions.match("[0-9]+")==this.net_salary_all_deductions){
+
+          this.words_str2=toWords.convert(this.net_salary_all_deductions)}
+          if(this.net_salary_all_deductions=='' || this.net_salary_all_deductions==null){
+            console.log(this.net_salary_all_deductions);
+            this.words_str2=''
+          }
+        },
+
+      },
   components: {
     ApplyProgress,
     ApplyFeature,

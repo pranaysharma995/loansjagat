@@ -266,24 +266,29 @@ sub,sup{
 }
 .error-message
 {
-  position: absolute;
+  /* position: absolute; */
   margin-top: 1px;
   font-size: 14px;
 }
 .input-tooltip
 {
   position: absolute;
-    top: 72%;
+    top: 43px;
     right: 25px;
     font-size: 15px;
     transform: translateY(-50%);
     color: #064C95;
 }
 .bg-blue .form-group{
-  margin-bottom:  2.5em;
+  margin-bottom:  12px;
 }
 .total_result{
   font-size: 2em;
+}
+.number2words{
+    /* position: absolute; */
+  font-size: 12px;
+  padding:5px;
 }
 @media screen and (max-width: 767px) {
   .desktop-version{

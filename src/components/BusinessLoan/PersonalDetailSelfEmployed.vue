@@ -64,8 +64,10 @@
                   id="date-of-birth"
                   placeholder="Date of Birth"
                   name="dateOfBirth"
+
                   v-model.trim="$v.dateOfBirth.$model"
                   :class="{ 'is-invalid': validationStatus($v.dateOfBirth) }"
+                  :max="Date().split(' ')[3].toString()-21+'-12-31'"
                 />
                 <div v-if="!$v.dateOfBirth.required&&flg" class="error-message color-red sub-heading">
                   Date of birth is required.
@@ -190,7 +192,7 @@ export default {
       flg:false,
       ownership: null,
       pan: null,
-      dateOfBirth: null,
+      dateOfBirth: '1999-07-22',
       email: null,
       fullName: null,
       self_employed_form: {},
@@ -261,7 +263,7 @@ export default {
       : null;
     this.dateOfBirth = this.self_employed_form.date_of_birth
       ? this.self_employed_form.date_of_birth
-      : null;
+      : '1992-01-01';
     this.email = this.self_employed_form.email
       ? this.self_employed_form.email
       : null;

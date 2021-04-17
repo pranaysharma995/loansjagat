@@ -21,6 +21,7 @@
                 v-model="grossAnnualIncome"
                 v-model.trim="$v.grossAnnualIncome.$model"
                 :class="{'is-invalid': validationStatus($v.grossAnnualIncome)}"
+                v-on:input="words"
               />
               <i
                 class="fa fa-info-circle input-tooltip color-blue"
@@ -30,7 +31,8 @@
                 title="Your Last Financial Year Turnover, As Filed With ITR."
               ></i>
 
-              <div v-if="!$v.grossAnnualIncome.required&&flag" class="error-message color-red sub-heading">Gross annual income is required.</div>
+              <div v-if="grossAnnualIncome!=''" class="color-white number2words">{{words_str}}</div>
+              <div v-if="!$v.grossAnnualIncome.required&&flg" class="error-message color-red sub-heading">Gross annual income is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="gst" class="color-white">GST Registration <span class="color-red">*</span></label>
@@ -39,12 +41,12 @@
               v-model.trim="$v.gst.$model"
               :class="{'is-invalid': validationStatus($v.gst)}"
               >
-              <option value=null>Select An Option</option>
+              <option value="">Select An Option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
 
             </select>
-              <div v-if="!$v.gst.required&&flag" class="error-message color-red sub-heading">GST is required.</div>
+              <div v-if="!$v.gst.required&&flg" class="error-message color-red sub-heading">GST is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -66,7 +68,7 @@
                 data-placement="top"
                 title="It Helps Calculate The Correct Eligible Loan Amount."
               ></i>
-              <div v-if="!$v.emi.required&&flag" class="error-message color-red sub-heading">Current EMI is required.</div>
+              <div v-if="!$v.emi.required&&flg" class="error-message color-red sub-heading">Current EMI is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="credit-score" class="color-white">Credit Score <span class="color-red">*</span></label>
@@ -75,12 +77,12 @@
                 :class="{'is-invalid': validationStatus($v.creditScore)}"
 
                 >
-                  <option value=null>Select An Option</option>
+                  <option value="">Select An Option</option>
               <option value="below-650">Below 650</option>
               <option value="above-650">Above 650</option>
               <option value="don't know">Don't Know</option>
               </select>
-              <div v-if="!$v.creditScore.required&&flag" class="error-message color-red sub-heading">Credit Score is required.</div>
+              <div v-if="!$v.creditScore.required&&flg" class="error-message color-red sub-heading">Credit Score is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -91,7 +93,7 @@
                   v-model-trim="business_type"
                   :class="{'is-invalid': validationStatus($v.business_type)}"
                   >
-                  <option value=null>Select An Option</option>
+                  <option value="">Select An Option</option>
                   <option value="Trader">Trader</option>
                   <option value="Manufacturer">Manufacturer</option>
                   <option value="Service Provider">Service Provider</option>
@@ -102,7 +104,7 @@
               </select>
 
 
-            <div v-if="!$v.business_type.required&&flag" class="error-message color-red sub-heading">Business Type required.</div>
+            <div v-if="!$v.business_type.required&&flg" class="error-message color-red sub-heading">Business Type required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="industries_name" class="color-white">Industries Name <span class="color-red">*</span></label>
@@ -115,10 +117,10 @@
                  :class="{'is-invalid': validationStatus($v.industries_name)}"
                  >
 
-              <option value=null>Select Industry</option>
+              <option value="">Select Industry</option>
               <option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
               </select>
-              <div v-if="!$v.industries_name.required&&flag" class="error-message color-red sub-heading">Industries Name required.</div>
+              <div v-if="!$v.industries_name.required&&flg" class="error-message color-red sub-heading">Industries Name required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -126,10 +128,10 @@
                 <select name="industries_item" v-model="industries_item" id="industries_item" class="form-control"
                 v-model-trim="industries_item"
                 :class="{'is-invalid': validationStatus($v.industries_item)}">
-              <option value=null>Select Industry</option>
+              <option value="">Select Industry</option>
               <option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
               </select>
-              <div v-if="!$v.industries_item.required&&flag" class="error-message color-red sub-heading">Industries Item required.</div>
+              <div v-if="!$v.industries_item.required&&flg" class="error-message color-red sub-heading">Industries Item required.</div>
             </div>
 
             <div class="col-12 form-group mgt-15">
@@ -164,22 +166,31 @@ import axios from 'axios';
 import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
-
+import { ToWords } from 'to-words';
+const toWords = new ToWords({
+  localeCode: 'en-IN',
+  converterOptions: {
+    currency: true,
+    ignoreDecimal: false,
+    ignoreZeroCurrency: false,
+  }
+});
 export default {
   name: "TransactionDetailSelfEmployed",
   data:function()
   {
       return{
-       grossAnnualIncome:null,
-       creditScore:null,
-       emi:null,
-       gst:null,
+        words_str:'',
+       grossAnnualIncome:"",
+       creditScore:"",
+       emi:"",
+       gst:"",
        industries:[],
        items:[],
-       flag:false,
-       industries_name:null,
-       business_type:null,
-       industries_item:null,
+       flg:false,
+       industries_name:"",
+       business_type:"",
+       industries_item:"",
        self_employed_form:{},
        list:[
           {
@@ -238,22 +249,24 @@ export default {
     mounted (){
       this.getIndustries();
       this.self_employed_form=localStorage.getItem("self_employed_form") ? JSON.parse(localStorage.getItem("self_employed_form")) : {};
-      this.grossAnnualIncome=this.self_employed_form.gross_annual_income ? this.self_employed_form.gross_annual_income : null;
-      this.creditScore=this.self_employed_form.civil_score ? this.self_employed_form.civil_score : null;
-      this.emi=this.self_employed_form.any_loans_running_emi_monthly ? this.self_employed_form.any_loans_running_emi_monthly : null;
-      this.gst=this.self_employed_form.gst ? this.self_employed_form.gst : null;
-      this.business_type=this.self_employed_form.business_type ? this.self_employed_form.business_type : null;
-      this.business_type=this.self_employed_form.type_of_business_industry ? this.self_employed_form.type_of_business_industry : null;
-      this.industries_name=this.self_employed_form.industry_type ? this.self_employed_form.industry_type : null;
-      this.industries_item=this.self_employed_form.industry_item ? this.self_employed_form.industry_item : null;
+      this.grossAnnualIncome=this.self_employed_form.gross_annual_income ? this.self_employed_form.gross_annual_income : "";
+      this.creditScore=this.self_employed_form.civil_score ? this.self_employed_form.civil_score : "";
+      this.emi=this.self_employed_form.any_loans_running_emi_monthly ? this.self_employed_form.any_loans_running_emi_monthly : "";
+      this.gst=this.self_employed_form.gst ? this.self_employed_form.gst : "";
+      this.business_type=this.self_employed_form.business_type ? this.self_employed_form.business_type : "";
+      this.business_type=this.self_employed_form.type_of_business_industry ? this.self_employed_form.type_of_business_industry : "";
+      this.industries_name=this.self_employed_form.industry_type ? this.self_employed_form.industry_type : "";
+      this.industries_item=this.self_employed_form.industry_item ? this.self_employed_form.industry_item : "";
+      this.words();
 },
         methods: {
              validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
-            //console.log(this.loanAmount);
+
             this.flg=true;
+            console.log(this.flg);
             this.$v.$touch();
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/self-employed/offer-detail');
@@ -283,6 +296,16 @@ export default {
         this.items = this.industries[selectedIndex-1].blmarginlist_item
         //	this.lists  = this.industries[0].filter(c => c.industry_id.indexOf(val) > -1);
         //console.log(this.industries[indval].blmarginlist_item);
+        },
+        words:function(){
+
+          if (this.grossAnnualIncome.match("[0-9]+")==this.grossAnnualIncome){
+
+          this.words_str=toWords.convert(this.grossAnnualIncome)}
+          if(this.grossAnnualIncome=='' || this.grossAnnualIncome==null){
+            // console.log(this.grossAnnualIncome);
+            this.words_str=''
+          }
         },
       },//methods
 

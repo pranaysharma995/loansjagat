@@ -25,7 +25,7 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-4 pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
+            <input type='range' min='100000' :max='max_filter' value='0' class=' button-blue':step="10000" v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
@@ -141,11 +141,11 @@ export default{
       axios.put(process.env.VUE_APP_LIVE_HOST+'/personal-loan/'+this.request_id,{
       ...this.salariedObj
         })
-        .then((response)=>{//console.log(response);
+        .then((response)=>{console.log(this.salariedObj);
           // this.request_id=response.data.id;
           this.loader.page=false;
           this.response=response.data
-          this.search_data.company_id=0;
+          this.search_data.company_id=this.salariedObj.current_company_name;
           this.search_data.tenure=this.tenure
           axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
             .then((response)=>{//console.log(response);
@@ -158,7 +158,7 @@ export default{
     				}else{
     					max = maix_data
     				}
-    				var mx_amt = maix_data / 100000
+    				var mx_amt = maix_data
             this.max_filter = mx_amt.toFixed(2)
             //console.log('this.max_filter',this.max_filter);
             this.list=response.data;
@@ -213,7 +213,7 @@ export default{
     filter_post(){
       this.loader.apply_filter=true;
       this.loader.table=true;
-      this.search_data.company_id=0;
+      this.search_data.company_id=this.salariedObj.current_company_name;
       this.search_data.tenure=this.tenure
       this.search_data.loan_amount_required=this.filter
       axios.post(process.env.VUE_APP_LIVE_HOST+'/personal-loan-result',this.search_data)
@@ -258,7 +258,7 @@ export default{
        list:[],
        tenure:'1',
        salariedObj:{
-         "current_city_other":localStorage.getItem("current_city_other"),//
+         "current_city_other":'',//
          "loan_amount_required":localStorage.getItem("loan_amount_required"),//
          "mobile_number":localStorage.getItem("mobile_number"),//
          "net_salary_all_deductions":localStorage.getItem("net_salary_all_deductions"),//
@@ -266,16 +266,16 @@ export default{
          "any_loans_running_emi_monthly":localStorage.getItem("any_loans_running_emi_monthly"),//
          "civil_score":localStorage.getItem("civil_score"),///
          "company_type":"",
-         "current_city_of_residence":"",
-         "current_company_name":localStorage.getItem("current_company_name"),///
+         "current_city_of_residence":localStorage.getItem("current_city_other"),//
+         "current_company_name":localStorage.getItem("current_company_no")==''?'':localStorage.getItem("current_company_no")*1,///
          "date_of_birth":localStorage.getItem("date_of_birth"),///
          "email":localStorage.getItem("email"),///
          "joining_date_in_current_company":localStorage.getItem("joining_date_in_current_company"),///
          "mode_of_salary":localStorage.getItem("mode_of_salary"),///
          "name":localStorage.getItem("name"),///
-         "other_company_name":"",
+         "other_company_name":localStorage.getItem("current_company_name"),///
          "panno":localStorage.getItem("panno"),//
-         "salary_account_name":localStorage.getItem("salary_account_name"),
+         "salary_account_name":localStorage.getItem("salary_account_name")==''?'':localStorage.getItem("salary_account_name")*1,
          "total_work_experience":localStorage.getItem("total_work_experience"),///
          "ownership":localStorage.getItem("ownership")
        },

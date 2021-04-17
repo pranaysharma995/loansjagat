@@ -21,7 +21,7 @@
                 v-model.trim="$v.name.$model"
                 :class="{'is-invalid': validationStatus($v.name)}"
               />
-              <div v-if="!$v.name.required&&flag" class="error-message color-red sub-heading">Full name is required.</div>
+              <div v-if="!$v.name.required&&flg" class="error-message color-red sub-heading">Full name is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="email" class="color-white">Email <span class="color-red">*</span></label>
@@ -41,7 +41,7 @@
                 data-placement="top"
                 title="Ensure valid Email ID to receive timely communication for your application."
               ></i>
-              <div v-if="!$v.email.required&&flag" class="error-message color-red sub-heading">Email is required.</div>
+              <div v-if="!$v.email.required&&flg" class="error-message color-red sub-heading">Email is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -57,7 +57,7 @@
                 :class="{'is-invalid': validationStatus($v.date_of_birth)}"
               />
 
-              <div v-if="!$v.date_of_birth.required&&flag" class="error-message color-red sub-heading">Date of birth is required.</div>
+              <div v-if="!$v.date_of_birth.required&&flg" class="error-message color-red sub-heading">Date of birth is required.</div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
                  <label for="pan" maxlength="10" class="color-white">PAN Number <span class="color-red">*</span></label>
@@ -77,7 +77,7 @@
                 data-placement="top"
                 title="Permanent account number is requred"
               ></i>
-              <div v-if="!$v.panno.required&&flag" class="error-message color-red sub-heading">PAN is required.</div>
+              <div v-if="!$v.panno.required&&flg" class="error-message color-red sub-heading">PAN is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
 
@@ -93,7 +93,7 @@
                  name="current_company_name"
                  v-model.trim="$v.current_company_name.$model"
                  :class="{'is-invalids': validationStatus($v.current_company_name)}"
-                 @input="autocomplete_method"
+                 @input="(name)=>{autocomplete_method()}"
                  >
                  </typeahead>
                  <i
@@ -119,7 +119,7 @@
               <option value="1 - 3">1 - 3 Years</option>
               <option value="3 year above">Above 3 Years</option>
               </select>
-              <div v-if="!$v.total_work_experience.required&&flag" class="error-message color-red sub-heading">Total Work Experience is required.</div>
+              <div v-if="!$v.total_work_experience.required&&flg" class="error-message color-red sub-heading">Total Work Experience is required.</div>
             </div>
             <div class="col-md-2 col-sm-12 col-xs-12"></div>
             <div class="col-md-5 col-sm-6 col-xs-12 form-group">
@@ -133,7 +133,7 @@
                 <option value="2- 6 months">2 - 6 Months</option>
                 <option value="6 months above">Greater than 6 Months</option>
               </select>
-              <div v-if="!$v.joining_date_in_current_company.required&&flag" class="error-message color-red sub-heading">Joining In Current Company is required.</div>
+              <div v-if="!$v.joining_date_in_current_company.required&&flg" class="error-message color-red sub-heading">Joining In Current Company is required.</div>
             </div>
             <div class="col-12 form-group mgt-15">
               <router-link to="/salaried/basic-detail">
@@ -173,15 +173,16 @@ export default {
   {
       return{
         flg:false,
+        current_company_no:'',
           name:null,
           total_work_experience:null,
           current_company_name:null,
           panno:null,
           email:null,
-          date_of_birth:null,
+          date_of_birth:'1992-01-01',
           joining_date_in_current_company:null,
           autocomplete:[],
-          list:[
+        list:[
           {
             "title":"Personal Loan Starting at 10.40%",
             "new":false
@@ -223,9 +224,10 @@ export default {
     this.total_work_experience=localStorage.getItem("total_work_experience") ? localStorage.getItem("total_work_experience") : null;
     this.panno=localStorage.getItem("panno") ? localStorage.getItem("panno") : null;
     this.email=localStorage.getItem("email") ? localStorage.getItem("email") : null;
-    this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : null;
+    this.date_of_birth=localStorage.getItem("date_of_birth") ? localStorage.getItem("date_of_birth") : '1992-01-01';
     this.current_company_name=localStorage.getItem("current_company_name") ? localStorage.getItem("current_company_name") : null;
     this.joining_date_in_current_company=localStorage.getItem("joining_date_in_current_company") ? localStorage.getItem("joining_date_in_current_company") : null;
+    this.current_company_no=localStorage.getItem("current_company_no") ? localStorage.getItem("current_company_no") : '';
   },
   components: {
     ApplyProgress,
@@ -257,6 +259,7 @@ export default {
             localStorage.setItem("panno",this.panno);
             localStorage.setItem("date_of_birth",this.date_of_birth);
             localStorage.setItem("current_company_name",this.current_company_name);
+            localStorage.setItem("current_company_no",this.current_company_no);
             localStorage.setItem("email",this.email);
             localStorage.setItem("name",this.name);
             localStorage.setItem("total_work_experience",this.total_work_experience);
@@ -271,6 +274,20 @@ export default {
           )
             .catch((err)=>console.log(err))
           }
+          else{
+            for (var i in this.autocomplete){
+
+              if (this.autocomplete[i].name == this.current_company_name){
+                this.current_company_no=this.autocomplete[i].id;
+                // console.log(this.autocomplete[i]);
+              }
+            }
+          }
+
+      },
+      current_company_no_setter:function(i){
+        console.log(i,i.id);
+        this.current_company_no=i;
 
       },
 

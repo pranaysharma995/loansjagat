@@ -1,7 +1,7 @@
 <template>
     <div>
 		<app-header></app-header>
-		
+
 		<div class="formMainDiv">
 		<div class="container">
 			<div class="formBreadcrum">
@@ -11,7 +11,7 @@
 					<li>Business Loan</li>
 				</ul>
 			</div>
-			
+
 			<div class="row formInnerDiv">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-12 formInnerLeft">
 					<ul>
@@ -65,7 +65,7 @@
 								<div style="clear:both;"></div>
 								<a href="#" data-toggle="modal" data-target="#professYes" >Yes</a>
 							</div>
-							
+
 							<div class="row" id="newpl_step1" v-show="bl_step_1">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 									<div class="formInputFields busiLoanInputFields">
@@ -77,17 +77,17 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" @keyup="convertNumberTo
 
 									<div class="formInputFields busiLoanInputFields">
 										<label>City</label>
-										<typeahead :data = "cities" 
-										:serializer="name => name.name" 
+										<typeahead :data = "cities"
+										:serializer="name => name.name"
 										:minMatchingChars = "1"
 										v-model="city"
 										ref="city"
 										>
 										</typeahead>
 									</div>	<!-- formInputFields -->
-									
+
 								</div>
-								
+
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 									<div class="formInputFields busiLoanInputFields">
 										<label>Mobile</label>
@@ -112,7 +112,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										</select>
 									</div>	<!-- formInputFields -->
 								</div>
-								
+
 								<!-- <div class="formInputFields busiLoanInputFields">
 									<div class="formInputFieldLabel">
 										<p>Pin Code</p>
@@ -121,17 +121,17 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										<input type="tel" v-model="pin_code" placeholder="XXXXXX">
 									</div>
 								</div>	formInputFields -->
-								
-								
+
+
 								<div style="clear:both;"></div>
 								<div class="col-lg-12 formInnerRightProceed">
 									<a href="javascript:void(0)" @click="create" class="btn btn-primary next-btn">Proceed</a>
 								</div>
 							</div>	<!-- newpl_step1 -->
 							<div class="row" id="" v-show="mob_otp">
-									
+
 									<div class="newshl_step2_content">
-										
+
 										<div class="newshl_step2__mail">
 											<img src="@/assets/images/mobile_mail.png">
 										</div>
@@ -153,7 +153,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										<div style="clear:both;"></div>
 									</div>
 									<div style="clear:both;"></div>
-									
+
 								</div>	<!-- newpl_step2 -->
 							<div class="row" id="newpl_step2" v-show="bl_step_2">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -170,7 +170,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										<input @focus="toggleBorder" id="pan_number" class="form-control" type="text" v-model="pan_number" placeholder="XXXXXXXXXX">
 									</div>	<!-- formInputFields -->
 								</div>
-								
+
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 									<div class="formInputFields busiLoanInputFields">
 										<label>Email ID</label>
@@ -178,20 +178,25 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 									</div>	<!-- formInputFields -->
 									<div class="formInputFields busiLoanInputFields">
 										<label>Date of Birth</label>
-										<datepicker @focus="toggleBorder" id="dob" :open-date="new Date('1999-01-01')" v-model="date_of_birth" lang="en" type="month" format="yyyy-MM-dd"></datepicker>
-											
+										<datepicker @focus="toggleBorder" id="dob"
+                    :open-date="new Date('1999-01-01')"
+                    v-model="date_of_birth"
+                    lang="en" type="month"
+                    format="yyyy-MM-dd">
+                  </datepicker>
+
 									</div>	<!-- formInputFields -->
-									
+
 								</div>
-								
+
 								<div style="clear:both;"></div>
 								<div class="col-lg-12 formInnerRightProceed">
 									<a href="javascript:void(0)" @click="showStep(1)"  class="btn btn-primary prev-btn">Previous</a>
 									<a href="javascript:void(0)" @click="Validate(3)" class="btn btn-primary next-btn">Proceed</a>
 								</div>
-								
+
 							</div>	<!-- newpl_step2 -->
-							
+
 							<div class="row" id="newpl_step3" v-show="bl_step_3">
 								<div class="col-lg-6 col-md-6 col-sm-6 c	ol-12">
 									<div class="formInputFields busiLoanInputFields">
@@ -209,7 +214,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										<select @focus="toggleBorder" id="busi_indus" class="form-control" v-model="busi_indus" @change="filterLists($event, $event.target.selectedIndex)">
 											<option value="">Select Industry</option>
 											<option v-for="indus in industries" :value="indus.id" :key="indus.id">{{indus.industry}}</option>
-											
+
 										</select>
 									</div>	<!-- formInputFields -->
 									<div class="formInputFields busiLoanInputFields">
@@ -220,7 +225,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 											<option value="Rented">Rented</option>
 										</select>
 									</div>	<!-- formInputFields -->
-									
+
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 									<div class="formInputFields busiLoanInputFields">
@@ -241,7 +246,7 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										<select @focus="toggleBorder" id="busi_indus_item" class="form-control" v-model="busi_indus_item">
 											<option>Select Industry Item</option>
 											<option v-for="item in items" :value="item.id" :key="item.id">{{item.Item}}</option>
-											
+
 										</select>
 									</div>	<!-- formInputFields -->
 									<div class="formInputFields busiLoanInputFields">
@@ -253,15 +258,15 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 										</select>
 									</div>	<!-- formInputFields -->
 								</div>
-								
+
 								<div style="clear:both;"></div>
 								<div class="col-lg-12 formInnerRightProceed">
 									<a href="javascript:void(0)" @click="showStep(2)" class="btn btn-primary prev-btn">Previous</a>
 									<a href="javascript:void(0)" @click="Validate(4)" class="btn btn-primary next-btn">Proceed</a>
 								</div>
-								
+
 							</div>	<!-- newpl_step3 -->
-							
+
 							<div class="row" id="newpl_step4" v-show="bl_step_4">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 									<div class="formInputFields busiLoanInputFields">
@@ -308,32 +313,32 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 									<a href="javascript:void(0)" @click="showStep(3)" class="btn btn-primary prev-btn">Previous</a>
 									<a href="javascript:void(0)" @click="Validate(0)" class="btn btn-primary next-btn">Submit</a>
 								</div>
-								
+
 							</div>	<!-- newpl_step4 -->
-							
+
 						</div>
-						
+
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div style="clear:both;"></div>
-	
+
 	<div class="contentMainDiv">
 		<div class="contentHeading">
 			<h1>Instant Business Loan Online Apply</h1>
 		</div>
-		 
+
 		<div class="contentInnerDiv padding50">
 			<div class="container">
 				<p><b>What is a Business Loan? </b></p>
 				<p>Business loan is a suitable option for all the growing entrepreneurs to meet specific requirements pertaining to their business needs. It can be as simple as the installation of new machinery to as big as expanding the business to newer areas or starting a new venture.</p>
-				
+
 				<p><b>Why should a business opt for business loan?  </b></p>
 				<p>Convenience, less documentation, and quick processing help a businessman to easily explore new opportunities and set fund specifically for meeting business goals. The easy business loan offered by LoansJagat can help businesses to grow and manage their working capital requirements.</p>
-				
+
 				<p><b>What are the documents required for taking a Business Loan? </b></p>
 				<p>Following are the commonly asked documents for business loans in India. </p>
 				<p><b>Personal Documents</b></p>
@@ -365,22 +370,22 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 						<li class="tick">Latest shareholding pattern.</li>
 					</ul>
 				</div>
-				
+
 				<p><b>What is the advantage of a Business loan? </b></p>
 				<p>Unlike a personal loan, business loans could be availed for business needs and the amount is much bigger than the personal loans. Also, in case of companies, the liability belongs to the companies and not just to the individuals as is the case with the personal loans. Also, the online loan enablers like LoansJagat offer easy business loans without the requirement of any collaterals.</p>
-				
+
 				<p><b>How do I apply?</b></p>
 				<p>LoansJagat has a tie-up with various banks and NBFCs who offer easy business loan options depending upon your requirement. An applicant answers 2 basic questions which are based on personal & financial numbers. Basis of the reply, the system automatically shows various business loan options available to the borrower from the top lenders to choose from. </p>
 				<p>Once decided LoansJagat gives the business loan options for proceeding further either online or offline with the documentation process. During this journey, a loan expert from the company helps you out for expediting the process. The loan applicant can track the loan application easily using online tools.</p>
-				
+
 				<p><b>Why should I go with LoansJagat? </b></p>
 				<p>LoansJagat is an online marketplace that offers the complete flexibility to apply for an easy business loan and get the flexibility to choose from over 40 lenders by comparing the business loan terms. LoansJagat offers easy online business loan in India and ensure complete satisfaction while providing a dedicated relationship manager and absolute data privacy.</p>
-				
+
 				<p><b>Planning to take a Business Loan, don’t make these common Mistakes </b></p>
 				<p>We all know business loan provides a much-needed boost to accelerate growth and enable expansion plans. However, if loan planning is not done appropriately it would lead to issues later on and might cost higher than the loan amount itself.</p>
 				<p>Suresh has been doing reasonably well in his business in Surat as a manufacturer of the clothing line. However, he wants to buy a shop for selling cloth materials directly in the market. For this purpose, he needs Rs. 50 Lakh business loan. </p>
-				
-				
+
+
 				<p><b>Here are some checks that Suresh needs to ensure before availing the business loan?</b></p>
 				<p>Clarity of Objective and Proper documents:</p>
 				<p>Financial institutions will ask how much loan you want, the purpose of the loan and how would you repay back. The borrower should have clear answers against each along with income proofs like business balance sheets and ITR submitted.</p>
@@ -391,10 +396,10 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 						<li class="tick"><b>Terms & Conditions of Loan -</b> One should be vigilant while signing a business loan agreement, one needs to read the document and understand the clauses like prepayment penalty and late EMI payment fees. LoansJagat provides easy business loans with transparent terms and conditions.  </li>
 					</ul>
 				</div>
-				
-				    
-				
-				<h2 class="middleHeading">Business Loan Specific FAQs</h2>	
+
+
+
+				<h2 class="middleHeading">Business Loan Specific FAQs</h2>
 				<div class="faqsDiv" id="faqID">
 					<div class="container">
 						<div class="row">
@@ -464,13 +469,13 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 								</p>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
-				 
+
 			</div>
 		</div>
-		
+
 	</div>
 	<div style="clear:both;"></div>
 
@@ -548,19 +553,19 @@ event.keyCode === 46 ? true : !isNaN(Number(event.key))" v-model="mobile" placeh
 							</div>
 						</div>
 						</div>
-						
+
 						<div style="clear:both;"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<app-footer></app-footer>
 
-		
+
 
 
     </div>
 </template>
-<script src = "./BusinessLoan.js"></script> 
+<script src = "./BusinessLoan.js"></script>

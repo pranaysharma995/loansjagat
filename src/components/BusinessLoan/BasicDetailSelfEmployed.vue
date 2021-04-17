@@ -20,7 +20,10 @@
                 name="loanAmount"
                 v-model.trim="$v.loanAmount.$model"
                 :class="{'is-invalid': validationStatus($v.loanAmount)}"
+                v-on:input="words"
               />
+              <!-- words_str -->
+              <div v-if="loanAmount!=''" class="color-white number2words">{{words_str}}</div>
               <div v-if="!$v.loanAmount.required&&flg" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
@@ -29,7 +32,7 @@
               <select name="annualSales" v-model="annualSales" id="annual-sales" class="form-control"
               v-model.trim="$v.annualSales.$model"
               :class="{'is-invalid': validationStatus($v.annualSales)}">
-                <option value=null>Select An Option</option>
+                <option value="">Select An Option</option>
                 <option value="5000000">Less than 50 Lacs</option>
                 <option value="7500000">50 Lacs - 1 Cr</option>
                 <option value="15000000">1 Cr - 2 Cr</option>
@@ -45,7 +48,7 @@
             </select>
               <div v-if="!$v.annualSales.required&&flg" class="error-message color-red sub-heading">Annual sales is required.</div>
             </div>
-            <div class="col-md-2 col-sm-12 col-xs-12 form-group"></div>
+
             <div class="col-md-5 col-xs-12 col-sm-6 form-group">
               <div>
 
@@ -118,12 +121,22 @@ import Header from '../sub-components/Header';
 import Footer from '../sub-components/Footer';
 import OtherPages from '../sub-components/OtherPages';
 import typeahead from 'vue-bootstrap-typeahead';
+import { ToWords } from 'to-words';
+const toWords = new ToWords({
+  localeCode: 'en-IN',
+  converterOptions: {
+    currency: true,
+    ignoreDecimal: false,
+    ignoreZeroCurrency: false,
+  }
+});
 // import {self_employed_form} from '../globalVariableSalaried.js'
 export default {
   name: "BasicDetailSelfEmployment",
   data:function()
   {
    return{
+      words_str:'',
        mobileNumber:null,
        loanAmount:null,
        city:null,
@@ -190,10 +203,11 @@ export default {
         this.mobileNumber=this.self_employed_form.mobile_number ? this.self_employed_form.mobile_number : null;
         this.loanAmount=this.self_employed_form.loan_amount_required ? this.self_employed_form.loan_amount_required : null;
         this.city=this.self_employed_form.city ? this.self_employed_form.city : null;
-        this.annualSales=this.self_employed_form.turn_over ? this.self_employed_form.turn_over :null ;
+        this.annualSales=this.self_employed_form.turn_over ? this.self_employed_form.turn_over :"" ;
+        this.words()
       },
         methods: {
-             validationStatus: function(validation) {
+        validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
             },
         submit: function() {
@@ -208,6 +222,18 @@ export default {
             localStorage.setItem("self_employed_form",JSON.stringify(this.self_employed_form));
             this.$router.push('/self-employed/personal-detail');
             // alert('Data Submit');
-        }},
+        },
+        words:function(){
+
+          if (this.loanAmount.match("[0-9]+")==this.loanAmount){
+
+          this.words_str=toWords.convert(this.loanAmount)}
+          if(this.loanAmount=='' || this.loanAmount==null){
+            console.log(this.loanAmount);
+            this.words_str=''
+          }
+        },
+      },//methods
+
 };
 </script>
