@@ -22,6 +22,13 @@
                 :class="{'is-invalid': validationStatus($v.loan_amount_required)}"
                 v-on:input="words"
               />
+              <i
+                class="fa fa-info-circle input-tooltip color-blue"
+                delay="0"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="You can apply for minimum loan of One lakh"
+              ></i>
               <div v-if="loan_amount_required!=''" class="color-white number2words">{{words_str}}</div>
               <div v-if="!$v.loan_amount_required.required&&flg" class="error-message color-red sub-heading">Loan amount is required.</div>
             </div>
@@ -116,7 +123,7 @@
 </template>
 
 <script>
-import { required, minLength,numeric } from 'vuelidate/lib/validators'
+import { required, minLength,numeric,minValue } from 'vuelidate/lib/validators'
 import ApplyProgress from '../sub-components/ApplyProgress';
 import ApplyFeature from '../sub-components/ApplyFeature';
 import ApplyReview from '../sub-components/ApplyReview';
@@ -194,7 +201,7 @@ export default {
     this.words2();
   },
       validations: {
-        loan_amount_required: {required,numeric},
+        loan_amount_required: {required,numeric,minValue:minValue(100000)},
         net_salary_all_deductions: {required,numeric},
         current_city_other: {required},
         mobile_number: {required,numeric, minLength: minLength(10)}
