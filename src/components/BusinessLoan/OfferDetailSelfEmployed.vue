@@ -25,7 +25,7 @@
         <!-- <div class='col-md-12 d-flex flex-row justify-content-between align-items-center'> -->
           <span class='col-md-4   pad_top d-flex flex-row align-items-center'>
             <p class='padd_text'>Loan Amount:    </p>
-            <input type='range' min='0' :max='max_filter' value='0' class=' button-blue' v-model='filter' v-on:change='filter_post'>
+            <input type='range' min='100000' :max='max_filter' value='0' class=' button-blue':step="10000" v-model='filter' v-on:change='filter_post'>
             <p class='padd_text padd_left'>₹{{filter}}   </p>
 
           </span>
@@ -141,7 +141,7 @@ export default{
       filter:JSON.parse(localStorage.getItem("self_employed_form")).loan_amount_required ,
       max_filter:JSON.parse(localStorage.getItem("self_employed_form")).loan_amount_required ,
   list:[],
-      tenure:'1',
+      tenure:'4',
       loader:{
         page:false,
         btn:false,

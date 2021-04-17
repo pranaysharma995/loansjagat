@@ -256,7 +256,7 @@ export default{
        // filter:self_employed_form.loan_amount_required,
        max_filter:localStorage.getItem("loan_amount_required"),
        list:[],
-       tenure:'1',
+       tenure:'4',
        salariedObj:{
          "current_city_other":'',//
          "loan_amount_required":localStorage.getItem("loan_amount_required"),//

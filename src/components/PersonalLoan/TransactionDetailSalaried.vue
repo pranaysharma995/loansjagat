@@ -79,15 +79,15 @@
 
             <div v-if="mode_of_salary=='Direct Bank'"class="col-md-5 col-sm-6 col-xs-12 form-group">
               <label for="salary_account_name" class="color-white">Salary Bank<span class="color-red">*</span></label>
-                <select  class="form-control" id="salary_account_name" v-model="salary_account_name"
-                v-model.trim="$v.salary_account_name.$model"
-                :class="{'is-invalid': validationStatus($v.salary_account_name)}"
+                <select  class="form-control " id="salary_account_name" v-model="salary_account_name"
+
+                :class="{'is-invalid': this.mode_of_salary=='Direct Bank' && this.salary_account_name==''}"
 
                 >
                   <option value="">Select Bank</option>
                   <option v-for="bank in banks" :key="bank.id" :value="bank.id">{{bank.bank_name}}</option>
                 </select>
-              <div v-if="!$v.salary_account_name.required&&flg" class="error-message color-red sub-heading">Salary Bank is required</div>
+              <div v-if="this.mode_of_salary=='Direct Bank' && this.salary_account_name=='' &&flg" class="error-message color-red sub-heading">Salary Bank is required</div>
             </div>
 
             <div class="col-12 form-group mgt-15">
@@ -203,7 +203,7 @@ export default {
         any_loans_running_emi_monthly: {required,numeric},
         mode_of_salary: {required},
         ownership:{required},
-        salary_account_name:{required},
+        // salary_account_name:{required},
 
     },
         methods: {
@@ -213,6 +213,9 @@ export default {
         submit: function() {
           this.flg=true;
             this.$v.$touch();
+            console.log(this.mode_of_salary=='Direct Bank' && this.salary_account_name=='',this.mode_of_salary=='Direct Bank' , this.salary_account_name=='');
+            if (this.mode_of_salary=='Direct Bank' && this.salary_account_name=='')return;
+            console.log('wd');
             if (this.$v.$pendding || this.$v.$error) return;
             this.$router.push('/salaried/offer-detail');
             localStorage.setItem("ownership",this.ownership);
